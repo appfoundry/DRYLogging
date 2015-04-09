@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'DRYLogging', :exclusive => true do
+  pod "DRYLogging", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "DRYLogging", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+end
