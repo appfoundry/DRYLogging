@@ -15,7 +15,10 @@
 
 @end
 
-
+#define callAppenders(format)  va_list args; \
+va_start(args, (format));                           \
+[self _callAppendersWithFormat:(format) args:args]; \
+va_end(args);
 
 @implementation DRYDefaultLogger
 
@@ -47,7 +50,15 @@
 }
 
 - (void)trace:(NSString *)format, ... {
-    
+    if (self.isTraceEnabled) {
+        callAppenders(format)
+    }
+}
+
+- (void)_callAppendersWithFormat:(NSString *)format args:(va_list)args {
+    for (id<DRYLoggingAppender> appender in _appenders) {
+        [appender append:format, args];
+    }
 }
 
 - (BOOL)isDebugEnabled {
@@ -56,12 +67,7 @@
 
 - (void)debug:(NSString *)format, ... {
     if (self.isDebugEnabled) {
-        va_list args;
-        va_start(args, format);
-        for (id<DRYLoggingAppender> appender in _appenders) {
-            [appender append:format, args];
-        }
-        va_end(args);
+        callAppenders(format);
     }
 }
 
@@ -71,12 +77,7 @@
 
 - (void)info:(NSString *)format, ... {
     if (self.isInfoEnabled) {
-        va_list args;
-        va_start(args, format);
-        for (id<DRYLoggingAppender> appender in _appenders) {
-            [appender append:format, args];
-        }
-        va_end(args);
+        callAppenders(format);
     }
 }
 
@@ -85,7 +86,9 @@
 }
 
 - (void)warn:(NSString *)format, ... {
-    
+    if (self.isWarnEnabled) {
+        callAppenders(format);
+    }
 }
 
 - (BOOL)isErrorEnabled {
@@ -93,7 +96,9 @@
 }
 
 - (void)error:(NSString *)format, ... {
-    
+    if (self.isErrorEnabled) {
+        callAppenders(format);
+    }
 }
 
 - (BOOL)_isLevelEnabled:(DRYLogLevel)level {
@@ -104,4 +109,7 @@
     [_appenders addObject:appender];
 }
 
+- (void)removeAppender:(id <DRYLoggingAppender>)appender {
+    [_appenders removeObject:appender];
+}
 @end

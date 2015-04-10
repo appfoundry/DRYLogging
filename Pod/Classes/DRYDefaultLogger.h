@@ -17,5 +17,6 @@
 - (instancetype)initWithName:(NSString *)name;
 
 - (void)addAppender:(id<DRYLoggingAppender>)appender;
+- (void)removeAppender:(id <DRYLoggingAppender>)appender;
 
 @end
