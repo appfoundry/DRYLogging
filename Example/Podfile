@@ -6,7 +6,7 @@ end
 
 target 'Tests', :exclusive => true do
   pod "DRYLogging", :path => "../"
-
-  pod 'Specta'
-  pod 'Expecta'
+  pod "OCHamcrest"
+  pod "OCMockito"
+  pod "DRYTestUtilities"
 end
