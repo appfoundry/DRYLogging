@@ -7,12 +7,32 @@
 //
 
 #import "DRYAppDelegate.h"
+#import "DRYDefaultLogger.h"
+#import "DRYLoggingConsoleAppender.h"
+#import "DRYLoggingMessageFormatter.h"
+#import "DRYBlockBasedLoggingMessageFormatter.h"
+#import "DRYLoggingMessage.h"
 
 @implementation DRYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    DRYDefaultLogger *logger = [[DRYDefaultLogger alloc] initWithName:@"mylogger"];
+    id <DRYLoggingMessageFormatter> formatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
+        return [NSString stringWithFormat:@"%@ - [%@] - %@", message.loggerName, message.className, message.message];
+    }];
+    id<DRYLoggingAppender> appender = [[DRYLoggingConsoleAppender alloc] initWithFormatter:formatter];
+    [logger addAppender:appender];
+
+    logger.level = DRYLogLevelTrace;
+
+    [logger trace:@"Trace logging %@", @1];
+    [logger trace:@"Debug logging %@", @2];
+    [logger trace:@"Info logging %@", @3];
+    [logger trace:@"Warn logging %@", @4];
+    [logger trace:@"Error logging %@", @5];
+
     return YES;
 }
 							

@@ -8,6 +8,7 @@
 
 #import "DRYDefaultLogger.h"
 #import "DRYLoggingAppender.h"
+#import "DRYLoggingMessage.h"
 
 @interface DRYDefaultLogger () {
     NSMutableArray *_appenders;
@@ -56,8 +57,14 @@ va_end(args);
 }
 
 - (void)_callAppendersWithFormat:(NSString *)format args:(va_list)args {
+    NSString *sourceString = [NSThread callStackSymbols][2];
+    NSCharacterSet *separatorSet = [NSCharacterSet characterSetWithCharactersInString:@" -[]+?.,"];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[sourceString  componentsSeparatedByCharactersInSet:separatorSet]];
+    [array removeObject:@""];
+    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:[[NSString alloc] initWithFormat:format arguments:args] loggerName:self.name framework:array[1] className:array[3] methodName:array[4] memoryAddress:array[2] byteOffset:array[5]];
+
     for (id<DRYLoggingAppender> appender in _appenders) {
-        [appender append:format, args];
+        [appender append:message];
     }
 }
 

@@ -8,11 +8,13 @@
 
 #import "DRYDefaultLogger.h"
 #import "DRYLoggingAppender.h"
+#import "DRYLoggingMessage.h"
 
 @interface DRYDefaultLoggerLogTest : XCTestCase {
     DRYDefaultLogger *_logger;
     
     id<DRYLoggingAppender> _firstAppender;
+    id _messageMatcher;
 }
 
 @end
@@ -24,7 +26,14 @@
     _firstAppender = mockProtocol(@protocol(DRYLoggingAppender));
     _logger = [[DRYDefaultLogger alloc] initWithName:@"testlogger"];
     [_logger addAppender:_firstAppender];
-    
+    _messageMatcher = allOf(hasProperty(@"message", @"Message param"), hasProperty(@"loggerName", @"testlogger"), hasProperty(@"framework", @"Tests"), hasProperty(@"className", @"DRYDefaultLoggerLogTest"), hasProperty(@"methodName", [self _testMethodName]), hasProperty(@"memoryAddress", notNilValue()), hasProperty(@"byteOffset", notNilValue()), nil);
+}
+
+- (NSString *)_testMethodName {
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"-\\[.* (.*)\\]" options:NSRegularExpressionCaseInsensitive error:NULL];
+    NSArray *matches = [regex matchesInString:super.name options:0 range:NSMakeRange(0, super.name.length)];
+    NSString *testMethod = [super.name substringWithRange:[matches[0] rangeAtIndex:1]];
+    return testMethod;
 }
 
 - (void)testDefaultLogLevelIsOff {
@@ -45,7 +54,7 @@
 - (void)testTrace_callsAppenderWhenTraceLevelIsEnabled {
     _logger.level = DRYLogLevelTrace;
     [_logger trace:@"Message %@", @"param"];
-    [MKTVerify(_firstAppender) append:@"Message %@", @"param"];
+    [MKTVerify(_firstAppender) append:_messageMatcher];
 }
 
 - (void)testTrace_callsExtreAddedAppenderWhenDebugLevelIsEnabled {
@@ -53,7 +62,7 @@
     _logger.level = DRYLogLevelTrace;
     [_logger addAppender:secondAppender];
     [_logger trace:@"Message %@", @"param"];
-    [MKTVerify(secondAppender) append:@"Message %@", @"param"];
+    [MKTVerify(secondAppender) append:_messageMatcher];
 }
 
 - (void)testTrace_doesNotCallAppendersWhenDebugLevelIsNotEnabled {
@@ -66,7 +75,7 @@
 - (void)testDebug_callsAppenderWhenDebugLevelIsEnabled {
     _logger.level = DRYLogLevelDebug;
     [_logger debug:@"Message %@", @"param"];
-    [MKTVerify(_firstAppender) append:@"Message %@", @"param"];
+    [MKTVerify(_firstAppender) append:_messageMatcher];
 }
 
 - (void)testDebug_callsExtreAddedAppenderWhenDebugLevelIsEnabled {
@@ -74,7 +83,7 @@
     _logger.level = DRYLogLevelDebug;
     [_logger addAppender:secondAppender];
     [_logger debug:@"Message %@", @"param"];
-    [MKTVerify(secondAppender) append:@"Message %@", @"param"];
+    [MKTVerify(secondAppender) append:_messageMatcher];
 }
 
 - (void)testDebug_doesNotCallAppendersWhenDebugLevelIsNotEnabled {
@@ -87,7 +96,7 @@
 - (void)testInfo_callsAppenderWhenInfoLevelIsEnabled {
     _logger.level = DRYLogLevelInfo;
     [_logger info:@"Message %@", @"param"];
-    [MKTVerify(_firstAppender) append:@"Message %@", @"param"];
+    [MKTVerify(_firstAppender) append:_messageMatcher];
 }
 
 - (void) testInfo_callsExtreAddedAppenderWhenInfoLevelIsEnabled {
@@ -95,7 +104,7 @@
     _logger.level = DRYLogLevelInfo;
     [_logger addAppender:secondAppender];
     [_logger info:@"Message %@", @"param"];
-    [MKTVerify(secondAppender) append:@"Message %@", @"param"];
+    [MKTVerify(secondAppender) append:_messageMatcher];
 }
 
 - (void)testInfo_doesNotCallAppendersWhenInfoLevelIsNotEnabled {
@@ -107,7 +116,7 @@
 - (void)testWarn_callsAppenderWhenWarnLevelIsEnabled {
     _logger.level = DRYLogLevelWarn;
     [_logger warn:@"Message %@", @"param"];
-    [MKTVerify(_firstAppender) append:@"Message %@", @"param"];
+    [MKTVerify(_firstAppender) append:_messageMatcher];
 }
 
 - (void) testWarn_callsExtreAddedAppenderWhenWarnLevelIsEnabled {
@@ -115,7 +124,7 @@
     _logger.level = DRYLogLevelWarn;
     [_logger addAppender:secondAppender];
     [_logger warn:@"Message %@", @"param"];
-    [MKTVerify(secondAppender) append:@"Message %@", @"param"];
+    [MKTVerify(secondAppender) append:_messageMatcher];
 }
 
 - (void)testWarn_doesNotCallAppendersWhenWarnLevelIsNotEnabled {
@@ -128,7 +137,7 @@
 - (void)testError_callsAppenderWhenErrorLevelIsEnabled {
     _logger.level = DRYLogLevelError;
     [_logger error:@"Message %@", @"param"];
-    [MKTVerify(_firstAppender) append:@"Message %@", @"param"];
+    [MKTVerify(_firstAppender) append:_messageMatcher];
 }
 
 - (void) testError_callsExtreAddedAppenderWhenErrorLevelIsEnabled {
@@ -136,7 +145,7 @@
     _logger.level = DRYLogLevelError;
     [_logger addAppender:secondAppender];
     [_logger error:@"Message %@", @"param"];
-    [MKTVerify(secondAppender) append:@"Message %@", @"param"];
+    [MKTVerify(secondAppender) append:_messageMatcher];
 }
 
 - (void)testError_doesNotCallAppendersWhenErrorLevelIsNotEnabled {

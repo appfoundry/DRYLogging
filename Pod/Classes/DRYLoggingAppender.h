@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class DRYLoggingMessage;
+
 @protocol DRYLoggingAppender <NSObject>
 
-- (void)append:(NSString *)format, ... NS_FORMAT_FUNCTION(1, 2);
+- (void)append:(DRYLoggingMessage *)message;
 
 @end

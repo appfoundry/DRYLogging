@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2727D65A1AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2727D6591AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m */; };
 		2727D65C1AD7411D00482706 /* DRYDefaultLoggerLogTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2727D65B1AD7411D00482706 /* DRYDefaultLoggerLogTest.m */; };
+		277FF7B41ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7B31ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m */; };
+		277FF7B91ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7B81ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -40,6 +42,8 @@
 /* Begin PBXFileReference section */
 		2727D6591AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerLevelsTest.m; sourceTree = "<group>"; };
 		2727D65B1AD7411D00482706 /* DRYDefaultLoggerLogTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerLogTest.m; sourceTree = "<group>"; };
+		277FF7B31ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingConsoleAppenderTest.m; sourceTree = "<group>"; };
+		277FF7B81ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYBlockBasedLoggingMessageFormatterTest.m; sourceTree = "<group>"; };
 		4C03203957C991F05371E15D /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		54BC96D2C18FADFC7F5617DC /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* DRYLogging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DRYLogging.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +178,8 @@
 				6003F5B6195388D20070C39A /* Supporting Files */,
 				2727D6591AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m */,
 				2727D65B1AD7411D00482706 /* DRYDefaultLoggerLogTest.m */,
+				277FF7B31ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m */,
+				277FF7B81ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -376,6 +382,8 @@
 			files = (
 				2727D65C1AD7411D00482706 /* DRYDefaultLoggerLogTest.m in Sources */,
 				2727D65A1AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m in Sources */,
+				277FF7B91ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m in Sources */,
+				277FF7B41ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
