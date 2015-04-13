@@ -52,15 +52,17 @@
 }
 
 - (id <DRYLogger>)_returnCachedOrCreateNewLoggerForName:(NSString *)name parent:(id <DRYLogger>)parent {
-    id <DRYLogger> logger = _loggersByName[name];
-    if (!logger) {
-        logger = [DRYDefaultLogger loggerWithName:name parent:parent];
-        _loggersByName[name] = logger;
-        if (!parent) {
-            logger.level = DRYLogLevelInfo;
+    @synchronized (_loggersByName) {
+        id <DRYLogger> logger = _loggersByName[name];
+        if (!logger) {
+            logger = [DRYDefaultLogger loggerWithName:name parent:parent];
+            _loggersByName[name] = logger;
+            if (!parent) {
+                logger.level = DRYLogLevelInfo;
+            }
         }
+        return logger;
     }
-    return logger;
 }
 
 static DRYLoggerFactory *_instance;
