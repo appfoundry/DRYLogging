@@ -14,9 +14,9 @@
 @interface DRYDefaultLogger : NSObject<DRYLogger>
 
 + (instancetype)loggerWithName:(NSString *)name;
-- (instancetype)initWithName:(NSString *)name;
++ (instancetype)loggerWithName:(NSString *)name parent:(id<DRYLogger>)parent;
 
-- (void)addAppender:(id<DRYLoggingAppender>)appender;
-- (void)removeAppender:(id <DRYLoggingAppender>)appender;
+- (instancetype)initWithName:(NSString *)name;
+- (instancetype)initWithName:(NSString *)name parent:(id<DRYLogger>)parent;
 
 @end

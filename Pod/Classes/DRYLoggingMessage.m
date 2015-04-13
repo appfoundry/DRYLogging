@@ -10,14 +10,15 @@
 
 @implementation DRYLoggingMessage
 
-+ (instancetype)messageWithMessage:(NSString *)message loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset {
-    return [[self alloc] initWithMessage:message loggerName:loggerName framework:framework className:className methodName:methodName memoryAddress:memoryAddress byteOffset:byteOffset];
++ (instancetype)messageWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset {
+    return [[self alloc] initWithMessage:message level:level loggerName:loggerName framework:framework className:className methodName:methodName memoryAddress:memoryAddress byteOffset:byteOffset];
 }
 
-- (instancetype)initWithMessage:(NSString *)message loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset {
+- (instancetype)initWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset {
     self = [super init];
     if (self) {
         _message = message;
+        _level = level;
         _loggerName = loggerName;
         _framework = framework;
         _className = className;
@@ -44,6 +45,8 @@
     if (message == nil)
         return NO;
     if (self.message != message.message && ![self.message isEqualToString:message.message])
+        return NO;
+    if (self.level != message.level)
         return NO;
     if (self.loggerName != message.loggerName && ![self.loggerName isEqualToString:message.loggerName])
         return NO;

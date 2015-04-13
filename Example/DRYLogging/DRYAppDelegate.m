@@ -6,61 +6,71 @@
 //  Copyright (c) 2014 Michael Seghers. All rights reserved.
 //
 
+#import <DRYLogging/NSString+DRYLoggingLevelAdditions.h>
 #import "DRYAppDelegate.h"
 #import "DRYDefaultLogger.h"
 #import "DRYLoggingConsoleAppender.h"
 #import "DRYLoggingMessageFormatter.h"
 #import "DRYBlockBasedLoggingMessageFormatter.h"
 #import "DRYLoggingMessage.h"
+#import "DRYLoggerFactory.h"
+
+@interface DRYAppDelegate () {
+    id<DRYLogger> _logger;
+}
+@end
 
 @implementation DRYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    DRYDefaultLogger *logger = [[DRYDefaultLogger alloc] initWithName:@"mylogger"];
+
     id <DRYLoggingMessageFormatter> formatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
-        return [NSString stringWithFormat:@"%@ - [%@] - %@", message.loggerName, message.className, message.message];
+        return [NSString stringWithFormat:@"%@ -[%@ %@] + %@ - %@ - (%@)", [NSString stringFromDRYLoggingLevel:message.level], message.className, message.methodName, message.byteOffset, message.message, message.loggerName];
     }];
     id<DRYLoggingAppender> appender = [[DRYLoggingConsoleAppender alloc] initWithFormatter:formatter];
-    [logger addAppender:appender];
+    [[DRYLoggerFactory rootLogger] addAppender:appender];
 
-    logger.level = DRYLogLevelTrace;
+    _logger = [DRYLoggerFactory loggerWithName:@"application.DRYAppDelegate"];
+    [_logger info:@"Application did finish launching, this message should be printed, as the AppDelegate logger inherits from the root logger, which by default has INFO level logging"];
 
-    [logger trace:@"Trace logging %@", @1];
-    [logger trace:@"Debug logging %@", @2];
-    [logger trace:@"Info logging %@", @3];
-    [logger trace:@"Warn logging %@", @4];
-    [logger trace:@"Error logging %@", @5];
+
+    id <DRYLogger> viewControllerLoggers = [DRYLoggerFactory loggerWithName:@"viewcontroller"];
+    viewControllerLoggers.level = DRYLogLevelTrace;
+
+    [_logger trace:@"Example of a trace logging %@, but should not be visible in the logs, as long as the default level is kept for the root logger", @1];
+    [_logger debug:@"Example of a debug logging %@, but should not be visible in the logs, as long as the default level is kept for the root logger", @2];
+    [_logger info:@"Example of info logging %@, should be visible in the logs, as long as the default level is kept for the root logger", @3];
+    [_logger warn:@"Example of warn logging %@, should be visible in the logs, as long as the default level is kept for the root logger", @4];
+    [_logger error:@"Example of error logging %@, should be visible in the logs, as long as the default level is kept for the root logger", @5];
 
     return YES;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    [_logger info:@"Application %@ is resigning active", application];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [_logger info:@"Application %@ did enter background", application];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [_logger info:@"Application %@ will enter foreground", application];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [_logger info:@"Application %@ did become active", application];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [_logger info:@"Application %@ will terminate", application];
 }
 
 @end

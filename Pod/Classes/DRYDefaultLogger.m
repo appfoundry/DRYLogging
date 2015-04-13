@@ -16,15 +16,17 @@
 
 @end
 
-#define callAppenders(format)  va_list args; \
+#define callAppenders(lvl, format)  va_list args; \
 va_start(args, (format));                           \
-[self _callAppendersWithFormat:(format) args:args]; \
+[self _callAppendersWithFormat:(format) level:(lvl) args:args]; \
 va_end(args);
 
 @implementation DRYDefaultLogger
 
 @synthesize level = _level;
 @synthesize name = _name;
+@synthesize parent = _parent;
+@synthesize appenders = _appenders;
 
 - (instancetype)init
 {
@@ -42,73 +44,99 @@ va_end(args);
     return self;
 }
 
+- (instancetype)initWithName:(NSString *)name parent:(id<DRYLogger>)parent {
+    self = [self initWithName:name];
+    if (self) {
+        _parent = parent;
+    }
+    return self;
+}
+
 + (instancetype)loggerWithName:(NSString *)name {
     return [[self alloc] initWithName:name];
 }
 
++ (instancetype)loggerWithName:(NSString *)name parent:(id<DRYLogger>)parent {
+    return [[self alloc] initWithName:name parent:parent];
+}
+
+
 - (BOOL)isTraceEnabled {
-    return [self _isLevelEnabled:DRYLogLevelTrace];
+    return [self isLevelEnabled:DRYLogLevelTrace];
 }
 
 - (void)trace:(NSString *)format, ... {
     if (self.isTraceEnabled) {
-        callAppenders(format)
+        callAppenders(DRYLogLevelTrace, format)
     }
 }
 
-- (void)_callAppendersWithFormat:(NSString *)format args:(va_list)args {
-    NSString *sourceString = [NSThread callStackSymbols][2];
-    NSCharacterSet *separatorSet = [NSCharacterSet characterSetWithCharactersInString:@" -[]+?.,"];
-    NSMutableArray *array = [NSMutableArray arrayWithArray:[sourceString  componentsSeparatedByCharactersInSet:separatorSet]];
-    [array removeObject:@""];
-    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:[[NSString alloc] initWithFormat:format arguments:args] loggerName:self.name framework:array[1] className:array[3] methodName:array[4] memoryAddress:array[2] byteOffset:array[5]];
 
-    for (id<DRYLoggingAppender> appender in _appenders) {
-        [appender append:message];
-    }
-}
 
 - (BOOL)isDebugEnabled {
-    return [self _isLevelEnabled:DRYLogLevelDebug];
+    return [self isLevelEnabled:DRYLogLevelDebug];
 }
 
 - (void)debug:(NSString *)format, ... {
     if (self.isDebugEnabled) {
-        callAppenders(format);
+        callAppenders(DRYLogLevelDebug, format);
     }
 }
 
 - (BOOL)isInfoEnabled {
-    return [self _isLevelEnabled:DRYLogLevelInfo];
+    return [self isLevelEnabled:DRYLogLevelInfo];
 }
 
 - (void)info:(NSString *)format, ... {
     if (self.isInfoEnabled) {
-        callAppenders(format);
+        callAppenders(DRYLogLevelInfo, format);
     }
 }
 
 - (BOOL)isWarnEnabled {
-    return [self _isLevelEnabled:DRYLogLevelWarn];
+    return [self isLevelEnabled:DRYLogLevelWarn];
 }
 
 - (void)warn:(NSString *)format, ... {
     if (self.isWarnEnabled) {
-        callAppenders(format);
+        callAppenders(DRYLogLevelWarn, format);
     }
 }
 
 - (BOOL)isErrorEnabled {
-    return [self _isLevelEnabled:DRYLogLevelError];
+    return [self isLevelEnabled:DRYLogLevelError];
 }
 
 - (void)error:(NSString *)format, ... {
     if (self.isErrorEnabled) {
-        callAppenders(format);
+        callAppenders(DRYLogLevelError, format);
     }
 }
 
-- (BOOL)_isLevelEnabled:(DRYLogLevel)level {
+- (void)_callAppendersWithFormat:(NSString *)format level:(DRYLogLevel)level args:(va_list)args {
+    NSString *sourceString = [NSThread callStackSymbols][2];
+    NSCharacterSet *separatorSet = [NSCharacterSet characterSetWithCharactersInString:@" -[]+?.,"];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[sourceString  componentsSeparatedByCharactersInSet:separatorSet]];
+    [array removeObject:@""];
+    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:[[NSString alloc] initWithFormat:format arguments:args] level:level loggerName:self.name framework:array[1] className:array[3] methodName:array[4] memoryAddress:array[2] byteOffset:array[5]];
+
+    [self _callLoggerAppenders:self message:message];
+}
+
+- (void)_callLoggerAppenders:(DRYDefaultLogger *)logger message:(DRYLoggingMessage *)message {
+    for (id<DRYLoggingAppender> appender in logger.appenders) {
+        [appender append:message];
+    }
+
+    if (logger.parent) {
+        [self _callLoggerAppenders:logger.parent message:message];
+    }
+}
+
+- (BOOL)isLevelEnabled:(DRYLogLevel)level {
+    if (_level == DRYLogLevelOff && _parent) {
+        return [_parent isLevelEnabled:level];
+    }
     return _level <= level;
 }
 

@@ -28,7 +28,7 @@
 }
 
 - (void)testLoggerShouldCallFormatter {
-    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:nil loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil];
+    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:nil level:DRYLogLevelOff loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil];
     [_appender append:message];
     [MKTVerify(_formatter) format:message];
 }

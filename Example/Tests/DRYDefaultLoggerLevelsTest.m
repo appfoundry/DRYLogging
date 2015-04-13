@@ -8,6 +8,7 @@
 
 
 #import "DRYDefaultLogger.h"
+#import "NSString+DRYLoggingLevelAdditions.h"
 #import <DRYTestUtilities/DRYParameterizedTestCase.h>
 
 @interface DRYDefaultLoggerLevelsTest : DRYParameterizedTestCase {
@@ -43,27 +44,7 @@
 }
 
 - (NSString *)testName {
-    NSString *levelString;
-    switch (self.levelToSet) {
-        case DRYLogLevelTrace:
-            levelString = @"TRACE";
-            break;
-        case DRYLogLevelDebug:
-            levelString = @"DEBUG";
-            break;
-        case DRYLogLevelInfo:
-            levelString = @"INFO";
-            break;
-        case DRYLogLevelWarn:
-            levelString = @"WARN";
-            break;
-        case DRYLogLevelError:
-            levelString = @"ERROR";
-            break;
-        case DRYLogLevelOff:
-            levelString = @"OFF";
-            break;
-    }
+    NSString *levelString= [NSString stringFromDRYLoggingLevel:self.levelToSet];
     NSString *methodString = NSStringFromSelector(self.enabledMethod);
     NSString *boolString = self.expectedToBe ? @"YES" : @"NO";
     return [NSString stringWithFormat:@"test_whenLevelIsSetTo%@_%@_shouldBe%@", levelString, methodString, boolString];

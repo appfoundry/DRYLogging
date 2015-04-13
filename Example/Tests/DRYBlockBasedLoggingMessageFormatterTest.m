@@ -9,6 +9,7 @@
 #import "DRYLoggingMessageFormatter.h"
 #import "DRYBlockBasedLoggingMessageFormatter.h"
 #import "DRYLoggingMessage.h"
+#import "DRYLogger.h"
 
 @interface DRYBlockBasedLoggingMessageFormatterTest : XCTestCase {
     DRYBlockBasedLoggingMessageFormatter *_formatter;
@@ -26,7 +27,7 @@
 }
 
 - (void)testFormatterReturnsResultFromBlock {
-    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:@"message" loggerName:@"logger" framework:@"framework" className:@"classname" methodName:@"method" memoryAddress:@"mem" byteOffset:@"byte"];
+    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:@"message" level:DRYLogLevelDebug loggerName:@"logger" framework:@"framework" className:@"classname" methodName:@"method" memoryAddress:@"mem" byteOffset:@"byte"];
     NSString *string = [_formatter format:message];
     assertThat(string, is(equalTo(@"[classname] message")));
 }

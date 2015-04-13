@@ -6,9 +6,13 @@
 //  Copyright (c) 2014 Michael Seghers. All rights reserved.
 //
 
+#import <DRYLogging/DRYLoggerFactory.h>
 #import "DRYViewController.h"
+#import "DRYLogger.h"
 
-@interface DRYViewController ()
+@interface DRYViewController () {
+    id <DRYLogger> _logger;
+}
 
 @end
 
@@ -17,13 +21,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    _logger = [DRYLoggerFactory loggerWithName:@"viewcontroller.DRYViewController"];
+    [_logger trace:@"Controller view did load"];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [_logger warn:@"Memory warning!"];
 }
 
 @end
