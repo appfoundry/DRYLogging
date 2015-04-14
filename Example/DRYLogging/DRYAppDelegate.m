@@ -7,13 +7,8 @@
 //
 
 #import <DRYLogging/NSString+DRYLoggingLevelAdditions.h>
+#import <DRYLogging/DRYLogging.h>
 #import "DRYAppDelegate.h"
-#import "DRYDefaultLogger.h"
-#import "DRYLoggingConsoleAppender.h"
-#import "DRYLoggingMessageFormatter.h"
-#import "DRYBlockBasedLoggingMessageFormatter.h"
-#import "DRYLoggingMessage.h"
-#import "DRYLoggerFactory.h"
 
 @interface DRYAppDelegate () {
     id<DRYLogger> _logger;

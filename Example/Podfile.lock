@@ -1,5 +1,5 @@
 PODS:
-  - DRYLogging (0.1.0)
+  - DRYLogging (1.0.0)
   - DRYTestUtilities (0.1.1)
   - OCHamcrest (4.1.1)
   - OCMockito (1.4.0):
@@ -16,7 +16,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  DRYLogging: 309227e074f97aeb28d1276060bcee2d449f507d
+  DRYLogging: 6b6002835520cb8384aa7bb51813caf59e0e8b76
   DRYTestUtilities: bd822808b8a648372f40d8b364bc9a3981c448a1
   OCHamcrest: 6f03ffa81d12feab872638490a44ab0a6d3aca10
   OCMockito: 4981140c9a9ec06c31af40f636e3c0f25f27e6b2

@@ -6,9 +6,8 @@
 //  Copyright (c) 2014 Michael Seghers. All rights reserved.
 //
 
-#import <DRYLogging/DRYLoggerFactory.h>
+#import <DRYLogging/DRYLogging.h>
 #import "DRYViewController.h"
-#import "DRYLogger.h"
 
 @interface DRYViewController () {
     id <DRYLogger> _logger;
