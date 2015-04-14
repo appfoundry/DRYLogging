@@ -10,11 +10,11 @@
 
 @implementation DRYLoggingMessage
 
-+ (instancetype)messageWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset {
-    return [[self alloc] initWithMessage:message level:level loggerName:loggerName framework:framework className:className methodName:methodName memoryAddress:memoryAddress byteOffset:byteOffset];
++ (instancetype)messageWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName {
+    return [[self alloc] initWithMessage:message level:level loggerName:loggerName framework:framework className:className methodName:methodName memoryAddress:memoryAddress byteOffset:byteOffset threadName:threadName];
 }
 
-- (instancetype)initWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset {
+- (instancetype)initWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName {
     self = [super init];
     if (self) {
         _message = message;
@@ -25,6 +25,7 @@
         _methodName = methodName;
         _memoryAddress = memoryAddress;
         _byteOffset = byteOffset;
+        _threadName = threadName;
     }
 
     return self;
@@ -58,6 +59,8 @@
         return NO;
     if (self.memoryAddress != message.memoryAddress && ![self.memoryAddress isEqualToString:message.memoryAddress])
         return NO;
+    if (self.threadName != message.threadName && ![self.threadName isEqualToString:message.threadName])
+        return NO;
     return !(self.byteOffset != message.byteOffset && ![self.byteOffset isEqualToString:message.byteOffset]);
 }
 
@@ -69,6 +72,7 @@
     hash = hash * 31u + [self.methodName hash];
     hash = hash * 31u + [self.memoryAddress hash];
     hash = hash * 31u + [self.byteOffset hash];
+    hash = hash * 31u + [self.threadName hash];
     return hash;
 }
 

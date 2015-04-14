@@ -118,7 +118,8 @@ va_end(args);
     NSCharacterSet *separatorSet = [NSCharacterSet characterSetWithCharactersInString:@" -[]+?.,"];
     NSMutableArray *array = [NSMutableArray arrayWithArray:[sourceString  componentsSeparatedByCharactersInSet:separatorSet]];
     [array removeObject:@""];
-    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:[[NSString alloc] initWithFormat:format arguments:args] level:level loggerName:self.name framework:array[1] className:array[3] methodName:array[4] memoryAddress:array[2] byteOffset:array[5]];
+    NSString *threadName = [NSThread currentThread].name.length ? [NSThread currentThread].name : ([NSThread currentThread].isMainThread ? @"main" : @"???");
+    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:[[NSString alloc] initWithFormat:format arguments:args] level:level loggerName:self.name framework:array[1] className:array[3] methodName:array[4] memoryAddress:array[2] byteOffset:array[5] threadName:threadName];
 
     [self _callLoggerAppenders:self message:message];
 }
