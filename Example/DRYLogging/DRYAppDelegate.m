@@ -34,11 +34,11 @@
     id <DRYLogger> viewControllerLoggers = [DRYLoggerFactory loggerWithName:@"viewcontroller"];
     viewControllerLoggers.level = DRYLogLevelTrace;
 
-    [_logger trace:@"Example of a trace logging %@, but should not be visible in the logs, as long as the default level is kept for the root logger", @1];
-    [_logger debug:@"Example of a debug logging %@, but should not be visible in the logs, as long as the default level is kept for the root logger", @2];
-    [_logger info:@"Example of info logging %@, should be visible in the logs, as long as the default level is kept for the root logger", @3];
-    [_logger warn:@"Example of warn logging %@, should be visible in the logs, as long as the default level is kept for the root logger", @4];
-    [_logger error:@"Example of error logging %@, should be visible in the logs, as long as the default level is kept for the root logger", @5];
+    DRYTrace(_logger, @"Example of a trace logging %@, but should not be visible in the logs, as long as the default level is kept for the root logger", @1);
+    DRYDebug(_logger, @"Example of a debug logging %@, but should not be visible in the logs, as long as the default level is kept for the root logger", @2);
+    DRYInfo(_logger, @"Example of info logging %@, should be visible in the logs, as long as the default level is kept for the root logger", @3);
+    DRYWarn(_logger, @"Example of warn logging %@, should be visible in the logs, as long as the default level is kept for the root logger", @4);
+    DRYError(_logger, @"Example of error logging %@, should be visible in the logs, as long as the default level is kept for the root logger", @5);
 
     return YES;
 }
