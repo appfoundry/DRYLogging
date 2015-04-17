@@ -13,6 +13,7 @@
 
 @interface DRYLoggingConsoleAppenderTest : XCTestCase {
     DRYLoggingConsoleAppender *_appender;
+    DRYLoggingMessage *_message;
     id <DRYLoggingMessageFormatter> _formatter;
     id <DRYLoggingAppenderFilter> _filter;
 }
@@ -26,53 +27,48 @@
     _formatter = mockProtocol(@protocol(DRYLoggingMessageFormatter));
     _filter = mockProtocol(@protocol(DRYLoggingAppenderFilter));
     _appender = [DRYLoggingConsoleAppender appenderWithFormatter:_formatter];
+    _message = [DRYLoggingMessage messageWithMessage:nil level:DRYLogLevelOff loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil threadName:nil lineNumber:0];
 }
 
 - (void)testAppenderShouldCallFormatter {
-    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:nil level:DRYLogLevelOff loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil threadName:nil];
-    [_appender append:message];
-    [MKTVerify(_formatter) format:message];
+    [_appender append:_message];
+    [MKTVerify(_formatter) format:_message];
 }
 
 - (void)testAppenderShouldCheckFilter {
     [_appender addFilter:_filter];
-    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:nil level:DRYLogLevelOff loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil threadName:nil];
-    [_appender append:message];
-    [MKTVerify(_filter) decide:message];
+    [_appender append:_message];
+    [MKTVerify(_filter) decide:_message];
 }
 
 - (void)testAppenderShouldNotAppendWhenFilterIsDeny {
-    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:nil level:DRYLogLevelOff loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil threadName:nil];
-    [given([_filter decide:message]) willReturnInteger:DRYLoggingAppenderFilterDecissionDeny];
+    [given([_filter decide:_message]) willReturnInteger:DRYLoggingAppenderFilterDecissionDeny];
     [_appender addFilter:_filter];
-    [_appender append:message];
-    [MKTVerifyCount(_formatter, never()) format:message];
+    [_appender append:_message];
+    [MKTVerifyCount(_formatter, never()) format:_message];
 }
 
 - (void)testAppenderShouldNotAppendWhenAnyFilterIsDeny {
-    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:nil level:DRYLogLevelOff loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil threadName:nil];
-    [[given([_filter decide:message]) willReturnInteger:DRYLoggingAppenderFilterDecissionNeutral] willReturnInteger:DRYLoggingAppenderFilterDecissionDeny];
+    [[given([_filter decide:_message]) willReturnInteger:DRYLoggingAppenderFilterDecissionNeutral] willReturnInteger:DRYLoggingAppenderFilterDecissionDeny];
     [_appender addFilter:_filter];
     [_appender addFilter:_filter];
-    [_appender append:message];
-    [MKTVerifyCount(_formatter, never()) format:message];
+    [_appender append:_message];
+    [MKTVerifyCount(_formatter, never()) format:_message];
 }
 
 - (void)testAppenderShouldNotTryAnyOtherFiltersWhenFilterReturnsAccept {
-    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:nil level:DRYLogLevelOff loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil threadName:nil];
-    [given([_filter decide:message]) willReturnInteger:DRYLoggingAppenderFilterDecissionAccept];
+    [given([_filter decide:_message]) willReturnInteger:DRYLoggingAppenderFilterDecissionAccept];
     [_appender addFilter:_filter];
     [_appender addFilter:_filter];
-    [_appender append:message];
-    [MKTVerifyCount(_filter, times(1)) decide:message];
+    [_appender append:_message];
+    [MKTVerifyCount(_filter, times(1)) decide:_message];
 }
 
 - (void)testAppenderDoesNotCallFilterWhenItIsRemoved {
     [_appender addFilter:_filter];
     [_appender removeFilter:_filter];
-    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:nil level:DRYLogLevelOff loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil threadName:nil];
-    [_appender append:message];
-    [MKTVerifyCount(_filter, never()) decide:message];
+    [_appender append:_message];
+    [MKTVerifyCount(_filter, never()) decide:_message];
 
 }
 

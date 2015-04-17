@@ -45,7 +45,7 @@
 
 - (void)_prepareFilteredConsoleAppenderOnRoorLoggerForErrorMessages {
     id <DRYLoggingMessageFormatter> filterFormatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
-        return [NSString stringWithFormat:@"ERRORS ONLY %@", message.message];
+        return [NSString stringWithFormat:@"ERRORS ONLY <%@> - %@", message.lineNumber, message.message];
     }];
     id<DRYLoggingAppender> errorAppender = [[DRYLoggingConsoleAppender alloc] initWithFormatter:filterFormatter];
     DRYLoggingAppenderLevelFilter *filter = [[DRYLoggingAppenderLevelFilter alloc] init];
@@ -56,7 +56,7 @@
 
 - (void)_prepareConsoleAppenderOnRootLoggerWithExtendedFormatter {
     id <DRYLoggingMessageFormatter> formatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
-        return [NSString stringWithFormat:@"%@ -[%@ %@] + %@ - %@ - (%@)", [NSString stringFromDRYLoggingLevel:message.level], message.className, message.methodName, message.byteOffset, message.message, message.loggerName];
+        return [NSString stringWithFormat:@"%@ -[%@ %@] <%@> + %@ - %@ - (%@)", [NSString stringFromDRYLoggingLevel:message.level], message.className, message.methodName, message.lineNumber, message.byteOffset, message.message, message.loggerName];
     }];
     id<DRYLoggingAppender> appender = [[DRYLoggingConsoleAppender alloc] initWithFormatter:formatter];
     [[DRYLoggerFactory rootLogger] addAppender:appender];

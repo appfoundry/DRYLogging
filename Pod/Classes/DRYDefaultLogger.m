@@ -16,9 +16,9 @@
 
 @end
 
-#define callAppenders(lvl, format)  va_list args; \
+#define callAppenders(lineNumber, lvl, format)  va_list args; \
 va_start(args, (format));                           \
-[self _callAppendersWithFormat:(format) level:(lvl) args:args]; \
+[self _callAppendersWithLineNumber:(lineNumber) format:(format) level:(lvl) args:args]; \
 va_end(args);
 
 @implementation DRYDefaultLogger
@@ -67,11 +67,15 @@ va_end(args);
 
 - (void)trace:(NSString *)format, ... {
     if (self.isTraceEnabled) {
-        callAppenders(DRYLogLevelTrace, format)
+        callAppenders(0, DRYLogLevelTrace, format)
     }
 }
 
-
+- (void)traceWithLineNumber:(int)lineNumber format:(NSString *)format, ... {
+    if (self.isTraceEnabled) {
+        callAppenders(lineNumber, DRYLogLevelTrace, format)
+    }
+}
 
 - (BOOL)isDebugEnabled {
     return [self isLevelEnabled:DRYLogLevelDebug];
@@ -79,7 +83,13 @@ va_end(args);
 
 - (void)debug:(NSString *)format, ... {
     if (self.isDebugEnabled) {
-        callAppenders(DRYLogLevelDebug, format);
+        callAppenders(0, DRYLogLevelDebug, format);
+    }
+}
+
+- (void)debugWithLineNumber:(int)lineNumber format:(NSString *)format, ... {
+    if (self.isDebugEnabled) {
+        callAppenders(lineNumber, DRYLogLevelDebug, format)
     }
 }
 
@@ -89,7 +99,13 @@ va_end(args);
 
 - (void)info:(NSString *)format, ... {
     if (self.isInfoEnabled) {
-        callAppenders(DRYLogLevelInfo, format);
+        callAppenders(0, DRYLogLevelInfo, format);
+    }
+}
+
+- (void)infoWithLineNumber:(int)lineNumber format:(NSString *)format, ... {
+    if (self.isInfoEnabled) {
+        callAppenders(lineNumber, DRYLogLevelInfo, format)
     }
 }
 
@@ -99,7 +115,13 @@ va_end(args);
 
 - (void)warn:(NSString *)format, ... {
     if (self.isWarnEnabled) {
-        callAppenders(DRYLogLevelWarn, format);
+        callAppenders(0, DRYLogLevelWarn, format);
+    }
+}
+
+- (void)warnWithLineNumber:(int)lineNumber format:(NSString *)format, ... {
+    if (self.isWarnEnabled) {
+        callAppenders(lineNumber, DRYLogLevelWarn, format)
     }
 }
 
@@ -109,17 +131,23 @@ va_end(args);
 
 - (void)error:(NSString *)format, ... {
     if (self.isErrorEnabled) {
-        callAppenders(DRYLogLevelError, format);
+        callAppenders(0, DRYLogLevelError, format);
     }
 }
 
-- (void)_callAppendersWithFormat:(NSString *)format level:(DRYLogLevel)level args:(va_list)args {
+- (void)errorWithLineNumber:(int)lineNumber format:(NSString *)format, ... {
+    if (self.isErrorEnabled) {
+        callAppenders(lineNumber, DRYLogLevelError, format)
+    }
+}
+
+- (void)_callAppendersWithLineNumber:(int)lineNumber format:(NSString *)format level:(DRYLogLevel)level args:(va_list)args {
     NSString *sourceString = [NSThread callStackSymbols][2];
     NSCharacterSet *separatorSet = [NSCharacterSet characterSetWithCharactersInString:@" -[]+?.,"];
     NSMutableArray *array = [NSMutableArray arrayWithArray:[sourceString  componentsSeparatedByCharactersInSet:separatorSet]];
     [array removeObject:@""];
     NSString *threadName = [NSThread currentThread].name.length ? [NSThread currentThread].name : ([NSThread currentThread].isMainThread ? @"main" : @"???");
-    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:[[NSString alloc] initWithFormat:format arguments:args] level:level loggerName:self.name framework:array[1] className:array[3] methodName:array[4] memoryAddress:array[2] byteOffset:array[5] threadName:threadName];
+    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:[[NSString alloc] initWithFormat:format arguments:args] level:level loggerName:self.name framework:array[1] className:array[3] methodName:array[4] memoryAddress:array[2] byteOffset:array[5] threadName:threadName lineNumber:lineNumber];
 
     [self _callLoggerAppenders:self message:message];
 }
@@ -148,4 +176,5 @@ va_end(args);
 - (void)removeAppender:(id <DRYLoggingAppender>)appender {
     [_appenders removeObject:appender];
 }
+
 @end

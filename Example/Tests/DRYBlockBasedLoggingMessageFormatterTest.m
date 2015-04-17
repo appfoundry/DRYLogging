@@ -27,7 +27,7 @@
 }
 
 - (void)testFormatterReturnsResultFromBlock {
-    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:@"message" level:DRYLogLevelDebug loggerName:@"logger" framework:@"framework" className:@"classname" methodName:@"method" memoryAddress:@"mem" byteOffset:@"byte" threadName:@"threadName"];
+    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:@"message" level:DRYLogLevelDebug loggerName:@"logger" framework:@"framework" className:@"classname" methodName:@"method" memoryAddress:@"mem" byteOffset:@"byte" threadName:@"threadName" lineNumber:0];
     NSString *string = [_formatter format:message];
     assertThat(string, is(equalTo(@"[classname] message")));
 }

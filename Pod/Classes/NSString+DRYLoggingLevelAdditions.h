@@ -11,6 +11,11 @@
 
 @interface NSString (DRYLoggingLevelAdditions)
 
+/**
+ *  Transforms a DRYLogLevel into a string. Usefull when including a level in a formatted message.
+ *
+ *  @since 1.0
+ */
 + (instancetype)stringFromDRYLoggingLevel:(DRYLogLevel)level;
 
 @end

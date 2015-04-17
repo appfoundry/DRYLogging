@@ -6,13 +6,14 @@
 //  Copyright (c) 2015 Michael Seghers. All rights reserved.
 //
 
+#import <DRYLogging/DRYLogging.h>
 #import "DRYDefaultLogger.h"
-#import "DRYLoggingAppender.h"
-#import "DRYLoggingMessage.h"
+
+#define __PREVIOUS_LINE__ __LINE__ - 1
 
 @interface DRYDefaultLoggerLogTest : XCTestCase {
     DRYDefaultLogger *_logger;
-    
+
     id<DRYLoggingAppender> _firstAppender;
     id _messageMatcher;
 }
@@ -26,7 +27,7 @@
     _firstAppender = mockProtocol(@protocol(DRYLoggingAppender));
     _logger = [[DRYDefaultLogger alloc] initWithName:@"testlogger"];
     [_logger addAppender:_firstAppender];
-    _messageMatcher = allOf(hasProperty(@"message", @"Message param"), hasProperty(@"loggerName", @"testlogger"), hasProperty(@"threadName", @"main"), hasProperty(@"framework", @"Tests"), hasProperty(@"className", @"DRYDefaultLoggerLogTest"), hasProperty(@"methodName", [self _testMethodName]), hasProperty(@"memoryAddress", notNilValue()), hasProperty(@"byteOffset", notNilValue()), hasProperty(@"level", anyOf(@(DRYLogLevelInfo), @(DRYLogLevelTrace), @(DRYLogLevelDebug), @(DRYLogLevelError), @(DRYLogLevelWarn), nil)), nil);
+    _messageMatcher = allOf(hasProperty(@"lineNumber", equalToInteger(0)), hasProperty(@"message", @"Message param"), hasProperty(@"loggerName", @"testlogger"), hasProperty(@"threadName", @"main"), hasProperty(@"framework", @"Tests"), hasProperty(@"className", @"DRYDefaultLoggerLogTest"), hasProperty(@"methodName", [self _testMethodName]), hasProperty(@"memoryAddress", notNilValue()), hasProperty(@"byteOffset", notNilValue()), hasProperty(@"level", anyOf(@(DRYLogLevelInfo), @(DRYLogLevelTrace), @(DRYLogLevelDebug), @(DRYLogLevelError), @(DRYLogLevelWarn), nil)), nil);
 }
 
 - (NSString *)_testMethodName {
@@ -71,6 +72,11 @@
     [MKTVerifyCount(_firstAppender, never()) append:anything()];
 }
 
+- (void)testTraceWithLineNumber {
+    _logger.level = DRYLogLevelTrace;
+    DRYTrace(_logger, @"format %@", @1);
+    [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelTrace)), nil)];
+}
 
 - (void)testDebug_callsAppenderWhenDebugLevelIsEnabled {
     _logger.level = DRYLogLevelDebug;
@@ -92,6 +98,11 @@
     [MKTVerifyCount(_firstAppender, never()) append:anything()];
 }
 
+- (void)testDebugWithLineNumber {
+    _logger.level = DRYLogLevelDebug;
+    DRYDebug(_logger, @"format %@", @1);
+    [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelDebug)), nil)];
+}
 
 - (void)testInfo_callsAppenderWhenInfoLevelIsEnabled {
     _logger.level = DRYLogLevelInfo;
@@ -111,6 +122,12 @@
     _logger.level = DRYLogLevelOff;
     [_logger info:@"Message %@", @"param"];
     [MKTVerifyCount(_firstAppender, never()) append:anything()];
+}
+
+- (void)testInfoWithLineNumber {
+    _logger.level = DRYLogLevelInfo;
+    DRYInfo(_logger, @"format %@", @1);
+    [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelInfo)), nil)];
 }
 
 - (void)testWarn_callsAppenderWhenWarnLevelIsEnabled {
@@ -133,6 +150,12 @@
     [MKTVerifyCount(_firstAppender, never()) append:anything()];
 }
 
+- (void)testWarnWithLineNumber {
+    _logger.level = DRYLogLevelWarn;
+    DRYWarn(_logger, @"format %@", @1);
+    [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelWarn)), nil)];
+}
+
 
 - (void)testError_callsAppenderWhenErrorLevelIsEnabled {
     _logger.level = DRYLogLevelError;
@@ -152,6 +175,12 @@
     _logger.level = DRYLogLevelOff;
     [_logger error:@"Message %@", @"param"];
     [MKTVerifyCount(_firstAppender, never()) append:anything()];
+}
+
+- (void)testErrorWithLineNumber {
+    _logger.level = DRYLogLevelError;
+    DRYError(_logger, @"format %@", @1);
+    [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelError)), nil)];
 }
 
 - (void)testTrace_stopsCallingAppenderWhenItIsRemoved {

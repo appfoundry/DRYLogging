@@ -22,7 +22,7 @@
 #ifndef Pods_DRYLogging_h
 #define Pods_DRYLogging_h
 
-#define DRYLog(logger, level, format, ...) [(logger) level:(format), __VA_ARGS__]
+#define DRYLog(LOGGER, LEVEL, FORMAT, ...) [(LOGGER) LEVEL##WithLineNumber:(__LINE__) format:(FORMAT), __VA_ARGS__]
 #define DRYTrace(logger, format, ...) DRYLog(logger, trace, format, __VA_ARGS__)
 #define DRYDebug(logger, format, ...) DRYLog(logger, debug, format, __VA_ARGS__)
 #define DRYInfo(logger, format, ...) DRYLog(logger, info, format, __VA_ARGS__)

@@ -19,4 +19,5 @@
 - (instancetype)initWithName:(NSString *)name;
 - (instancetype)initWithName:(NSString *)name parent:(id<DRYLogger>)parent;
 
+
 @end

@@ -6,16 +6,15 @@
 //
 //
 
-#import <DRYLogging/DRYLoggingAppenderFilter.h>
 #import "DRYLoggingMessage.h"
 
 @implementation DRYLoggingMessage
 
-+ (instancetype)messageWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName {
-    return [[self alloc] initWithMessage:message level:level loggerName:loggerName framework:framework className:className methodName:methodName memoryAddress:memoryAddress byteOffset:byteOffset threadName:threadName];
++ (instancetype)messageWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName lineNumber:(int)lineNumber {
+    return [[self alloc] initWithMessage:message level:level loggerName:loggerName framework:framework className:className methodName:methodName memoryAddress:memoryAddress byteOffset:byteOffset threadName:threadName lineNumber:lineNumber];
 }
 
-- (instancetype)initWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName {
+- (instancetype)initWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName lineNumber:(int)lineNumber {
     self = [super init];
     if (self) {
         _message = message;
@@ -27,6 +26,7 @@
         _memoryAddress = memoryAddress;
         _byteOffset = byteOffset;
         _threadName = threadName;
+        _lineNumber = @(lineNumber);
     }
 
     return self;
@@ -49,6 +49,8 @@
     if (self.message != message.message && ![self.message isEqualToString:message.message])
         return NO;
     if (self.level != message.level)
+        return NO;
+    if (self.lineNumber != message.lineNumber && ![self.lineNumber isEqualToNumber:message.lineNumber])
         return NO;
     if (self.loggerName != message.loggerName && ![self.loggerName isEqualToString:message.loggerName])
         return NO;
@@ -74,6 +76,7 @@
     hash = hash * 31u + [self.memoryAddress hash];
     hash = hash * 31u + [self.byteOffset hash];
     hash = hash * 31u + [self.threadName hash];
+    hash = hash * 31u + [self.lineNumber hash];
     return hash;
 }
 
