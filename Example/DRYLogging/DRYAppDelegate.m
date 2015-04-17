@@ -25,7 +25,16 @@
         return [NSString stringWithFormat:@"%@ -[%@ %@] + %@ - %@ - (%@)", [NSString stringFromDRYLoggingLevel:message.level], message.className, message.methodName, message.byteOffset, message.message, message.loggerName];
     }];
     id<DRYLoggingAppender> appender = [[DRYLoggingConsoleAppender alloc] initWithFormatter:formatter];
+
+    id <DRYLoggingMessageFormatter> filterFormatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
+        return [NSString stringWithFormat:@"ERRORS ONLY %@", message.message];
+    }];
+    id<DRYLoggingAppender> errorAppender = [[DRYLoggingConsoleAppender alloc] initWithFormatter:filterFormatter];
+    DRYLoggingAppenderLevelFilter *filter = [[DRYLoggingAppenderLevelFilter alloc] init];
+    filter.level = DRYLogLevelError;
+    [errorAppender addFilter:filter];
     [[DRYLoggerFactory rootLogger] addAppender:appender];
+    [[DRYLoggerFactory rootLogger] addAppender:errorAppender];
 
     _logger = [DRYLoggerFactory loggerWithName:@"application.DRYAppDelegate"];
     [_logger info:@"Application did finish launching, this message should be printed, as the AppDelegate logger inherits from the root logger, which by default has INFO level logging"];
@@ -38,7 +47,7 @@
     DRYDebug(_logger, @"Example of a debug logging %@, but should not be visible in the logs, as long as the default level is kept for the root logger", @2);
     DRYInfo(_logger, @"Example of info logging %@, should be visible in the logs, as long as the default level is kept for the root logger", @3);
     DRYWarn(_logger, @"Example of warn logging %@, should be visible in the logs, as long as the default level is kept for the root logger", @4);
-    DRYError(_logger, @"Example of error logging %@, should be visible in the logs, as long as the default level is kept for the root logger", @5);
+    DRYError(_logger, @"Example of error logging %@, should occur 2 times, since two appenders will accept this message, as long as the default level is kept for the root logger", @5);
 
     return YES;
 }

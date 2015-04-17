@@ -16,6 +16,9 @@
 #import "DRYBlockBasedLoggingMessageFormatter.h"
 #import "DRYLoggingConsoleAppender.h"
 
+#import "DRYLoggingAppenderFilter.h"
+#import "DRYLoggingAppenderLevelFilter.h"
+
 #ifndef Pods_DRYLogging_h
 #define Pods_DRYLogging_h
 
@@ -23,7 +26,7 @@
 #define DRYTrace(logger, format, ...) DRYLog(logger, trace, format, __VA_ARGS__)
 #define DRYDebug(logger, format, ...) DRYLog(logger, debug, format, __VA_ARGS__)
 #define DRYInfo(logger, format, ...) DRYLog(logger, info, format, __VA_ARGS__)
-#define DRYWarn(logger, format, ...) DRYLog(logger, error, format, __VA_ARGS__)
-#define DRYError(logger, format, ...) DRYLog(logger, warn, format, __VA_ARGS__)
+#define DRYWarn(logger, format, ...) DRYLog(logger, warn, format, __VA_ARGS__)
+#define DRYError(logger, format, ...) DRYLog(logger, error, format, __VA_ARGS__)
 
 #endif

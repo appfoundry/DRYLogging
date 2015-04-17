@@ -6,6 +6,7 @@
 //
 //
 
+#import <DRYLogging/DRYLoggingAppenderFilter.h>
 #import "DRYLoggingMessage.h"
 
 @implementation DRYLoggingMessage
