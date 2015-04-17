@@ -19,29 +19,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [self _prepareConsoleAppenderOnRootLoggerWithExtendedFormatter];
+    [self _prepareFilteredConsoleAppenderOnRoorLoggerForErrorMessages];
+    [self _prepareViewControllerParentLoggerToHaveLogLevelTrace];
 
-    id <DRYLoggingMessageFormatter> formatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
-        return [NSString stringWithFormat:@"%@ -[%@ %@] + %@ - %@ - (%@)", [NSString stringFromDRYLoggingLevel:message.level], message.className, message.methodName, message.byteOffset, message.message, message.loggerName];
-    }];
-    id<DRYLoggingAppender> appender = [[DRYLoggingConsoleAppender alloc] initWithFormatter:formatter];
-
-    id <DRYLoggingMessageFormatter> filterFormatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
-        return [NSString stringWithFormat:@"ERRORS ONLY %@", message.message];
-    }];
-    id<DRYLoggingAppender> errorAppender = [[DRYLoggingConsoleAppender alloc] initWithFormatter:filterFormatter];
-    DRYLoggingAppenderLevelFilter *filter = [[DRYLoggingAppenderLevelFilter alloc] init];
-    filter.level = DRYLogLevelError;
-    [errorAppender addFilter:filter];
-    [[DRYLoggerFactory rootLogger] addAppender:appender];
-    [[DRYLoggerFactory rootLogger] addAppender:errorAppender];
-
+    //Example on how to get a logger, and log a message.
+    //Since we've setup the root logger with a console appender, and the default log level of a logger is set to info,
+    //this message will be printed to the console with the configured format. (see _prepareConsoleAppenderOnRootLoggerWithExtendedFormatter)
     _logger = [DRYLoggerFactory loggerWithName:@"application.DRYAppDelegate"];
     [_logger info:@"Application did finish launching, this message should be printed, as the AppDelegate logger inherits from the root logger, which by default has INFO level logging"];
-
-
-    id <DRYLogger> viewControllerLoggers = [DRYLoggerFactory loggerWithName:@"viewcontroller"];
-    viewControllerLoggers.level = DRYLogLevelTrace;
 
     DRYTrace(_logger, @"Example of a trace logging %@, but should not be visible in the logs, as long as the default level is kept for the root logger", @1);
     DRYDebug(_logger, @"Example of a debug logging %@, but should not be visible in the logs, as long as the default level is kept for the root logger", @2);
@@ -51,7 +37,31 @@
 
     return YES;
 }
-							
+
+- (void)_prepareViewControllerParentLoggerToHaveLogLevelTrace {
+    id <DRYLogger> viewControllerLoggers = [DRYLoggerFactory loggerWithName:@"viewcontroller"];
+    viewControllerLoggers.level = DRYLogLevelTrace;
+}
+
+- (void)_prepareFilteredConsoleAppenderOnRoorLoggerForErrorMessages {
+    id <DRYLoggingMessageFormatter> filterFormatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
+        return [NSString stringWithFormat:@"ERRORS ONLY %@", message.message];
+    }];
+    id<DRYLoggingAppender> errorAppender = [[DRYLoggingConsoleAppender alloc] initWithFormatter:filterFormatter];
+    DRYLoggingAppenderLevelFilter *filter = [[DRYLoggingAppenderLevelFilter alloc] init];
+    filter.level = DRYLogLevelError;
+    [errorAppender addFilter:filter];
+    [[DRYLoggerFactory rootLogger] addAppender:errorAppender];
+}
+
+- (void)_prepareConsoleAppenderOnRootLoggerWithExtendedFormatter {
+    id <DRYLoggingMessageFormatter> formatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
+        return [NSString stringWithFormat:@"%@ -[%@ %@] + %@ - %@ - (%@)", [NSString stringFromDRYLoggingLevel:message.level], message.className, message.methodName, message.byteOffset, message.message, message.loggerName];
+    }];
+    id<DRYLoggingAppender> appender = [[DRYLoggingConsoleAppender alloc] initWithFormatter:formatter];
+    [[DRYLoggerFactory rootLogger] addAppender:appender];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     [_logger info:@"Application %@ is resigning active", application];
