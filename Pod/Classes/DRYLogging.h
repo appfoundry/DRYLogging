@@ -20,6 +20,7 @@
 #import "DRYLoggingConsoleAppender.h"
 #import "DRYLoggingFileAppender.h"
 #import "DRYLoggingAppenderLevelFilter.h"
+#import "DRYLoggingSizeRollerPredicate.h"
 
 #ifndef Pods_DRYLogging_h
 #define Pods_DRYLogging_h
