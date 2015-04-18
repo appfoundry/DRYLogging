@@ -15,6 +15,7 @@
 
 #import "DRYBlockBasedLoggingMessageFormatter.h"
 #import "DRYLoggingConsoleAppender.h"
+#import "DRYLoggingFileAppender.h"
 
 #import "DRYLoggingAppenderFilter.h"
 #import "DRYLoggingAppenderLevelFilter.h"

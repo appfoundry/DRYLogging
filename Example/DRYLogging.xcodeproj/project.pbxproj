@@ -16,6 +16,8 @@
 		277FF7BB1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7BA1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m */; };
 		277FF7C31ADBE527003CDF82 /* DRYLoggerFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7C21ADBE527003CDF82 /* DRYLoggerFactoryTest.m */; };
 		277FF7C51ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7C41ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m */; };
+		27DE12CA1AE24F210071EC68 /* DRYLoggingFileAppenderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12C91AE24F210071EC68 /* DRYLoggingFileAppenderTest.m */; };
+		27DE12CF1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12CE1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -54,6 +56,8 @@
 		277FF7BA1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerInheritanceTest.m; sourceTree = "<group>"; };
 		277FF7C21ADBE527003CDF82 /* DRYLoggerFactoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggerFactoryTest.m; sourceTree = "<group>"; };
 		277FF7C41ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerThreadingTest.m; sourceTree = "<group>"; };
+		27DE12C91AE24F210071EC68 /* DRYLoggingFileAppenderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingFileAppenderTest.m; sourceTree = "<group>"; };
+		27DE12CE1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingBaseFormattingAppenderTest.m; sourceTree = "<group>"; };
 		4C03203957C991F05371E15D /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		54BC96D2C18FADFC7F5617DC /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* DRYLogging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DRYLogging.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,6 +199,8 @@
 				277FF7C41ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m */,
 				2704AC6B1AE179A4000B6EA5 /* DRYLoggingAppenderLevelFilterDecissionTest.m */,
 				2704AC6D1AE18A28000B6EA5 /* DRYLoggingAppenderLevelFilterTest.m */,
+				27DE12C91AE24F210071EC68 /* DRYLoggingFileAppenderTest.m */,
+				27DE12CE1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -395,11 +401,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27DE12CA1AE24F210071EC68 /* DRYLoggingFileAppenderTest.m in Sources */,
 				277FF7BB1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m in Sources */,
 				2727D65C1AD7411D00482706 /* DRYDefaultLoggerLogTest.m in Sources */,
 				2727D65A1AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m in Sources */,
 				2704AC6C1AE179A4000B6EA5 /* DRYLoggingAppenderLevelFilterDecissionTest.m in Sources */,
 				277FF7B91ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m in Sources */,
+				27DE12CF1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m in Sources */,
 				2704AC6E1AE18A28000B6EA5 /* DRYLoggingAppenderLevelFilterTest.m in Sources */,
 				277FF7C51ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m in Sources */,
 				277FF7C31ADBE527003CDF82 /* DRYLoggerFactoryTest.m in Sources */,
