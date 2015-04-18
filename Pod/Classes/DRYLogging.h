@@ -12,12 +12,13 @@
 
 #import "DRYLoggerFactory.h"
 #import "DRYLoggingMessage.h"
+#import "DRYLoggingRoller.h"
+#import "DRYLoggingRollerPredicate.h"
+#import "DRYLoggingAppenderFilter.h"
 
 #import "DRYBlockBasedLoggingMessageFormatter.h"
 #import "DRYLoggingConsoleAppender.h"
 #import "DRYLoggingFileAppender.h"
-
-#import "DRYLoggingAppenderFilter.h"
 #import "DRYLoggingAppenderLevelFilter.h"
 
 #ifndef Pods_DRYLogging_h

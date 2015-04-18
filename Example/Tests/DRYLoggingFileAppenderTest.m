@@ -11,7 +11,8 @@
 @interface DRYLoggingFileAppenderTest : XCTestCase {
     DRYLoggingFileAppender *_appender;
     id<DRYLoggingMessageFormatter> _formatter;
-    id<DRYLoggingAppenderFilter> _filter;
+    id<DRYLoggingRollerPredicate> _rollerPredicate;
+    id<DRYLoggingRoller> _roller;
     
     NSString *_filePath;
     NSStringEncoding _encoding;
@@ -19,17 +20,21 @@
 
 @end
 
+@interface FileDeletingRoller : NSObject <DRYLoggingRoller>
+@end
+
 @implementation DRYLoggingFileAppenderTest
 
 - (void)setUp {
     [super setUp];
     _formatter = mockProtocol(@protocol(DRYLoggingMessageFormatter));
-    _filter = mockProtocol(@protocol(DRYLoggingAppenderFilter));
+    _rollerPredicate = mockProtocol(@protocol(DRYLoggingRollerPredicate));
+    _roller = mockProtocol(@protocol(DRYLoggingRoller));
     _encoding = NSUTF8StringEncoding;
     
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     _filePath = [documentsPath stringByAppendingPathComponent:@"file.txt"];
-    _appender = [DRYLoggingFileAppender appenderWithFormatter:_formatter toFileAtPath:_filePath encoding:_encoding];
+    _appender = [DRYLoggingFileAppender appenderWithFormatter:_formatter toFileAtPath:_filePath encoding:_encoding rollerPredicate:_rollerPredicate roller:_roller];
 }
 
 - (void)tearDown {
@@ -62,6 +67,31 @@
     [self _removeFileAtPath:path];
 }
 
+- (void)testFileAppenderChecksRollerPredicate {
+    [_appender appendAcceptedAndFormattedMessage:@"message"];
+    [MKTVerify(_rollerPredicate) shouldRollFileAtPath:_filePath];
+}
+
+- (void)testFileAppenderShouldCallFileRoller {
+    [given([_rollerPredicate shouldRollFileAtPath:_filePath]) willReturnBool:YES];
+    [_appender appendAcceptedAndFormattedMessage:@"message"];
+    [MKTVerify(_roller) rollFileAtPath:_filePath];
+}
+
+- (void)testFileAppenderShouldNotCallFileRollerIfPredicateSaysNo {
+    [given([_rollerPredicate shouldRollFileAtPath:_filePath]) willReturnBool:NO];
+    [_appender appendAcceptedAndFormattedMessage:@"message"];
+    [MKTVerifyCount(_roller, never()) rollFileAtPath:anything()];
+}
+
+- (void)testWhenRollingOccurredANewFileIsCreated {
+    [given([_rollerPredicate shouldRollFileAtPath:_filePath]) willReturnBool:YES];
+    id <DRYLoggingRoller> roller = [[FileDeletingRoller alloc] init];
+    _appender = [DRYLoggingFileAppender appenderWithFormatter:_formatter toFileAtPath:_filePath encoding:_encoding rollerPredicate:_rollerPredicate roller:roller];
+    [_appender appendAcceptedAndFormattedMessage:@"message"];
+    assertThatBool([[NSFileManager defaultManager] fileExistsAtPath:_filePath], isTrue());
+}
+
 - (NSString *)_readStringFromFile {
     return [NSString stringWithContentsOfFile:_filePath encoding:_encoding error:nil];
 }
@@ -73,5 +103,15 @@
     }
 }
 
+@end
+
+
+@implementation FileDeletingRoller
+
+- (void)rollFileAtPath:(NSString *)path {
+    if (![[NSFileManager defaultManager] removeItemAtPath:path error:nil]) {
+        XCTFail(@"Test roller could not delete file");
+    }
+}
 
 @end
