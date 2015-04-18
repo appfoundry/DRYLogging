@@ -11,9 +11,28 @@
 
 @protocol DRYLoggingMessageFormatter;
 
+/**
+ *  DRYLoggingAppender implementation that uses the console as its underlying system, through the use of NSLog. It will append DRYLoggingMessage instances to the console using a DRYLoggingMessageFormatter.
+ *
+ *  @since 1.0
+ */
 @interface DRYLoggingConsoleAppender : NSObject <DRYLoggingAppender>
 
+/**
+ *  Class factory method, initializing an appender with the given formatter.
+ *
+ *  @see initWithFormatter:
+ */
 + (instancetype)appenderWithFormatter:(id<DRYLoggingMessageFormatter>)formatter;
-- (instancetype)initWithFormatter:(id<DRYLoggingMessageFormatter>)formatter;
+
+/**
+ *  Do not use this initializer, as it will throw an exception, because a formatter is missing.
+ */
+- (instancetype)init;
+
+/**
+ *  Designated initializer, initializing an appender with the given formatter.
+ */
+- (instancetype)initWithFormatter:(id<DRYLoggingMessageFormatter>)formatter NS_DESIGNATED_INITIALIZER;
 
 @end

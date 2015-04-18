@@ -10,17 +10,22 @@
 #import "DRYLoggingMessage.h"
 
 @interface DRYBlockBasedLoggingMessageFormatter () {
-    FormatterBlock _formatterBlock;
+    DRYLoggingMessageFormatterBlock _formatterBlock;
 }
 @end
 
 @implementation DRYBlockBasedLoggingMessageFormatter
 
-+ (instancetype)formatterWithFormatterBlock:(FormatterBlock)formatterBlock {
++ (instancetype)formatterWithFormatterBlock:(DRYLoggingMessageFormatterBlock)formatterBlock {
     return [[self alloc] initWithFormatterBlock:formatterBlock];
 }
 
-- (instancetype)initWithFormatterBlock:(FormatterBlock)formatterBlock {
+- (instancetype)init {
+    return [self initWithFormatterBlock:nil];
+}
+
+- (instancetype)initWithFormatterBlock:(DRYLoggingMessageFormatterBlock)formatterBlock {
+    NSParameterAssert(formatterBlock);
     self = [super init];
     if (self) {
         _formatterBlock = formatterBlock;

@@ -72,5 +72,9 @@
 
 }
 
+- (void)testAppenderShouldNotBeAbleToCreateWithoutFormatter {
+    XCTAssertThrows([[DRYLoggingConsoleAppender alloc] init]);
+}
+
 
 @end

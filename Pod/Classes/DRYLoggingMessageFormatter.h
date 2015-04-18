@@ -11,9 +11,6 @@
 @class DRYLoggingMessage;
 
 /**
-*
-*/
-/**
  *  A message formatter transforms a DRYLoggingMessage into an NSString.
  *
  *  Message formatters are used by DRYLoggingAppender implementations.

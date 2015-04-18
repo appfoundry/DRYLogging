@@ -24,7 +24,12 @@
     return [[self alloc] initWithFormatter:formatter];
 }
 
+- (instancetype)init {
+    return [self initWithFormatter:nil];
+}
+
 - (instancetype)initWithFormatter:(id <DRYLoggingMessageFormatter>)formatter {
+    NSParameterAssert(formatter);
     self = [super init];
     if (self) {
         _formatter = formatter;

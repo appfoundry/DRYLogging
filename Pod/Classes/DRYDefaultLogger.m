@@ -34,20 +34,17 @@ va_end(args);
 }
 
 - (instancetype)initWithName:(NSString *)name {
-    NSAssert(name != nil,  @"Name should not be nil for a logger!");
-    self = [super init];
-    if (self) {
-        _name = name;
-        _level = DRYLogLevelOff;
-        _appenders = [[NSMutableArray alloc] init];
-    }
-    return self;
+    return [self initWithName:name parent:nil];
 }
 
 - (instancetype)initWithName:(NSString *)name parent:(id<DRYLogger>)parent {
-    self = [self initWithName:name];
+    NSParameterAssert(name);
+    self = [super init];
     if (self) {
         _parent = parent;
+        _name = name;
+        _level = DRYLogLevelOff;
+        _appenders = [[NSMutableArray alloc] init];
     }
     return self;
 }

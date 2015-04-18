@@ -32,6 +32,9 @@
     assertThat(string, is(equalTo(@"[classname] message")));
 }
 
+- (void)testInitializingWithoutBlockFails {
+    XCTAssertThrows([[DRYBlockBasedLoggingMessageFormatter alloc] init]);
+}
 
 
 @end
