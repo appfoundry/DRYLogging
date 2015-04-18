@@ -110,7 +110,9 @@
 
 - (void)rollFileAtPath:(NSString *)path {
     if (![[NSFileManager defaultManager] removeItemAtPath:path error:nil]) {
-        XCTFail(@"Test roller could not delete file");
+        @throw [NSException exceptionWithName:@"TestException"
+                                       reason:@"Test roller could not delete file"
+                                     userInfo:nil];
     }
 }
 
