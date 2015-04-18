@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5023" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier View Controller-->
+        <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="DRYViewController" sceneMemberID="viewController">
@@ -15,7 +16,66 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bv-1c-wD4">
+                                <rect key="frame" x="145" y="269" width="30" height="30"/>
+                                <state key="normal" title="Info">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="_logAnInfo:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="NET-c4-NBg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJ8-RN-7Ui">
+                                <rect key="frame" x="137" y="231" width="46" height="30"/>
+                                <state key="normal" title="Debug">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="_logADebug:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="E9l-wC-kFL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ag-EV-LBm">
+                                <rect key="frame" x="143" y="345" width="34" height="30"/>
+                                <state key="normal" title="Error">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="_logAnError:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vcQ-pU-arx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5uf-fW-rgh">
+                                <rect key="frame" x="141" y="193" width="38" height="30"/>
+                                <state key="normal" title="Trace">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="_logATrace:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tIP-Fn-xqq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUX-wS-0B0">
+                                <rect key="frame" x="142" y="307" width="36" height="30"/>
+                                <state key="normal" title="Warn">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="_logAWarn:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="YeZ-OA-J7x"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="pUX-wS-0B0" secondAttribute="centerX" id="5a3-V0-REU"/>
+                            <constraint firstItem="0bv-1c-wD4" firstAttribute="top" secondItem="LJ8-RN-7Ui" secondAttribute="bottom" constant="8" id="NR4-0x-ynK"/>
+                            <constraint firstItem="5Ag-EV-LBm" firstAttribute="top" secondItem="pUX-wS-0B0" secondAttribute="bottom" constant="8" id="VvZ-gs-fK2"/>
+                            <constraint firstAttribute="centerX" secondItem="LJ8-RN-7Ui" secondAttribute="centerX" id="W9i-sU-A2F"/>
+                            <constraint firstItem="LJ8-RN-7Ui" firstAttribute="top" secondItem="5uf-fW-rgh" secondAttribute="bottom" constant="8" id="YNB-JW-kZr"/>
+                            <constraint firstAttribute="centerX" secondItem="5Ag-EV-LBm" secondAttribute="centerX" id="bfB-dh-3B7"/>
+                            <constraint firstAttribute="centerX" secondItem="5uf-fW-rgh" secondAttribute="centerX" id="hkj-Sv-l6n"/>
+                            <constraint firstAttribute="centerX" secondItem="0bv-1c-wD4" secondAttribute="centerX" id="omX-FR-0nJ"/>
+                            <constraint firstItem="pUX-wS-0B0" firstAttribute="top" secondItem="0bv-1c-wD4" secondAttribute="bottom" constant="8" id="pWy-2B-pR2"/>
+                            <constraint firstAttribute="centerY" secondItem="0bv-1c-wD4" secondAttribute="centerY" id="sJE-Pz-oJu"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

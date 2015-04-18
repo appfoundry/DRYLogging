@@ -24,8 +24,28 @@
     [_logger trace:@"Controller view did load"];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (IBAction)_logATrace:(id)sender {
+    [_logger trace:@"Trace action invoked"];
+}
+
+
+- (IBAction)_logADebug:(id)sender {
+    [_logger debug:@"Debug action invoked"];
+}
+
+- (IBAction)_logAnInfo:(id)sender {
+    [_logger info:@"Info action invoked"];
+}
+
+- (IBAction)_logAWarn:(id)sender {
+    [_logger warn:@"Warn action invoked"];
+}
+
+- (IBAction)_logAnError:(id)sender {
+    [_logger error:@"Error action invoked"];
+}
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     [_logger warn:@"Memory warning!"];
 }

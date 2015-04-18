@@ -6,8 +6,9 @@
 //
 //
 
+#import <DRYLogging/DRYLoggingBackupRoller.h>
 #import "DRYLoggingRoller.h"
-#import "DRYLoggingRollerPredicate.h"
+#import "DRYLoggingSizeRollerPredicate.h"
 #import "DRYLoggingFileAppender.h"
 
 @interface DRYLoggingFileAppender () {
@@ -26,10 +27,12 @@
 + (instancetype)appenderWithFormatter:(id<DRYLoggingMessageFormatter>)formatter toFileAtPath:(NSString *)path encoding:(NSStringEncoding)encoding rollerPredicate:(id<DRYLoggingRollerPredicate>)rollerPredicate roller:(id<DRYLoggingRoller>)roller {
     return [[self alloc] initWithFormatter:formatter toFileAtPath:path encoding:encoding rollerPredicate:rollerPredicate roller:roller];
 }
-#warning todo -> set default size roller predicate of 1 MB and roller to simple backup roller
+
 - (instancetype)initWithFormatter:(id<DRYLoggingMessageFormatter>)formatter {
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    return [self initWithFormatter:formatter toFileAtPath:[documentsPath stringByAppendingPathComponent:@"default.log"] encoding:NSUTF8StringEncoding rollerPredicate:nil roller:nil];
+    id <DRYLoggingRollerPredicate> predicate = [[DRYLoggingSizeRollerPredicate alloc] init];
+    id <DRYLoggingRoller> roller = [[DRYLoggingBackupRoller alloc] init];
+    return [self initWithFormatter:formatter toFileAtPath:[documentsPath stringByAppendingPathComponent:@"default.log"] encoding:NSUTF8StringEncoding rollerPredicate:predicate roller:roller];
 }
 
 - (instancetype)initWithFormatter:(id<DRYLoggingMessageFormatter>)formatter toFileAtPath:(NSString *)path encoding:(NSStringEncoding)encoding rollerPredicate:(id<DRYLoggingRollerPredicate>)rollerPredicate roller:(id<DRYLoggingRoller>)roller {

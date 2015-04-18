@@ -47,7 +47,7 @@
     id <DRYLoggingMessageFormatter> filterFormatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
         return [NSString stringWithFormat:@"ERRORS ONLY <%@> - %@", message.lineNumber, message.message];
     }];
-    id<DRYLoggingAppender> errorAppender = [[DRYLoggingConsoleAppender alloc] initWithFormatter:filterFormatter];
+    id<DRYLoggingAppender> errorAppender = [[DRYLoggingFileAppender alloc] initWithFormatter:filterFormatter];
     DRYLoggingAppenderLevelFilter *filter = [[DRYLoggingAppenderLevelFilter alloc] init];
     filter.level = DRYLogLevelError;
     [errorAppender addFilter:filter];
