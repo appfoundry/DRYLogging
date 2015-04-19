@@ -10,13 +10,16 @@
 
 @interface DRYLoggingConcurrencyTest : XCTestCase {
     NSString *_filePath;
+    int _numberOfThreadsToSpawn;
+    int _numberOfMessagesToLogWithinOneThread;
 }
 
 @end
 
 @interface MyLoggerThread : NSThread
 
-@property (nonatomic, strong) XCTestExpectation *exp;
+@property(nonatomic) int numberOfMessagesToLog;
+@property(nonatomic, strong) XCTestExpectation *exp;
 
 @end
 
@@ -25,47 +28,63 @@
 - (void)setUp {
     [super setUp];
     self.continueAfterFailure = NO;
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    _filePath = [documentsPath stringByAppendingPathComponent:@"concurrent.txt"];
+    _numberOfThreadsToSpawn = 50;
+    _numberOfMessagesToLogWithinOneThread = 100;
+    [self _setupNonRollingRootFileAppender];
+    [DRYLoggerFactory loggerWithName:@"threadlogger"].level = DRYLogLevelTrace;
+}
+
+- (void)_setupNonRollingRootFileAppender {
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    df.dateFormat =  @"yyyy-MM-dd HH:mm:ss.SSS";
+    df.dateFormat = @"yyyy-MM-dd HH:mm:ss.SSS";
     id <DRYLoggingMessageFormatter> filterFormatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
         return [NSString stringWithFormat:@"[%@] - [%@] %@", [df stringFromDate:message.date], message.threadName, message.message];
     }];
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    _filePath = [documentsPath stringByAppendingPathComponent:@"concurrent.txt"];
-    id<DRYLoggingAppender> errorAppender = [[DRYLoggingFileAppender alloc] initWithFormatter:filterFormatter toFileAtPath:_filePath encoding:NSUTF8StringEncoding rollerPredicate:nil roller:nil];
+    id <DRYLoggingAppender> errorAppender = [[DRYLoggingFileAppender alloc] initWithFormatter:filterFormatter toFileAtPath:_filePath encoding:NSUTF8StringEncoding rollerPredicate:nil roller:nil];
     [[DRYLoggerFactory rootLogger] addAppender:errorAppender];
-    [DRYLoggerFactory loggerWithName:@"threadlogger"].level = DRYLogLevelTrace;
-    
-    
 }
 
 - (void)testSpawnThreads {
-    int total = 50;
-    for (int i = 0; i < total; i++) {
+    [self _spawnThreads];
+    [super waitForExpectationsWithTimeout:5 handler:^(NSError *error) {
+    }];
+    [self _checkLogToHoldExpectedLinesOfLogging];
+}
+
+- (void)_checkLogToHoldExpectedLinesOfLogging {
+    NSString *contents = [self _readLogFileToString];
+    NSRange fullRange = NSMakeRange(0, contents.length);
+    for (int i = 0; i < _numberOfThreadsToSpawn; i++) {
+        for (int j = 0; j < _numberOfMessagesToLogWithinOneThread; j++) {
+            NSArray *matches = [[self _expressionForThreadAtIndex:i withMessageAt:j] matchesInString:contents options:0 range:fullRange];
+            XCTAssertEqual(matches.count, 1, @"Incorrect matches: %@", matches);
+        }
+    }
+}
+
+- (NSRegularExpression *)_expressionForThreadAtIndex:(int)i withMessageAt:(int)j {
+    NSString *regexFormat = [NSString stringWithFormat:@"^\\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}\\] - \\[MyThread-%i\\] This is message %i\\.$", i, j];
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexFormat options:NSRegularExpressionAnchorsMatchLines error:&error];
+    if (!regex) {
+        XCTFail(@"Wrong regex format! %@", error);
+    }
+    return regex;
+}
+
+- (NSString *)_readLogFileToString {
+    return [NSString stringWithContentsOfFile:_filePath encoding:NSUTF8StringEncoding error:nil];
+}
+
+- (void)_spawnThreads {
+    for (int i = 0; i < _numberOfThreadsToSpawn; i++) {
         MyLoggerThread *t = [[MyLoggerThread alloc] init];
+        t.numberOfMessagesToLog = _numberOfMessagesToLogWithinOneThread;
         t.name = [NSString stringWithFormat:@"MyThread-%i", i];
         t.exp = [super expectationWithDescription:t.name];
         [t start];
-    }
-    
-    [super waitForExpectationsWithTimeout:5 handler:^(NSError *error) {}];
-    
-    NSString *contents = [NSString stringWithContentsOfFile:_filePath encoding:NSUTF8StringEncoding error:nil];
-    NSRange fullRange = NSMakeRange(0, contents.length);
-    
-    
-    for (int i = 0; i < total; i++) {
-        for (int j = 0; j < 100; j++) {
-            //NSString *regexFormat = [NSString stringWithFormat:@"^\\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}\\] - \\[MyThread-%i\\] This is message %i$", i, j];
-            NSString *regexFormat = [NSString stringWithFormat:@"^\\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}\\] - \\[MyThread-%i\\] This is message %i\\.$", i, j];
-            NSError *error;
-            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexFormat options:NSRegularExpressionAnchorsMatchLines error:&error];
-            if (!regex) {
-                XCTFail(@"Wrong regex format! %@", error);
-            }
-            NSArray *matches = [regex matchesInString:contents options:0 range:fullRange];
-            XCTAssertEqual(matches.count, 1, @"Incorrect matches: %@", matches);
-        }
     }
 }
 
@@ -87,7 +106,7 @@
 
 - (void)main {
     id <DRYLogger> commonLogger = [DRYLoggerFactory loggerWithName:@"threadlogger"];
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < self.numberOfMessagesToLog; i++) {
         DRYInfo(commonLogger, @"This is message %i.", i);
         [NSThread sleepForTimeInterval:(arc4random_uniform(10) / 10)];
     }
