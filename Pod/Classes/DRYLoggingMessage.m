@@ -10,11 +10,11 @@
 
 @implementation DRYLoggingMessage
 
-+ (instancetype)messageWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName lineNumber:(int)lineNumber {
-    return [[self alloc] initWithMessage:message level:level loggerName:loggerName framework:framework className:className methodName:methodName memoryAddress:memoryAddress byteOffset:byteOffset threadName:threadName lineNumber:lineNumber];
++ (instancetype)messageWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName lineNumber:(int)lineNumber date:(NSDate *)date {
+    return [[self alloc] initWithMessage:message level:level loggerName:loggerName framework:framework className:className methodName:methodName memoryAddress:memoryAddress byteOffset:byteOffset threadName:threadName lineNumber:lineNumber date:date];
 }
 
-- (instancetype)initWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName lineNumber:(int)lineNumber {
+- (instancetype)initWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName lineNumber:(int)lineNumber date:(NSDate *)date {
     self = [super init];
     if (self) {
         _message = message;
@@ -27,6 +27,7 @@
         _byteOffset = byteOffset;
         _threadName = threadName;
         _lineNumber = @(lineNumber);
+        _date = date;
     }
 
     return self;
@@ -51,6 +52,8 @@
     if (self.level != message.level)
         return NO;
     if (self.lineNumber != message.lineNumber && ![self.lineNumber isEqualToNumber:message.lineNumber])
+        return NO;
+    if (self.date != message.date && ![self.date isEqualToDate:message.date])
         return NO;
     if (self.loggerName != message.loggerName && ![self.loggerName isEqualToString:message.loggerName])
         return NO;
@@ -77,6 +80,7 @@
     hash = hash * 31u + [self.byteOffset hash];
     hash = hash * 31u + [self.threadName hash];
     hash = hash * 31u + [self.lineNumber hash];
+    hash = hash * 31u + [self.date hash];
     return hash;
 }
 

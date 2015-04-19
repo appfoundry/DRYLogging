@@ -27,7 +27,7 @@
     _firstAppender = mockProtocol(@protocol(DRYLoggingAppender));
     _logger = [[DRYDefaultLogger alloc] initWithName:@"testlogger"];
     [_logger addAppender:_firstAppender];
-    _messageMatcher = allOf(hasProperty(@"lineNumber", equalToInteger(0)), hasProperty(@"message", @"Message param"), hasProperty(@"loggerName", @"testlogger"), hasProperty(@"threadName", @"main"), hasProperty(@"framework", @"Tests"), hasProperty(@"className", @"DRYDefaultLoggerLogTest"), hasProperty(@"methodName", [self _testMethodName]), hasProperty(@"memoryAddress", notNilValue()), hasProperty(@"byteOffset", notNilValue()), hasProperty(@"level", anyOf(@(DRYLogLevelInfo), @(DRYLogLevelTrace), @(DRYLogLevelDebug), @(DRYLogLevelError), @(DRYLogLevelWarn), nil)), nil);
+    _messageMatcher = allOf(hasProperty(@"date", is(notNilValue())), hasProperty(@"lineNumber", equalToInteger(0)), hasProperty(@"message", @"Message param"), hasProperty(@"loggerName", @"testlogger"), hasProperty(@"threadName", @"main"), hasProperty(@"framework", @"Tests"), hasProperty(@"className", @"DRYDefaultLoggerLogTest"), hasProperty(@"methodName", [self _testMethodName]), hasProperty(@"memoryAddress", notNilValue()), hasProperty(@"byteOffset", notNilValue()), hasProperty(@"level", anyOf(@(DRYLogLevelInfo), @(DRYLogLevelTrace), @(DRYLogLevelDebug), @(DRYLogLevelError), @(DRYLogLevelWarn), nil)), nil);
 }
 
 - (NSString *)_testMethodName {

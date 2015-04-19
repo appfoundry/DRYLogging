@@ -138,7 +138,7 @@
     _filter.level = parameter.filterLevel;
     _filter.exactMatchRequired = parameter.exactMatchRequired;
 
-    DRYLoggingMessage *message = [[DRYLoggingMessage alloc] initWithMessage:nil level:parameter.messageLevel loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil threadName:nil lineNumber:0];
+    DRYLoggingMessage *message = [[DRYLoggingMessage alloc] initWithMessage:nil level:parameter.messageLevel loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil threadName:nil lineNumber:0 date:nil];
     DRYLoggingAppenderFilterDecission result = [_filter decide:message];
     assertThatInteger(result, is(equalToInteger(parameter.expectedDecission)));
 }

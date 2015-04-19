@@ -29,11 +29,11 @@
     _logger = [DRYLoggerFactory loggerWithName:@"application.DRYAppDelegate"];
     [_logger info:@"Application did finish launching, this message should be printed, as the AppDelegate logger inherits from the root logger, which by default has INFO level logging"];
 
-    DRYTrace(_logger, @"Example of a trace logging %@, but should not be visible in the logs, as long as the default level is kept for the root logger", @1);
-    DRYDebug(_logger, @"Example of a debug logging %@, but should not be visible in the logs, as long as the default level is kept for the root logger", @2);
-    DRYInfo(_logger, @"Example of info logging %@, should be visible in the logs, as long as the default level is kept for the root logger", @3);
-    DRYWarn(_logger, @"Example of warn logging %@, should be visible in the logs, as long as the default level is kept for the root logger", @4);
-    DRYError(_logger, @"Example of error logging %@, should occur 2 times, since two appenders will accept this message, as long as the default level is kept for the root logger", @5);
+    DRYTrace(_logger, @"%@: Example of a trace logging, but should not be visible in the logs", @1);
+    DRYDebug(_logger, @"%@: Example of a debug logging, but should not be visible in the logs", @2);
+    DRYInfo(_logger, @"%@: Example of info logging, should be visible in the logs", @3);
+    DRYWarn(_logger, @"%@: Example of warn logging, should be visible in the logs", @4);
+    DRYError(_logger, @"%@: Example of error logging, should be appended to the console and the file, since two appenders will accept this message, as long as the default level is kept for the root logger", @5);
 
     return YES;
 }
@@ -44,8 +44,10 @@
 }
 
 - (void)_prepareFilteredConsoleAppenderOnRoorLoggerForErrorMessages {
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    df.dateFormat =  @"yyyy-MM-dd HH:mm:ss.SSS";
     id <DRYLoggingMessageFormatter> filterFormatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
-        return [NSString stringWithFormat:@"ERRORS ONLY <%@> - %@", message.lineNumber, message.message];
+        return [NSString stringWithFormat:@"[%@] ERRORS ONLY <%@> - %@", [df stringFromDate:message.date], message.lineNumber, message.message];
     }];
     id<DRYLoggingAppender> errorAppender = [[DRYLoggingFileAppender alloc] initWithFormatter:filterFormatter];
     DRYLoggingAppenderLevelFilter *filter = [[DRYLoggingAppenderLevelFilter alloc] init];
@@ -64,27 +66,27 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    [_logger info:@"Application %@ is resigning active", application];
+    [_logger info:@"Application is resigning active"];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    [_logger info:@"Application %@ did enter background", application];
+    [_logger info:@"Application did enter background"];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    [_logger info:@"Application %@ will enter foreground", application];
+    [_logger info:@"Application will enter foreground"];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [_logger info:@"Application %@ did become active", application];
+    [_logger info:@"Application did become active"];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [_logger info:@"Application %@ will terminate", application];
+    [_logger info:@"Application will terminate"];
 }
 
 @end

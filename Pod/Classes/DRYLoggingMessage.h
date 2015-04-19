@@ -64,20 +64,30 @@
 
 /**
  *  The line number of the code on which this message was created.
+ *
+ *  @since 1.1
  */
 @property (nonatomic, readonly) NSNumber *lineNumber;
+
+/**
+ *  The date of the creation of this message.
+ *
+ *  @since 1.1
+ */
+@property (nonatomic, readonly) NSDate *date;
+
 
 /**
  *  Class factory, initializing a message with all of its properties.
  *
  *  @see initWithMessage:level:loggerName:framework:className:methodName:memoryAddress:byteOffset:threadName:lineNumber:
  */
-+ (instancetype)messageWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName lineNumber:(int)lineNumber;
++ (instancetype)messageWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName lineNumber:(int)lineNumber date:(NSDate *)date;
 
 /**
  *  Designated initializer, initializing a message with all of its properties.
  */
-- (instancetype)initWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName lineNumber:(int)lineNumber NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName lineNumber:(int)lineNumber date:(NSDate *)date NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Messages are equal if all of their properties are equal.

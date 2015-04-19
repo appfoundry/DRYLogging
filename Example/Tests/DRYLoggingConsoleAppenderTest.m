@@ -27,7 +27,7 @@
     _formatter = mockProtocol(@protocol(DRYLoggingMessageFormatter));
     _filter = mockProtocol(@protocol(DRYLoggingAppenderFilter));
     _appender = [DRYLoggingConsoleAppender appenderWithFormatter:_formatter];
-    _message = [DRYLoggingMessage messageWithMessage:nil level:DRYLogLevelOff loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil threadName:nil lineNumber:0];
+    _message = [DRYLoggingMessage messageWithMessage:nil level:DRYLogLevelOff loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil threadName:nil lineNumber:0 date:nil];
 }
 
 - (void)testDRYLoggingConsoleAppenderHasImplementationForAppendAcceptedAndFormattedMessage {
