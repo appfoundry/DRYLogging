@@ -45,11 +45,13 @@
 }
 
 - (void)rollFileAtPath:(NSString *)path {
-    NSString *fileName = [[path lastPathComponent] stringByDeletingPathExtension];
-    NSString *extension = path.pathExtension;
-    NSString *directory = [path stringByDeletingLastPathComponent];
-    DRYLoggingBackupRollerOperation *operation = [[DRYLoggingBackupRollerOperation alloc] initWithDirectory:directory fileName:fileName extension:extension lastIndex:_maximumNumberOfFiles - 1];
-    [operation performRolling];
+    @synchronized (self) {
+        NSString *fileName = [[path lastPathComponent] stringByDeletingPathExtension];
+        NSString *extension = path.pathExtension;
+        NSString *directory = [path stringByDeletingLastPathComponent];
+        DRYLoggingBackupRollerOperation *operation = [[DRYLoggingBackupRollerOperation alloc] initWithDirectory:directory fileName:fileName extension:extension lastIndex:_maximumNumberOfFiles - 1];
+        [operation performRolling];
+    }
 }
 
 
@@ -74,7 +76,7 @@
 - (void)performRolling {
     [self _deleteLastFileIfNeeded];
     for (NSInteger i = _lastIndex; i >= 0; i--) {
-        [self _moveFileToNextIndexFromIndex:(NSUInteger)i];
+        [self _moveFileToNextIndexFromIndex:(NSUInteger) i];
     }
 }
 
@@ -89,7 +91,10 @@
 - (void)_deleteLastFileIfNeeded {
     NSString *lastFile = [self _fileAtIndex:_lastIndex];
     if ([_manager fileExistsAtPath:lastFile]) {
-        [_manager removeItemAtPath:lastFile error:nil];
+        NSError *error;
+        if (![_manager removeItemAtPath:lastFile error:&error]) {
+            NSLog(@"Unable to delete last file: %@", error);
+        }
     }
 }
 

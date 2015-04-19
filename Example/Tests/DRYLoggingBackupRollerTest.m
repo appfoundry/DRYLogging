@@ -65,12 +65,18 @@
 }
 
 - (void)testDeletesMaximumAllowedFileAndMovesBeforeLast {
-    [@"3" writeToFile:_filePath3 atomically:NO encoding:NSUTF8StringEncoding error:nil];
-    [@"2" writeToFile:_filePath2 atomically:NO encoding:NSUTF8StringEncoding error:nil];
+    [self _writeString:@"3" toFile:_filePath3];
+    [self _writeString:@"2" toFile:_filePath2];
     [_roller rollFileAtPath:_filePath];
     NSString *file3Content = [NSString stringWithContentsOfFile:_filePath3 encoding:NSUTF8StringEncoding error:nil];
     assertThat(file3Content, is(equalTo(@"2")));
     assertThatBool([_manager fileExistsAtPath:_filePath4], isFalse());
+}
+
+- (void)_writeString:(NSString *)string toFile:(NSString *)file {
+    if (![string writeToFile:file atomically:NO encoding:NSUTF8StringEncoding error:nil]) {
+        XCTFail(@"Couldn't write file %@", file);
+    }
 }
 
 - (void)testConvenienceInitializerSetMaxNumberOfFilesTo5 {

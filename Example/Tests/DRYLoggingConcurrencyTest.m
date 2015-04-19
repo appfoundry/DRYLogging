@@ -32,7 +32,7 @@
     _filePath = [documentsPath stringByAppendingPathComponent:@"concurrent.txt"];
     _numberOfThreadsToSpawn = 50;
     _numberOfMessagesToLogWithinOneThread = 100;
-    [self _setupNonRollingRootFileAppender];
+
     [DRYLoggerFactory loggerWithName:@"threadlogger"].level = DRYLogLevelTrace;
 }
 
@@ -46,11 +46,41 @@
     [[DRYLoggerFactory rootLogger] addAppender:errorAppender];
 }
 
-- (void)testSpawnThreads {
+- (void)_setupFastRollingRootFileAppender {
+    id <DRYLoggingMessageFormatter> filterFormatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
+        return [NSString stringWithFormat:@"[%@] %@", message.threadName, message.message];
+    }];
+    DRYLoggingSizeRollerPredicate *predicate = [[DRYLoggingSizeRollerPredicate alloc] initWithMaxSizeInBytes:100];
+    DRYLoggingBackupRoller *roller = [[DRYLoggingBackupRoller alloc] initWithMaximumNumberOfFiles:10];
+
+    id <DRYLoggingAppender> errorAppender = [[DRYLoggingFileAppender alloc] initWithFormatter:filterFormatter toFileAtPath:_filePath encoding:NSUTF8StringEncoding rollerPredicate:predicate roller:roller];
+    [[DRYLoggerFactory rootLogger] addAppender:errorAppender];
+}
+
+- (void)testLinesShouldNotGetMixedUp {
+    [self _setupNonRollingRootFileAppender];
     [self _spawnThreads];
     [super waitForExpectationsWithTimeout:5 handler:^(NSError *error) {
     }];
     [self _checkLogToHoldExpectedLinesOfLogging];
+}
+
+- (void)testRollingOverWithMultipleThreadsShouldNotMoveMoreThenNeeded {
+    [self _setupFastRollingRootFileAppender];
+    [self _spawnThreads];
+    [super waitForExpectationsWithTimeout:20 handler:^(NSError *error) {
+    }];
+
+}
+
+- (void)_spawnThreads {
+    for (int i = 0; i < _numberOfThreadsToSpawn; i++) {
+        MyLoggerThread *t = [[MyLoggerThread alloc] init];
+        t.numberOfMessagesToLog = _numberOfMessagesToLogWithinOneThread;
+        t.name = [NSString stringWithFormat:@"MyThread-%i", i];
+        t.exp = [super expectationWithDescription:t.name];
+        [t start];
+    }
 }
 
 - (void)_checkLogToHoldExpectedLinesOfLogging {
@@ -64,6 +94,10 @@
     }
 }
 
+- (NSString *)_readLogFileToString {
+    return [NSString stringWithContentsOfFile:_filePath encoding:NSUTF8StringEncoding error:nil];
+}
+
 - (NSRegularExpression *)_expressionForThreadAtIndex:(int)i withMessageAt:(int)j {
     NSString *regexFormat = [NSString stringWithFormat:@"^\\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}\\] - \\[MyThread-%i\\] This is message %i\\.$", i, j];
     NSError *error;
@@ -72,20 +106,6 @@
         XCTFail(@"Wrong regex format! %@", error);
     }
     return regex;
-}
-
-- (NSString *)_readLogFileToString {
-    return [NSString stringWithContentsOfFile:_filePath encoding:NSUTF8StringEncoding error:nil];
-}
-
-- (void)_spawnThreads {
-    for (int i = 0; i < _numberOfThreadsToSpawn; i++) {
-        MyLoggerThread *t = [[MyLoggerThread alloc] init];
-        t.numberOfMessagesToLog = _numberOfMessagesToLogWithinOneThread;
-        t.name = [NSString stringWithFormat:@"MyThread-%i", i];
-        t.exp = [super expectationWithDescription:t.name];
-        [t start];
-    }
 }
 
 - (void)tearDown {
@@ -98,6 +118,10 @@
             XCTFail(@"Could not remove %@: %@", filePath, error);
         }
     }
+
+    [[DRYLoggerFactory rootLogger].appenders enumerateObjectsUsingBlock:^(id appender, NSUInteger idx, BOOL *stop) {
+        [[DRYLoggerFactory rootLogger] removeAppender:appender];
+    }];
 }
 
 @end
