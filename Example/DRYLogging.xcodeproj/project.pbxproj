@@ -286,6 +286,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Michael Seghers";
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = 25D2G7D8KE;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -551,6 +554,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DRYLogging/DRYLogging-Prefix.pch";
 				INFOPLIST_FILE = "DRYLogging/DRYLogging-Info.plist";
@@ -565,6 +569,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DRYLogging/DRYLogging-Prefix.pch";
 				INFOPLIST_FILE = "DRYLogging/DRYLogging-Info.plist";
