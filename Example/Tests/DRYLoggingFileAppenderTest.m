@@ -8,6 +8,9 @@
 
 #import <DRYLogging/DRYLogging.h>
 
+#define WEAK_SELF __weak DRYLoggingFileAppenderTest *weakSelf = self;
+#define STRONG_SELF DRYLoggingFileAppenderTest *self = weakSelf;
+
 @interface BlockRollerPredicate : NSObject <DRYLoggingRollerPredicate>
 @property(nonatomic) BOOL expectedAnswer;
 @property(nonatomic, strong) void(^executeOnCall)(NSString *passedInFilePath);
@@ -83,12 +86,15 @@
         return @([[NSFileManager defaultManager] fileExistsAtPath:path]);
     }, is(equalTo(@(YES))));
     [self _removeFileAtPath:path];
+    appender = nil;
 }
 
 - (void)testFileAppenderChecksRollerPredicate {
     XCTestExpectation *expectation = [super expectationWithDescription:@"PredicateExecution"];
+    WEAK_SELF
     _rollerPredicate.executeOnCall = ^(NSString *calledWithPath) {
-        assertThat(calledWithPath, is(equalTo(_filePath)));
+        STRONG_SELF
+        assertThat(calledWithPath, is(equalTo(self->_filePath)));
         [expectation fulfill];
     };
 
@@ -100,8 +106,10 @@
 - (void)testFileAppenderShouldCallFileRoller {
     XCTestExpectation *expectation = [super expectationWithDescription:@"RollerExecution"];
     _rollerPredicate.expectedAnswer = YES;
+    __weak DRYLoggingFileAppenderTest *weakSelf = self;
     _roller.executeOnCall = ^(NSString *calledWithPath) {
-        assertThat(calledWithPath, is(equalTo(_filePath)));
+        DRYLoggingFileAppenderTest *self = weakSelf;
+        assertThat(calledWithPath, is(equalTo(self->_filePath)));
         [expectation fulfill];
     };
     [_appender appendAcceptedAndFormattedMessage:@"message"];
@@ -110,8 +118,10 @@
 }
 
 - (void)testFileAppenderShouldNotCallFileRollerIfPredicateSaysNo {
-    _rollerPredicate.expectedAnswer = NO; //
+    _rollerPredicate.expectedAnswer = NO;
+    __weak id weakSelf = self;
     _roller.executeOnCall = ^(NSString *calledWithPath) {
+        id self = weakSelf;
         XCTFail(@"Roller should never be called!");
     };
     [_appender appendAcceptedAndFormattedMessage:@"message"];
