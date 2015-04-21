@@ -8,17 +8,28 @@
 
 #import <DRYLogging/DRYLogging.h>
 
+@interface BlockRollerPredicate : NSObject <DRYLoggingRollerPredicate>
+@property(nonatomic) BOOL expectedAnswer;
+@property(nonatomic, strong) void(^executeOnCall)(NSString *passedInFilePath);
+
+@end
+
+@interface BlockRoller : NSObject <DRYLoggingRoller>
+@property(nonatomic, strong) void(^executeOnCall)(NSString *passedInFilePath);
+@end
+
 @interface DRYLoggingFileAppenderTest : XCTestCase {
     DRYLoggingFileAppender *_appender;
-    id<DRYLoggingMessageFormatter> _formatter;
-    id<DRYLoggingRollerPredicate> _rollerPredicate;
-    id<DRYLoggingRoller> _roller;
-    
+    id <DRYLoggingMessageFormatter> _formatter;
+    BlockRollerPredicate *_rollerPredicate;
+    BlockRoller *_roller;
+
     NSString *_filePath;
     NSStringEncoding _encoding;
 }
 
 @end
+
 
 @interface FileDeletingRoller : NSObject <DRYLoggingRoller>
 @end
@@ -28,10 +39,10 @@
 - (void)setUp {
     [super setUp];
     _formatter = mockProtocol(@protocol(DRYLoggingMessageFormatter));
-    _rollerPredicate = mockProtocol(@protocol(DRYLoggingRollerPredicate));
-    _roller = mockProtocol(@protocol(DRYLoggingRoller));
+    _rollerPredicate = [[BlockRollerPredicate alloc] init];
+    _roller = [[BlockRoller alloc] init];
     _encoding = NSUTF8StringEncoding;
-    
+
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     _filePath = [documentsPath stringByAppendingPathComponent:@"file.txt"];
     _appender = [DRYLoggingFileAppender appenderWithFormatter:_formatter toFileAtPath:_filePath encoding:_encoding rollerPredicate:_rollerPredicate roller:_roller];
@@ -50,38 +61,61 @@
 
 - (void)testAppendShouldWriteMessageToFile {
     [_appender appendAcceptedAndFormattedMessage:@"message"];
-    assertThat([self _readStringFromFile], is(equalTo(@"message\n")));
+    assertThatAfter(1, ^id() {
+        return [self _readStringFromFile];
+    }, is(equalTo(@"message\n")));
 }
 
 - (void)testAppendShouldAppendMessagesToFile {
     [self _writeStringToFile:@"existing content"];
     [_appender appendAcceptedAndFormattedMessage:@"message2"];
-    assertThat([self _readStringFromFile], is(equalTo(@"existing contentmessage2\n")));
+    assertThatAfter(1, ^id() {
+        return [self _readStringFromFile];
+    }, is(equalTo(@"existing contentmessage2\n")));
 }
 
 - (void)testInitializingWithFormatterOnlyResultsInLoggingToDefaultDotLogFileInDocumentPath {
-    [DRYLoggingFileAppender appenderWithFormatter:_formatter];
+    DRYLoggingFileAppender *appender = [DRYLoggingFileAppender appenderWithFormatter:_formatter];
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSString *path = [documentsPath stringByAppendingPathComponent:@"default.log"];
-    assertThatBool([[NSFileManager defaultManager] fileExistsAtPath:path], isTrue());
+
+    assertThatAfter(1, ^id() {
+        return @([[NSFileManager defaultManager] fileExistsAtPath:path]);
+    }, is(equalTo(@(YES))));
     [self _removeFileAtPath:path];
 }
 
 - (void)testFileAppenderChecksRollerPredicate {
+    XCTestExpectation *expectation = [super expectationWithDescription:@"PredicateExecution"];
+    _rollerPredicate.executeOnCall = ^(NSString *calledWithPath) {
+        assertThat(calledWithPath, is(equalTo(_filePath)));
+        [expectation fulfill];
+    };
+
     [_appender appendAcceptedAndFormattedMessage:@"message"];
-    [MKTVerify(_rollerPredicate) shouldRollFileAtPath:_filePath];
+    [super waitForExpectationsWithTimeout:1 handler:^(NSError *error) {
+    }];
 }
 
 - (void)testFileAppenderShouldCallFileRoller {
-    [given([_rollerPredicate shouldRollFileAtPath:_filePath]) willReturnBool:YES];
+    XCTestExpectation *expectation = [super expectationWithDescription:@"RollerExecution"];
+    _rollerPredicate.expectedAnswer = YES;
+    _roller.executeOnCall = ^(NSString *calledWithPath) {
+        assertThat(calledWithPath, is(equalTo(_filePath)));
+        [expectation fulfill];
+    };
     [_appender appendAcceptedAndFormattedMessage:@"message"];
-    [MKTVerify(_roller) rollFileAtPath:_filePath];
+    [super waitForExpectationsWithTimeout:1 handler:^(NSError *error) {
+    }];
 }
 
 - (void)testFileAppenderShouldNotCallFileRollerIfPredicateSaysNo {
-    [given([_rollerPredicate shouldRollFileAtPath:_filePath]) willReturnBool:NO];
+    _rollerPredicate.expectedAnswer = NO; //
+    _roller.executeOnCall = ^(NSString *calledWithPath) {
+        XCTFail(@"Roller should never be called!");
+    };
     [_appender appendAcceptedAndFormattedMessage:@"message"];
-    [MKTVerifyCount(_roller, never()) rollFileAtPath:anything()];
+    [NSThread sleepForTimeInterval:1];
 }
 
 - (void)testWhenRollingOccurredANewFileIsCreated {
@@ -100,6 +134,27 @@
     NSError *error;
     if (![string writeToFile:_filePath atomically:NO encoding:_encoding error:&error]) {
         XCTFail(@"Could not write to file: %@", error);
+    }
+}
+
+@end
+
+@implementation BlockRollerPredicate
+
+- (BOOL)shouldRollFileAtPath:(NSString *)path {
+    if (self.executeOnCall) {
+        self.executeOnCall(path);
+    }
+    return self.expectedAnswer;
+}
+
+@end
+
+@implementation BlockRoller
+
+- (void)rollFileAtPath:(NSString *)path {
+    if (self.executeOnCall) {
+        self.executeOnCall(path);
     }
 }
 

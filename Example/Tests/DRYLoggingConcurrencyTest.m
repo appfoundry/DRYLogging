@@ -10,6 +10,7 @@
 
 @interface DRYLoggingConcurrencyTest : XCTestCase {
     NSString *_filePath;
+    NSString *_documentPath;
     int _numberOfThreadsToSpawn;
     int _numberOfMessagesToLogWithinOneThread;
 }
@@ -28,8 +29,8 @@
 - (void)setUp {
     [super setUp];
     self.continueAfterFailure = NO;
-    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    _filePath = [documentsPath stringByAppendingPathComponent:@"concurrent.txt"];
+    _documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    _filePath = [_documentPath stringByAppendingPathComponent:@"concurrent.txt"];
     _numberOfThreadsToSpawn = 50;
     _numberOfMessagesToLogWithinOneThread = 100;
 
@@ -70,7 +71,22 @@
     [self _spawnThreads];
     [super waitForExpectationsWithTimeout:20 handler:^(NSError *error) {
     }];
+    [NSThread sleepForTimeInterval:5];
 
+    [self _checkRolledLogsHaveExpectedThreeLines];
+
+}
+
+- (void)_checkRolledLogsHaveExpectedThreeLines {
+    for (int i = 1; i < 10; i++) {
+        NSString *path = [_documentPath stringByAppendingPathComponent:[NSString stringWithFormat:@"concurrent%i.txt", i]];
+        NSString *string = [self _readLogFileToString:path];
+        NSRange fullRange = NSMakeRange(0, string.length);
+        NSString *regexFormat = @"^\\[MyThread-[0-9]+\\] This is message [0-9]+\\.$";
+        NSRegularExpression *regex = [self _expressionForFormat:regexFormat];
+        NSArray *matches = [regex matchesInString:string options:0 range:fullRange];
+        assertThat(matches, hasCountOf(3));
+    }
 }
 
 - (void)_spawnThreads {
@@ -84,7 +100,7 @@
 }
 
 - (void)_checkLogToHoldExpectedLinesOfLogging {
-    NSString *contents = [self _readLogFileToString];
+    NSString *contents = [self _readLogFileToString:_filePath];
     NSRange fullRange = NSMakeRange(0, contents.length);
     for (int i = 0; i < _numberOfThreadsToSpawn; i++) {
         for (int j = 0; j < _numberOfMessagesToLogWithinOneThread; j++) {
@@ -94,12 +110,16 @@
     }
 }
 
-- (NSString *)_readLogFileToString {
-    return [NSString stringWithContentsOfFile:_filePath encoding:NSUTF8StringEncoding error:nil];
+- (NSString *)_readLogFileToString:(NSString *)path {
+    return [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
 }
 
 - (NSRegularExpression *)_expressionForThreadAtIndex:(int)i withMessageAt:(int)j {
     NSString *regexFormat = [NSString stringWithFormat:@"^\\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}\\] - \\[MyThread-%i\\] This is message %i\\.$", i, j];
+    return [self _expressionForFormat:regexFormat];
+}
+
+- (NSRegularExpression *)_expressionForFormat:(NSString *)regexFormat {
     NSError *error;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexFormat options:NSRegularExpressionAnchorsMatchLines error:&error];
     if (!regex) {

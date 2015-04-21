@@ -10,13 +10,24 @@
 #import "DRYLoggingSizeRollerPredicate.h"
 #import "DRYLoggingFileAppender.h"
 
-@interface DRYLoggingFileAppender () {
+@interface _DRYLoggingFileAppenderMessageQueueThread : NSThread {
     NSOutputStream *_stream;
     NSStringEncoding _encoding;
     NSString *_filePath;
     id <DRYLoggingRollerPredicate> _rollerPredicate;
     id <DRYLoggingRoller> _roller;
-    BOOL _rolling;
+    NSMutableArray *_queue;
+    dispatch_semaphore_t _queueOrCancelledSemaphore;
+}
+
+- (instancetype)initWithFileAtPath:(NSString *)path encoding:(NSStringEncoding)encoding rollerPredicate:(id <DRYLoggingRollerPredicate>)rollerPredicate roller:(id <DRYLoggingRoller>)roller queue:(NSMutableArray *)queue semaphore:(dispatch_semaphore_t)sem;
+
+@end
+
+@interface DRYLoggingFileAppender () {
+    NSMutableArray *_queuedMessages;
+    _DRYLoggingFileAppenderMessageQueueThread *_queueThread;
+    dispatch_semaphore_t _queueOrCancelledSemaphore;
 
 }
 @end
@@ -38,45 +49,89 @@
 - (instancetype)initWithFormatter:(id <DRYLoggingMessageFormatter>)formatter toFileAtPath:(NSString *)path encoding:(NSStringEncoding)encoding rollerPredicate:(id <DRYLoggingRollerPredicate>)rollerPredicate roller:(id <DRYLoggingRoller>)roller {
     self = [super initWithFormatter:formatter];
     if (self) {
-        _encoding = encoding;
-        _filePath = path;
-        _rollerPredicate = rollerPredicate;
-        _roller = roller;
-        [self _openStream];
+        _queuedMessages = [[NSMutableArray alloc] init];
+        _queueOrCancelledSemaphore = dispatch_semaphore_create(0);
+        _queueThread = [[_DRYLoggingFileAppenderMessageQueueThread alloc] initWithFileAtPath:path encoding:encoding rollerPredicate:rollerPredicate roller:roller queue:_queuedMessages semaphore:_queueOrCancelledSemaphore];
+        [_queueThread start];
     }
     return self;
 }
 
-- (void)_openStream {
-    @synchronized (self) {
-        _stream = [NSOutputStream outputStreamToFileAtPath:_filePath append:YES];
-        [_stream open];
-    }
-}
-
 - (void)appendAcceptedAndFormattedMessage:(NSString *)formattedMessage {
-    while (_rolling) {
-        [NSThread sleepForTimeInterval:0.1];
+    @synchronized (_queuedMessages) {
+        [_queuedMessages addObject:formattedMessage];
     }
-
-    NSData *stringAsData = [[formattedMessage stringByAppendingString:@"\n"] dataUsingEncoding:_encoding];
-    @synchronized (self) {
-        [_stream write:stringAsData.bytes maxLength:stringAsData.length];
-    }
-    [self _performRollingIfNeeded];
+    dispatch_semaphore_signal(_queueOrCancelledSemaphore);
 }
 
-- (void)_performRollingIfNeeded {
-    if ([_rollerPredicate shouldRollFileAtPath:_filePath] && !_rolling) {
-        @synchronized (self) {
-            [_stream close];
-        }
-        _rolling = YES;
-        NSThread *ct = [NSThread currentThread];
-        [_roller rollFileAtPath:_filePath];
-        [self _openStream];
-        _rolling = NO;
+
+- (void)dealloc {
+    [_queueThread cancel];
+    dispatch_semaphore_signal(_queueOrCancelledSemaphore);
+}
+
+@end
+
+@implementation _DRYLoggingFileAppenderMessageQueueThread
+
+- (instancetype)initWithFileAtPath:(NSString *)path encoding:(NSStringEncoding)encoding rollerPredicate:(id <DRYLoggingRollerPredicate>)rollerPredicate roller:(id <DRYLoggingRoller>)roller queue:(NSMutableArray *)queue semaphore:(dispatch_semaphore_t)sem {
+    self = [super init];
+    if (self) {
+        _filePath = path;
+        _encoding = encoding;
+        _rollerPredicate = rollerPredicate;
+        _roller = roller;
+        _queue = queue;
+        _queueOrCancelledSemaphore = sem;
+        self.name = @"DRYLoggingFileAppenderThread";
     }
+    return self;
+}
+
+
+- (void)main {
+    [self _openNewStream];
+    while (!self.isCancelled) {
+        NSString *message;
+        do {
+            message = [self _firstMessageFromQueue];
+            if (message) {
+                [self _writeMessage:message];
+                [self _rollIfNeeded];
+            }
+        } while (message);
+        dispatch_semaphore_wait(_queueOrCancelledSemaphore, DISPATCH_TIME_FOREVER);
+    }
+    [_stream close];
+}
+
+- (void)_rollIfNeeded {
+    if ([_rollerPredicate shouldRollFileAtPath:_filePath]) {
+        [_stream close];
+        [_roller rollFileAtPath:_filePath];
+        [self _openNewStream];
+    }
+}
+
+- (void)_openNewStream {
+    _stream = [NSOutputStream outputStreamToFileAtPath:_filePath append:YES];
+    [_stream open];
+}
+
+- (void)_writeMessage:(NSString *)message {
+    NSData *stringAsData = [[message stringByAppendingString:@"\n"] dataUsingEncoding:_encoding];
+    [_stream write:stringAsData.bytes maxLength:stringAsData.length];
+}
+
+- (NSString *)_firstMessageFromQueue {
+    NSString *message;
+    @synchronized (_queue) {
+        message = _queue.firstObject;
+        if (message) {
+            [_queue removeObjectAtIndex:0];
+        }
+    }
+    return message;
 }
 
 - (void)dealloc {
