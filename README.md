@@ -46,7 +46,8 @@ Create a logger, using the LoggerFactory
 id<DRYLogger> logger = [DRYLoggerFactory loggerWithName:@"FancyLogger"];
 ```
 
-If you want your messages to appear on the console, add the console appender to the root logger. Adding the appender on the root logger, makes sure all loggers will append their messages to the console
+If you want your messages to appear on the console, add the console appender to the root logger. Adding the appender on 
+the root logger, makes sure all loggers can append their messages too.
 
 ```Objective-C
 id <DRYLoggingMessageFormatter> formatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
