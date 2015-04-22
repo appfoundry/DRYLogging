@@ -61,7 +61,7 @@ By default, the root logger will set it's level to INFO, so info, warning and er
 Now we are ready to log a messages: 
 
 ```Objective-C
-NSString *world = @"globe"
+NSString *world = @"globe";
 DRYInfo(logger, @"Hello, %@", world);
 ```
 
