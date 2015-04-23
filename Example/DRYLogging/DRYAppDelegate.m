@@ -11,11 +11,12 @@
 #import "DRYAppDelegate.h"
 
 @interface DRYAppDelegate () {
-    id<DRYLogger> _logger;
 }
 @end
 
 @implementation DRYAppDelegate
+
+DRYClassLogger(@"application.DRYAppDelegate")
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -26,21 +27,19 @@
     //Example on how to get a logger, and log a message.
     //Since we've setup the root logger with a console appender, and the default log level of a logger is set to info,
     //this message will be printed to the console with the configured format. (see _prepareConsoleAppenderOnRootLoggerWithExtendedFormatter)
-    _logger = [DRYLoggerFactory loggerWithName:@"application.DRYAppDelegate"];
-    [_logger info:@"Application did finish launching, this message should be printed, as the AppDelegate logger inherits from the root logger, which by default has INFO level logging"];
+    dryInfo(@"Application did finish launching, this message should be printed, as the AppDelegate logger inherits from the root logger, which by default has INFO level logging");
 
-    DRYTrace(_logger, @"%@: Example of a trace logging, but should not be visible in the logs", @1);
-    DRYDebug(_logger, @"%@: Example of a debug logging, but should not be visible in the logs", @2);
-    DRYInfo(_logger, @"%@: Example of info logging, should be visible in the logs", @3);
-    DRYWarn(_logger, @"%@: Example of warn logging, should be visible in the logs", @4);
-    DRYError(_logger, @"%@: Example of error logging, should be appended to the console and the file, since two appenders will accept this message, as long as the default level is kept for the root logger", @5);
+    dryTrace(@"%@: Example of a trace logging, but should not be visible in the logs", @1);
+    dryDebug(@"%@: Example of a debug logging, but should not be visible in the logs", @2);
+    dryInfo(@"%@: Example of info logging, should be visible in the logs", @3);
+    dryWarn(@"%@: Example of warn logging, should be visible in the logs", @4);
+    dryError(@"%@: Example of error logging, should be appended to the console and the file, since two appenders will accept this message, as long as the default level is kept for the root logger", @5);
 
     return YES;
 }
 
 - (void)_prepareViewControllerParentLoggerToHaveLogLevelTrace {
-    id <DRYLogger> viewControllerLoggers = [DRYLoggerFactory loggerWithName:@"viewcontroller"];
-    viewControllerLoggers.level = DRYLogLevelTrace;
+    DRYLogger(@"viewcontroller").level = DRYLogLevelTrace;
 }
 
 - (void)_prepareFilteredConsoleAppenderOnRoorLoggerForErrorMessages {
@@ -66,27 +65,27 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    [_logger info:@"Application is resigning active"];
+    dryInfo(@"Application is resigning active");
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-    [_logger info:@"Application did enter background"];
+    dryInfo(@"Application did enter background");
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    [_logger info:@"Application will enter foreground"];
+    dryInfo(@"Application will enter foreground");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [_logger info:@"Application did become active"];
+    dryInfo(@"Application did become active");
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    [_logger info:@"Application will terminate"];
+    dryInfo(@"Application will terminate");
 }
 
 @end
