@@ -46,6 +46,12 @@ Create a logger, using the LoggerFactory
 id<DRYLogger> logger = [DRYLoggerFactory loggerWithName:@"FancyLogger"];
 ```
 
+You can also use a macro to get the same result:
+
+```Objective-C
+id<DRYLogger> logger = DRYLogger(@"FancyLogger");
+```
+
 If you want your messages to appear on the console, add the console appender to the root logger. Adding the appender on 
 the root logger, makes sure all loggers can append their messages too.
 
@@ -67,6 +73,27 @@ DRYInfo(logger, @"Hello, %@", world);
 ```
 
 This message will be printed to the console.
+
+If you plan to use a logger class wide, you can use the DRYClassLogger macro to create a static variable called "LOGGER". 
+We've also provided convenience macros that assume a LOGGER variable exists in scope. The example app uses this approach
+in both the DRYAppDelegate and the DRYViewController. Here's the gist of it.
+
+```Objective-C
+@implementation DRYAppDelegate
+
+DRYClassLogger(@"application.DRYAppDelegate")
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //...
+    dryTrace(@"...");
+    //...
+    return YES;
+}
+
+//...
+
+@end
+```
 
 For more information on log levels and appenders, refer to the API documentation. 
 

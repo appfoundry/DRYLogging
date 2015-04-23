@@ -18,8 +18,7 @@
 
 DRYClassLogger(@"application.DRYAppDelegate")
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self _prepareConsoleAppenderOnRootLoggerWithExtendedFormatter];
     [self _prepareFilteredConsoleAppenderOnRoorLoggerForErrorMessages];
     [self _prepareViewControllerParentLoggerToHaveLogLevelTrace];
