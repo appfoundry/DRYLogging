@@ -101,6 +101,11 @@ static void dryInitialize_DRYLogger() { \
  */
 #define DRYWarn(logger, ...) _DRYLog(logger, warn, __VA_ARGS__)
 
+/**
+ *  Calls the given logger's warnWithLineNumber:format: method, using the current line number and the given format.
+ *
+ *  @since 1.2
+ */
 #define dryWarn(...) DRYWarn(LOGGER, __VA_ARGS__)
 
 /**
@@ -113,7 +118,7 @@ static void dryInitialize_DRYLogger() { \
 /**
  *  Calls the given logger's errorWithLineNumber:format: method, using the current line number and the given format.
  *
- *  @since 1.1
+ *  @since 1.2
  */
 #define dryError(...) DRYError(LOGGER, __VA_ARGS__)
 
