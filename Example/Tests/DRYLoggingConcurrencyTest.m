@@ -151,7 +151,7 @@
 - (void)main {
     id <DRYLogger> commonLogger = [DRYLoggerFactory loggerWithName:@"threadlogger"];
     for (int i = 0; i < self.numberOfMessagesToLog; i++) {
-        DRYInfo(commonLogger, @"This is message %i.", i);
+        DRYInfoOnLogger(commonLogger, @"This is message %i.", i);
         [NSThread sleepForTimeInterval:(arc4random_uniform(10) / 10)];
     }
     [self.exp fulfill];

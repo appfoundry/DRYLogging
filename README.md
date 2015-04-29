@@ -74,18 +74,18 @@ DRYInfo(logger, @"Hello, %@", world);
 
 This message will be printed to the console.
 
-If you plan to use a logger class wide, you can use the DRYClassLogger macro to create a static variable called "LOGGER". 
+If you plan to use a logger class wide, you can use the DRYInitializeStaticLogger macro to create a static variable called "LOGGER". 
 We've also provided convenience macros that assume a LOGGER variable exists in scope. The example app uses this approach
 in both the DRYAppDelegate and the DRYViewController. Here's the gist of it.
 
 ```Objective-C
 @implementation DRYAppDelegate
 
-DRYClassLogger(@"application.DRYAppDelegate")
+DRYInitializeStaticLogger(@"application.DRYAppDelegate")
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //...
-    dryTrace(@"...");
+    DRYTrace(@"...");
     //...
     return YES;
 }

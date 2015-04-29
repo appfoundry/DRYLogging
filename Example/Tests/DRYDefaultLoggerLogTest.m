@@ -74,7 +74,7 @@
 
 - (void)testTraceWithLineNumber {
     _logger.level = DRYLogLevelTrace;
-    DRYTrace(_logger, @"format %@", @1);
+    DRYTraceOnLogger(_logger, @"format %@", @1);
     [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelTrace)), nil)];
 }
 
@@ -100,7 +100,7 @@
 
 - (void)testDebugWithLineNumber {
     _logger.level = DRYLogLevelDebug;
-    DRYDebug(_logger, @"format %@", @1);
+    DRYDebugOnLogger(_logger, @"format %@", @1);
     [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelDebug)), nil)];
 }
 
@@ -126,7 +126,7 @@
 
 - (void)testInfoWithLineNumber {
     _logger.level = DRYLogLevelInfo;
-    DRYInfo(_logger, @"format %@", @1);
+    DRYInfoOnLogger(_logger, @"format %@", @1);
     [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelInfo)), nil)];
 }
 
@@ -152,7 +152,7 @@
 
 - (void)testWarnWithLineNumber {
     _logger.level = DRYLogLevelWarn;
-    DRYWarn(_logger, @"format %@", @1);
+    DRYWarnOnLogger(_logger, @"format %@", @1);
     [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelWarn)), nil)];
 }
 
@@ -179,7 +179,7 @@
 
 - (void)testErrorWithLineNumber {
     _logger.level = DRYLogLevelError;
-    DRYError(_logger, @"format %@", @1);
+    DRYErrorOnLogger(_logger, @"format %@", @1);
     [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelError)), nil)];
 }
 
