@@ -138,14 +138,29 @@ va_end(args);
     }
 }
 
+- (DRYLoggingMessage *)_messageWithLineNumber:(int)lineNumber threadName:(NSString *)threadName level:(DRYLogLevel)level args:(va_list)args format:(NSString *)format array:(NSMutableArray *)array {
+    DRYLoggingMessage *message;
+    if (array.count == 8) {
+        NSString *methodAndBlock = [NSString stringWithFormat:@"%@ %@", array[5], array[6]];
+        message = [DRYLoggingMessage messageWithMessage:[[NSString alloc] initWithFormat:format arguments:args] level:level loggerName:self.name framework:array[1] className:array[4] methodName:methodAndBlock memoryAddress:array[2] byteOffset:array[3] threadName:threadName lineNumber:lineNumber date:[NSDate date]];
+    } else if (array.count == 6) {
+        message = [DRYLoggingMessage messageWithMessage:[[NSString alloc] initWithFormat:format arguments:args] level:level loggerName:self.name framework:array[1] className:array[3] methodName:array[4] memoryAddress:array[2] byteOffset:array[5] threadName:threadName lineNumber:lineNumber date:[NSDate date]];
+    } else if (array.count == 5) {
+        message = [DRYLoggingMessage messageWithMessage:[[NSString alloc] initWithFormat:format arguments:args] level:level loggerName:self.name framework:array[1] className:array[3] methodName:@"???" memoryAddress:array[2] byteOffset:array[4] threadName:threadName lineNumber:lineNumber date:[NSDate date]];
+    } else {
+        message = [DRYLoggingMessage messageWithMessage:[[NSString alloc] initWithFormat:format arguments:args] level:level loggerName:self.name framework:@"???" className:@"???" methodName:@"???" memoryAddress:@"???" byteOffset:@"???" threadName:threadName lineNumber:lineNumber date:[NSDate date]];
+    }
+    return message;
+}
+
 - (void)_callAppendersWithLineNumber:(int)lineNumber format:(NSString *)format level:(DRYLogLevel)level args:(va_list)args {
     NSString *sourceString = [NSThread callStackSymbols][2];
     NSCharacterSet *separatorSet = [NSCharacterSet characterSetWithCharactersInString:@" -[]+?.,"];
     NSMutableArray *array = [NSMutableArray arrayWithArray:[sourceString  componentsSeparatedByCharactersInSet:separatorSet]];
     [array removeObject:@""];
     NSString *threadName = [NSThread currentThread].name.length ? [NSThread currentThread].name : ([NSThread currentThread].isMainThread ? @"main" : @"???");
-    DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:[[NSString alloc] initWithFormat:format arguments:args] level:level loggerName:self.name framework:array[1] className:array[3] methodName:array[4] memoryAddress:array[2] byteOffset:array[5] threadName:threadName lineNumber:lineNumber date:[NSDate date]];
 
+    DRYLoggingMessage *message = [self _messageWithLineNumber:lineNumber threadName:threadName level:level args:args format:format array:array];
     [self _callLoggerAppenders:self message:message];
 }
 

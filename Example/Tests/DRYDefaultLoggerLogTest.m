@@ -16,6 +16,7 @@
 
     id<DRYLoggingAppender> _firstAppender;
     id _messageMatcher;
+    id _messageMatcherForBlock;
 }
 
 @end
@@ -28,6 +29,8 @@
     _logger = [[DRYDefaultLogger alloc] initWithName:@"testlogger"];
     [_logger addAppender:_firstAppender];
     _messageMatcher = allOf(hasProperty(@"date", is(notNilValue())), hasProperty(@"lineNumber", equalToInteger(0)), hasProperty(@"message", @"Message param"), hasProperty(@"loggerName", @"testlogger"), hasProperty(@"threadName", @"main"), hasProperty(@"framework", @"Tests"), hasProperty(@"className", @"DRYDefaultLoggerLogTest"), hasProperty(@"methodName", [self _testMethodName]), hasProperty(@"memoryAddress", notNilValue()), hasProperty(@"byteOffset", notNilValue()), hasProperty(@"level", anyOf(@(DRYLogLevelInfo), @(DRYLogLevelTrace), @(DRYLogLevelDebug), @(DRYLogLevelError), @(DRYLogLevelWarn), nil)), nil);
+    _messageMatcherForBlock = allOf(hasProperty(@"date", is(notNilValue())), hasProperty(@"lineNumber", equalToInteger(0)), hasProperty(@"message", @"Message param"), hasProperty(@"loggerName", @"testlogger"), hasProperty(@"threadName", @"main"), hasProperty(@"framework", @"Tests"), hasProperty(@"className", @"DRYDefaultLoggerLogTest"), hasProperty(@"methodName", allOf(containsString([self _testMethodName]), containsString(@"_block_invoke"), nil)), hasProperty(@"memoryAddress", notNilValue()), hasProperty(@"byteOffset", notNilValue()), hasProperty(@"level", anyOf(@(DRYLogLevelInfo), @(DRYLogLevelTrace), @(DRYLogLevelDebug), @(DRYLogLevelError), @(DRYLogLevelWarn), nil)), nil);
+
 }
 
 - (NSString *)_testMethodName {
@@ -189,5 +192,27 @@
     [_logger trace:@"Message %@", @"param"];
     [MKTVerifyCount(_firstAppender, never()) append:anything()];
 }
+
+- (void)testLog_blockLoggingWorksAsExpected {
+    _logger.level = DRYLogLevelError;
+    void (^testBlock)() = ^void() {
+            [_logger error:@"Message %@", @"param"];
+    };
+    testBlock();
+    [MKTVerify(_firstAppender) append:_messageMatcherForBlock];
+}
+
+- (void)testLog_blockInBlockLoggingWorksAsExpected {
+    _logger.level = DRYLogLevelError;
+    void (^testBlock)() = ^void() {
+        void (^innerBlock)() = ^void() {
+            [_logger error:@"Message %@", @"param"];
+        };
+        innerBlock();
+    };
+    testBlock();
+    [MKTVerify(_firstAppender) append:_messageMatcherForBlock];
+}
+
 
 @end
