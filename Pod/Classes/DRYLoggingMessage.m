@@ -10,6 +10,10 @@
 
 @implementation DRYLoggingMessage
 
+- (instancetype) init  {
+    return [self initWithMessage:@"None" level:DRYLogLevelInfo loggerName:@"root" framework:@"Unknown" className:@"Unknown" methodName:@"Unknown" memoryAddress:@"Unknown" byteOffset:@"Unknown" threadName:@"Unknown" lineNumber:0 date:nil];
+}
+
 + (instancetype)messageWithMessage:(NSString *)message level:(DRYLogLevel)level loggerName:(NSString *)loggerName framework:(NSString *)framework className:(NSString *)className methodName:(NSString *)methodName memoryAddress:(NSString *)memoryAddress byteOffset:(NSString *)byteOffset threadName:(NSString *)threadName lineNumber:(int)lineNumber date:(NSDate *)date {
     return [[self alloc] initWithMessage:message level:level loggerName:loggerName framework:framework className:className methodName:methodName memoryAddress:memoryAddress byteOffset:byteOffset threadName:threadName lineNumber:lineNumber date:date];
 }
