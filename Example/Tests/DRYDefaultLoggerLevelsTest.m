@@ -7,7 +7,7 @@
 //
 
 
-#import "DRYDefaultLogger.h"
+#import <DRYLogging/DRYDefaultLogger.h>
 #import "NSString+DRYLoggingLevelAdditions.h"
 #import <DRYTestUtilities/DRYParameterizedTestCase.h>
 
@@ -109,7 +109,7 @@
     BOOL result;
     [invocation getReturnValue:&result];
     
-    assertThatBool(result, parameter.expectedToBe ? isTrue() : isFalse());
+    HC_assertThatBool(result, parameter.expectedToBe ? HC_isTrue() : HC_isFalse());
 }
 
 @end

@@ -23,7 +23,7 @@
  *
  *  @since 1.0
  */
-typedef NS_ENUM(NSInteger, DRYLogLevel){
+typedef NS_ENUM(NSInteger, DRYLogLevel) {
     /**
      *  TRACE log level, lowest level of logging. Use this only while analysing the flow of your code. It is probably best 
      *  not to activate this in production.

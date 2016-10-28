@@ -1,12 +1,14 @@
+platform :ios, '9.0'
 source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
 
-target 'DRYLogging' do
+target 'DRYLoggingExample' do
   pod "DRYLogging", :path => "../"
-end
 
-target 'Tests' do
-  pod "DRYLogging", :path => "../"
-  pod "OCHamcrest"
-  pod "OCMockito"
-  pod "DRYTestUtilities"
+  target 'Tests' do
+      inherit! :search_paths
+      pod "OCHamcrest"
+      pod "OCMockito"
+      pod "DRYTestUtilities"
+  end
 end

@@ -140,7 +140,7 @@
 
     DRYLoggingMessage *message = [[DRYLoggingMessage alloc] initWithMessage:nil level:parameter.messageLevel loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil threadName:nil lineNumber:0 date:nil];
     DRYLoggingAppenderFilterDecission result = [_filter decide:message];
-    assertThatInteger(result, is(equalToInteger(parameter.expectedDecission)));
+    HC_assertThatInteger(result, HC_is(HC_equalToInteger(parameter.expectedDecission)));
 }
 
 @end

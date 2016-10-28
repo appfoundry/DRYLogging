@@ -85,7 +85,7 @@
         NSString *regexFormat = @"^\\[MyThread-[0-9]+\\] This is message [0-9]+\\.$";
         NSRegularExpression *regex = [self _expressionForFormat:regexFormat];
         NSArray *matches = [regex matchesInString:string options:0 range:fullRange];
-        assertThat(matches, hasCountOf(3));
+        HC_assertThat(matches, HC_hasCountOf(3));
     }
 }
 

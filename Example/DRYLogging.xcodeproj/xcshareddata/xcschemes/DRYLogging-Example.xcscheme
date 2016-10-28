@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6003F589195388D20070C39A"
-               BuildableName = "DRYLogging.app"
-               BlueprintName = "DRYLogging"
+               BuildableName = "DRYLoggingExample.app"
+               BlueprintName = "DRYLoggingExample"
                ReferencedContainer = "container:DRYLogging.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,8 +44,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "DRYLogging.app"
-            BlueprintName = "DRYLogging"
+            BuildableName = "DRYLoggingExample.app"
+            BlueprintName = "DRYLoggingExample"
             ReferencedContainer = "container:DRYLogging.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -67,8 +67,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "DRYLogging.app"
-            BlueprintName = "DRYLogging"
+            BuildableName = "DRYLoggingExample.app"
+            BlueprintName = "DRYLoggingExample"
             ReferencedContainer = "container:DRYLogging.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -86,8 +86,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "DRYLogging.app"
-            BlueprintName = "DRYLogging"
+            BuildableName = "DRYLoggingExample.app"
+            BlueprintName = "DRYLoggingExample"
             ReferencedContainer = "container:DRYLogging.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -6,10 +6,17 @@
 //  Copyright (c) 2015 Michael Seghers. All rights reserved.
 //
 
-#import "DRYLoggingMessageFormatter.h"
-#import "DRYBlockBasedLoggingMessageFormatter.h"
-#import "DRYLoggingMessage.h"
-#import "DRYLogger.h"
+#import <DRYLogging/DRYLoggingMessageFormatter.h>
+#import <DRYLogging/DRYBlockBasedLoggingMessageFormatter.h>
+#import <DRYLogging/DRYLoggingMessage.h>
+#import <DRYLogging/DRYLogger.h>
+
+
+#import <XCTest/XCTest.h>
+#define HC_SHORTHAND
+#import <OCHamcrest/OCHamcrest.h>
+#define MOCKITO_SHORTHAND
+#import <OCMockito/OCMockito.h>
 
 @interface DRYBlockBasedLoggingMessageFormatterTest : XCTestCase {
     DRYBlockBasedLoggingMessageFormatter *_formatter;
@@ -29,7 +36,7 @@
 - (void)testFormatterReturnsResultFromBlock {
     DRYLoggingMessage *message = [DRYLoggingMessage messageWithMessage:@"message" level:DRYLogLevelDebug loggerName:@"logger" framework:@"framework" className:@"classname" methodName:@"method" memoryAddress:@"mem" byteOffset:@"byte" threadName:@"threadName" lineNumber:0 date:[NSDate dateWithTimeIntervalSince1970:0]];
     NSString *string = [_formatter format:message];
-    assertThat(string, is(equalTo(@"[classname] message")));
+    HC_assertThat(string, HC_is(HC_equalTo(@"[classname] message")));
 }
 
 - (void)testInitializingWithoutBlockFails {
