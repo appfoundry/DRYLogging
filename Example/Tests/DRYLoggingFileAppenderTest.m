@@ -21,6 +21,12 @@
 @property(nonatomic, strong) void(^executeOnCall)(NSString *passedInFilePath);
 @end
 
+@interface DRYLoggingFileAppender (TestKnowsAll)
+
+@property (readonly, nonatomic) NSArray *queuedMessage;
+
+@end
+
 @interface DRYLoggingFileAppenderTest : XCTestCase {
     DRYLoggingFileAppender *_appender;
     id <DRYLoggingMessageFormatter> _formatter;
@@ -133,6 +139,7 @@
     id <DRYLoggingRoller> roller = [[FileDeletingRoller alloc] init];
     _appender = [DRYLoggingFileAppender appenderWithFormatter:_formatter toFileAtPath:_filePath encoding:_encoding rollerPredicate:_rollerPredicate roller:roller];
     [_appender appendAcceptedAndFormattedMessage:@"message"];
+    while(_appender.queuedMessage.count > 0) {}
     assertThatBool([[NSFileManager defaultManager] fileExistsAtPath:_filePath], isTrue());
 }
 

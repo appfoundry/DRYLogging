@@ -30,6 +30,9 @@
     dispatch_semaphore_t _queueOrCancelledSemaphore;
 
 }
+
+@property (readonly, nonatomic) NSArray *queuedMessage;
+
 @end
 
 @implementation DRYLoggingFileAppender
@@ -63,7 +66,6 @@
     }
     dispatch_semaphore_signal(_queueOrCancelledSemaphore);
 }
-
 
 - (void)dealloc {
     [_queueThread cancel];

@@ -1,10 +1,10 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'DRYLogging', :exclusive => true do
+target 'DRYLogging' do
   pod "DRYLogging", :path => "../"
 end
 
-target 'Tests', :exclusive => true do
+target 'Tests' do
   pod "DRYLogging", :path => "../"
   pod "OCHamcrest"
   pod "OCMockito"
