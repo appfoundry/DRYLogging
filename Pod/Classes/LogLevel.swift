@@ -49,3 +49,21 @@ public enum LogLevel : Int {
      */
     case off
 }
+
+extension LogLevel : Comparable {
+    public static func <(lhs: LogLevel, rhs: LogLevel) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+    
+    public static func <=(lhs: LogLevel, rhs: LogLevel) -> Bool {
+        return lhs.rawValue <= rhs.rawValue
+    }
+    
+    public static func >=(lhs: LogLevel, rhs: LogLevel) -> Bool {
+        return lhs.rawValue >= rhs.rawValue
+    }
+    
+    public static func >(lhs: LogLevel, rhs: LogLevel) -> Bool {
+        return lhs.rawValue > rhs.rawValue
+    }
+}
