@@ -17,6 +17,8 @@
 		277FF7BB1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7BA1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m */; };
 		277FF7C31ADBE527003CDF82 /* DRYLoggerFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7C21ADBE527003CDF82 /* DRYLoggerFactoryTest.m */; };
 		277FF7C51ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7C41ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m */; };
+		27AAEE771DCBA75200E99ECF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAEE761DCBA75200E99ECF /* ViewController.swift */; };
+		27AAEE791DCBA98100E99ECF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AAEE781DCBA98100E99ECF /* Launch Screen.storyboard */; };
 		27DE12CA1AE24F210071EC68 /* DRYLoggingFileAppenderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12C91AE24F210071EC68 /* DRYLoggingFileAppenderTest.m */; };
 		27DE12CF1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12CE1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m */; };
 		27DE12D61AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12D51AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m */; };
@@ -28,8 +30,7 @@
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59E195388D20070C39A /* DRYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* DRYAppDelegate.m */; };
-		6003F5A1195388D20070C39A /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6003F59F195388D20070C39A /* Main_iPhone.storyboard */; };
-		6003F5A4195388D20070C39A /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A2195388D20070C39A /* Main_iPad.storyboard */; };
+		6003F5A1195388D20070C39A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6003F59F195388D20070C39A /* Main.storyboard */; };
 		6003F5A7195388D20070C39A /* DRYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* DRYViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
@@ -59,6 +60,8 @@
 		277FF7BA1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerInheritanceTest.m; sourceTree = "<group>"; };
 		277FF7C21ADBE527003CDF82 /* DRYLoggerFactoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggerFactoryTest.m; sourceTree = "<group>"; };
 		277FF7C41ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerThreadingTest.m; sourceTree = "<group>"; };
+		27AAEE761DCBA75200E99ECF /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		27AAEE781DCBA98100E99ECF /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		27DE12C91AE24F210071EC68 /* DRYLoggingFileAppenderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingFileAppenderTest.m; sourceTree = "<group>"; };
 		27DE12CE1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingBaseFormattingAppenderTest.m; sourceTree = "<group>"; };
 		27DE12D51AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingSizeRollerPredicateTest.m; sourceTree = "<group>"; };
@@ -76,8 +79,7 @@
 		6003F59B195388D20070C39A /* DRYLogging-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DRYLogging-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* DRYAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DRYAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* DRYAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DRYAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A0195388D20070C39A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		6003F5A3195388D20070C39A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		6003F5A0195388D20070C39A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6003F5A5195388D20070C39A /* DRYViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DRYViewController.h; sourceTree = "<group>"; };
 		6003F5A6195388D20070C39A /* DRYViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DRYViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -178,13 +180,14 @@
 			children = (
 				6003F59C195388D20070C39A /* DRYAppDelegate.h */,
 				6003F59D195388D20070C39A /* DRYAppDelegate.m */,
-				6003F59F195388D20070C39A /* Main_iPhone.storyboard */,
-				6003F5A2195388D20070C39A /* Main_iPad.storyboard */,
+				27F2995C1DC367FD008935E8 /* AppDelegate.swift */,
+				6003F59F195388D20070C39A /* Main.storyboard */,
+				27AAEE781DCBA98100E99ECF /* Launch Screen.storyboard */,
 				6003F5A5195388D20070C39A /* DRYViewController.h */,
 				6003F5A6195388D20070C39A /* DRYViewController.m */,
+				27AAEE761DCBA75200E99ECF /* ViewController.swift */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
-				27F2995C1DC367FD008935E8 /* AppDelegate.swift */,
 			);
 			path = DRYLogging;
 			sourceTree = "<group>";
@@ -329,9 +332,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F5A4195388D20070C39A /* Main_iPad.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
-				6003F5A1195388D20070C39A /* Main_iPhone.storyboard in Resources */,
+				6003F5A1195388D20070C39A /* Main.storyboard in Resources */,
+				27AAEE791DCBA98100E99ECF /* Launch Screen.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,6 +449,7 @@
 			files = (
 				27F2995D1DC367FD008935E8 /* AppDelegate.swift in Sources */,
 				6003F59E195388D20070C39A /* DRYAppDelegate.m in Sources */,
+				27AAEE771DCBA75200E99ECF /* ViewController.swift in Sources */,
 				6003F5A7195388D20070C39A /* DRYViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,20 +494,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		6003F59F195388D20070C39A /* Main_iPhone.storyboard */ = {
+		6003F59F195388D20070C39A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6003F5A0195388D20070C39A /* Base */,
 			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		6003F5A2195388D20070C39A /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6003F5A3195388D20070C39A /* Base */,
-			);
-			name = Main_iPad.storyboard;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		6003F5B8195388D20070C39A /* InfoPlist.strings */ = {
@@ -605,7 +601,6 @@
 			baseConfigurationReference = E8804426F57E0250F6F9422C /* Pods-DRYLoggingExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -626,7 +621,6 @@
 			baseConfigurationReference = E339446594B992B70585F081 /* Pods-DRYLoggingExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
