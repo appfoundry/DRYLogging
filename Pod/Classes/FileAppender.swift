@@ -12,18 +12,18 @@ fileprivate class MessageQueue {
     var messageQueue:[String] = [String]()
     
     func append(message: String) {
-        objc_sync_enter(self.messageQueue)
+        objc_sync_enter(self)
         messageQueue.append(message)
-        objc_sync_exit(self.messageQueue)
+        objc_sync_exit(self)
     }
     
     func firstMessage() -> String? {
-        objc_sync_enter(self.messageQueue)
+        objc_sync_enter(self)
         let first = messageQueue.first
         if first != nil {
             messageQueue.remove(at: 0)
         }
-        objc_sync_exit(self.messageQueue)
+        objc_sync_exit(self)
         return first
     }
 }
