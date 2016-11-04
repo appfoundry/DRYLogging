@@ -24,24 +24,24 @@
 }
 
 - (void)testFilterShouldHaveTraceLevelAsFilterLevelByDefault {
-    assertThatInteger(_filter.level, is(equalToInteger(DRYLogLevelTrace)));
+    HC_assertThatInteger(_filter.level, HC_is(HC_equalToInteger(DRYLogLevelTrace)));
 }
 
 - (void)testFilterShouldRequireExactMatchByDefault {
-    assertThatBool(_filter.exactMatchRequired, isTrue());
+    HC_assertThatBool(_filter.exactMatchRequired, HC_isTrue());
 }
 
 - (void)testFilterShouldHaveAcceptDecissionAsDefaultMatchDecission {
-    assertThatInteger(_filter.matchDecission, is(equalToInteger(DRYLoggingAppenderFilterDecissionAccept)));
+    HC_assertThatInteger(_filter.matchDecission, HC_is(HC_equalToInteger(DRYLoggingAppenderFilterDecissionAccept)));
 }
 
 - (void)testFilterShouldHaveDenyDecissionAsDefaultNoMatchDecission {
-    assertThatInteger(_filter.noMatchDecission, is(equalToInteger(DRYLoggingAppenderFilterDecissionDeny)));
+    HC_assertThatInteger(_filter.noMatchDecission, HC_is(HC_equalToInteger(DRYLoggingAppenderFilterDecissionDeny)));
 }
 
 - (void)testFilterShouldHavePropertiesFromInitializer {
     DRYLoggingAppenderLevelFilter *filter = [[DRYLoggingAppenderLevelFilter alloc] initWithLevel:DRYLogLevelOff exactMatchRequired:NO matchDecission:DRYLoggingAppenderFilterDecissionNeutral noMatchDecission:DRYLoggingAppenderFilterDecissionNeutral];
-    assertThat(filter, allOf(hasProperty(@"level", equalToInteger(DRYLogLevelOff)), hasProperty(@"exactMatchRequired", isFalse()), hasProperty(@"matchDecission", equalToInteger(DRYLoggingAppenderFilterDecissionNeutral)), hasProperty(@"noMatchDecission", equalToInteger(DRYLoggingAppenderFilterDecissionNeutral)), nil));
+    HC_assertThat(filter, HC_allOf(HC_hasProperty(@"level", HC_equalToInteger(DRYLogLevelOff)), HC_hasProperty(@"exactMatchRequired", HC_isFalse()), HC_hasProperty(@"matchDecission", HC_equalToInteger(DRYLoggingAppenderFilterDecissionNeutral)), HC_hasProperty(@"noMatchDecission", HC_equalToInteger(DRYLoggingAppenderFilterDecissionNeutral)), nil));
 }
 
 

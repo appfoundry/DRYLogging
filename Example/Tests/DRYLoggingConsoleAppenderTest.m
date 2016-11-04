@@ -24,8 +24,8 @@
 
 - (void)setUp {
     [super setUp];
-    _formatter = mockProtocol(@protocol(DRYLoggingMessageFormatter));
-    _filter = mockProtocol(@protocol(DRYLoggingAppenderFilter));
+    _formatter = MKTMockProtocol(@protocol(DRYLoggingMessageFormatter));
+    _filter = MKTMockProtocol(@protocol(DRYLoggingAppenderFilter));
     _appender = [DRYLoggingConsoleAppender appenderWithFormatter:_formatter];
     _message = [DRYLoggingMessage messageWithMessage:nil level:DRYLogLevelOff loggerName:nil framework:nil className:nil methodName:nil memoryAddress:nil byteOffset:nil threadName:nil lineNumber:0 date:nil];
 }

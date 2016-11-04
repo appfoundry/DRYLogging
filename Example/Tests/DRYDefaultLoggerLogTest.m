@@ -25,11 +25,11 @@
 
 - (void)setUp {
     [super setUp];
-    _firstAppender = mockProtocol(@protocol(DRYLoggingAppender));
+    _firstAppender = MKTMockProtocol(@protocol(DRYLoggingAppender));
     _logger = [[DRYDefaultLogger alloc] initWithName:@"testlogger"];
     [_logger addAppender:_firstAppender];
-    _messageMatcher = allOf(hasProperty(@"date", is(notNilValue())), hasProperty(@"lineNumber", equalToInteger(0)), hasProperty(@"message", @"Message param"), hasProperty(@"loggerName", @"testlogger"), hasProperty(@"threadName", @"main"), hasProperty(@"framework", @"Tests"), hasProperty(@"className", @"DRYDefaultLoggerLogTest"), hasProperty(@"methodName", [self _testMethodName]), hasProperty(@"memoryAddress", notNilValue()), hasProperty(@"byteOffset", notNilValue()), hasProperty(@"level", anyOf(@(DRYLogLevelInfo), @(DRYLogLevelTrace), @(DRYLogLevelDebug), @(DRYLogLevelError), @(DRYLogLevelWarn), nil)), nil);
-    _messageMatcherForBlock = allOf(hasProperty(@"date", is(notNilValue())), hasProperty(@"lineNumber", equalToInteger(0)), hasProperty(@"message", @"Message param"), hasProperty(@"loggerName", @"testlogger"), hasProperty(@"threadName", @"main"), hasProperty(@"framework", @"Tests"), hasProperty(@"className", @"DRYDefaultLoggerLogTest"), hasProperty(@"methodName", allOf(containsString([self _testMethodName]), containsString(@"_block_invoke"), nil)), hasProperty(@"memoryAddress", notNilValue()), hasProperty(@"byteOffset", notNilValue()), hasProperty(@"level", anyOf(@(DRYLogLevelInfo), @(DRYLogLevelTrace), @(DRYLogLevelDebug), @(DRYLogLevelError), @(DRYLogLevelWarn), nil)), nil);
+    _messageMatcher = HC_allOf(HC_hasProperty(@"date", HC_is(HC_notNilValue())), HC_hasProperty(@"lineNumber", HC_equalToInteger(0)), HC_hasProperty(@"message", @"Message param"), HC_hasProperty(@"loggerName", @"testlogger"), HC_hasProperty(@"threadName", @"main"), HC_hasProperty(@"framework", @"Tests"), HC_hasProperty(@"className", @"DRYDefaultLoggerLogTest"), HC_hasProperty(@"methodName", [self _testMethodName]), HC_hasProperty(@"memoryAddress", HC_notNilValue()), HC_hasProperty(@"byteOffset", HC_notNilValue()), HC_hasProperty(@"level", HC_anyOf(@(DRYLogLevelInfo), @(DRYLogLevelTrace), @(DRYLogLevelDebug), @(DRYLogLevelError), @(DRYLogLevelWarn), nil)), nil);
+    _messageMatcherForBlock = HC_allOf(HC_hasProperty(@"date", HC_is(HC_notNilValue())), HC_hasProperty(@"lineNumber", HC_equalToInteger(0)), HC_hasProperty(@"message", @"Message param"), HC_hasProperty(@"loggerName", @"testlogger"), HC_hasProperty(@"threadName", @"main"), HC_hasProperty(@"framework", @"Tests"), HC_hasProperty(@"className", @"DRYDefaultLoggerLogTest"), HC_hasProperty(@"methodName", HC_allOf(HC_containsString([self _testMethodName]), HC_containsString(@"_block_invoke"), nil)), HC_hasProperty(@"memoryAddress", HC_notNilValue()), HC_hasProperty(@"byteOffset", HC_notNilValue()), HC_hasProperty(@"level", HC_anyOf(@(DRYLogLevelInfo), @(DRYLogLevelTrace), @(DRYLogLevelDebug), @(DRYLogLevelError), @(DRYLogLevelWarn), nil)), nil);
 
 }
 
@@ -42,12 +42,12 @@
 
 - (void)testDefaultLogLevelIsOff {
     _logger = [[DRYDefaultLogger alloc] init];
-    assertThatInteger(_logger.level, is(equalToInteger(DRYLogLevelOff)));
+    HC_assertThatInteger(_logger.level, HC_is(HC_equalToInteger(DRYLogLevelOff)));
 }
 
 - (void)testInitReturnsRootLogger {
     _logger = [[DRYDefaultLogger alloc] init];
-    assertThat(_logger.name, is(equalTo(@"root")));
+    HC_assertThat(_logger.name, HC_is(HC_equalTo(@"root")));
 }
 
 - (void)testInitDoesNotAllowNilAsName {
@@ -62,7 +62,7 @@
 }
 
 - (void)testTrace_callsExtreAddedAppenderWhenDebugLevelIsEnabled {
-    id<DRYLoggingAppender> secondAppender = mockProtocol(@protocol(DRYLoggingAppender));
+    id<DRYLoggingAppender> secondAppender = MKTMockProtocol(@protocol(DRYLoggingAppender));
     _logger.level = DRYLogLevelTrace;
     [_logger addAppender:secondAppender];
     [_logger trace:@"Message %@", @"param"];
@@ -72,13 +72,13 @@
 - (void)testTrace_doesNotCallAppendersWhenDebugLevelIsNotEnabled {
     _logger.level = DRYLogLevelOff;
     [_logger trace:@"Message %@", @"param"];
-    [MKTVerifyCount(_firstAppender, never()) append:anything()];
+    [MKTVerifyCount(_firstAppender, MKTNever()) append:HC_anything()];
 }
 
 - (void)testTraceWithLineNumber {
     _logger.level = DRYLogLevelTrace;
     DRYTraceOnLogger(_logger, @"format %@", @1);
-    [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelTrace)), nil)];
+    [MKTVerify(_firstAppender) append:HC_allOf(HC_hasProperty(@"lineNumber", HC_equalToInteger(__PREVIOUS_LINE__)), HC_hasProperty(@"level", HC_equalToInteger(DRYLogLevelTrace)), nil)];
 }
 
 - (void)testDebug_callsAppenderWhenDebugLevelIsEnabled {
@@ -88,7 +88,7 @@
 }
 
 - (void)testDebug_callsExtreAddedAppenderWhenDebugLevelIsEnabled {
-    id<DRYLoggingAppender> secondAppender = mockProtocol(@protocol(DRYLoggingAppender));
+    id<DRYLoggingAppender> secondAppender = MKTMockProtocol(@protocol(DRYLoggingAppender));
     _logger.level = DRYLogLevelDebug;
     [_logger addAppender:secondAppender];
     [_logger debug:@"Message %@", @"param"];
@@ -98,13 +98,13 @@
 - (void)testDebug_doesNotCallAppendersWhenDebugLevelIsNotEnabled {
     _logger.level = DRYLogLevelOff;
     [_logger debug:@"Message %@", @"param"];
-    [MKTVerifyCount(_firstAppender, never()) append:anything()];
+    [MKTVerifyCount(_firstAppender, MKTNever()) append:HC_anything()];
 }
 
 - (void)testDebugWithLineNumber {
     _logger.level = DRYLogLevelDebug;
     DRYDebugOnLogger(_logger, @"format %@", @1);
-    [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelDebug)), nil)];
+    [MKTVerify(_firstAppender) append:HC_allOf(HC_hasProperty(@"lineNumber", HC_equalToInteger(__PREVIOUS_LINE__)), HC_hasProperty(@"level", HC_equalToInteger(DRYLogLevelDebug)), nil)];
 }
 
 - (void)testInfo_callsAppenderWhenInfoLevelIsEnabled {
@@ -114,7 +114,7 @@
 }
 
 - (void) testInfo_callsExtreAddedAppenderWhenInfoLevelIsEnabled {
-    id<DRYLoggingAppender> secondAppender = mockProtocol(@protocol(DRYLoggingAppender));
+    id<DRYLoggingAppender> secondAppender = MKTMockProtocol(@protocol(DRYLoggingAppender));
     _logger.level = DRYLogLevelInfo;
     [_logger addAppender:secondAppender];
     [_logger info:@"Message %@", @"param"];
@@ -124,13 +124,13 @@
 - (void)testInfo_doesNotCallAppendersWhenInfoLevelIsNotEnabled {
     _logger.level = DRYLogLevelOff;
     [_logger info:@"Message %@", @"param"];
-    [MKTVerifyCount(_firstAppender, never()) append:anything()];
+    [MKTVerifyCount(_firstAppender, MKTNever()) append:HC_anything()];
 }
 
 - (void)testInfoWithLineNumber {
     _logger.level = DRYLogLevelInfo;
     DRYInfoOnLogger(_logger, @"format %@", @1);
-    [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelInfo)), nil)];
+    [MKTVerify(_firstAppender) append:HC_allOf(HC_hasProperty(@"lineNumber", HC_equalToInteger(__PREVIOUS_LINE__)), HC_hasProperty(@"level", HC_equalToInteger(DRYLogLevelInfo)), nil)];
 }
 
 - (void)testWarn_callsAppenderWhenWarnLevelIsEnabled {
@@ -140,7 +140,7 @@
 }
 
 - (void) testWarn_callsExtreAddedAppenderWhenWarnLevelIsEnabled {
-    id<DRYLoggingAppender> secondAppender = mockProtocol(@protocol(DRYLoggingAppender));
+    id<DRYLoggingAppender> secondAppender = MKTMockProtocol(@protocol(DRYLoggingAppender));
     _logger.level = DRYLogLevelWarn;
     [_logger addAppender:secondAppender];
     [_logger warn:@"Message %@", @"param"];
@@ -150,13 +150,13 @@
 - (void)testWarn_doesNotCallAppendersWhenWarnLevelIsNotEnabled {
     _logger.level = DRYLogLevelOff;
     [_logger warn:@"Message %@", @"param"];
-    [MKTVerifyCount(_firstAppender, never()) append:anything()];
+    [MKTVerifyCount(_firstAppender, MKTNever()) append:HC_anything()];
 }
 
 - (void)testWarnWithLineNumber {
     _logger.level = DRYLogLevelWarn;
     DRYWarnOnLogger(_logger, @"format %@", @1);
-    [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelWarn)), nil)];
+    [MKTVerify(_firstAppender) append:HC_allOf(HC_hasProperty(@"lineNumber", HC_equalToInteger(__PREVIOUS_LINE__)), HC_hasProperty(@"level", HC_equalToInteger(DRYLogLevelWarn)), nil)];
 }
 
 
@@ -167,7 +167,7 @@
 }
 
 - (void) testError_callsExtreAddedAppenderWhenErrorLevelIsEnabled {
-    id<DRYLoggingAppender> secondAppender = mockProtocol(@protocol(DRYLoggingAppender));
+    id<DRYLoggingAppender> secondAppender = MKTMockProtocol(@protocol(DRYLoggingAppender));
     _logger.level = DRYLogLevelError;
     [_logger addAppender:secondAppender];
     [_logger error:@"Message %@", @"param"];
@@ -177,20 +177,20 @@
 - (void)testError_doesNotCallAppendersWhenErrorLevelIsNotEnabled {
     _logger.level = DRYLogLevelOff;
     [_logger error:@"Message %@", @"param"];
-    [MKTVerifyCount(_firstAppender, never()) append:anything()];
+    [MKTVerifyCount(_firstAppender, MKTNever()) append:HC_anything()];
 }
 
 - (void)testErrorWithLineNumber {
     _logger.level = DRYLogLevelError;
     DRYErrorOnLogger(_logger, @"format %@", @1);
-    [MKTVerify(_firstAppender) append:allOf(hasProperty(@"lineNumber", equalToInteger(__PREVIOUS_LINE__)), hasProperty(@"level", equalToInteger(DRYLogLevelError)), nil)];
+    [MKTVerify(_firstAppender) append:HC_allOf(HC_hasProperty(@"lineNumber", HC_equalToInteger(__PREVIOUS_LINE__)), HC_hasProperty(@"level", HC_equalToInteger(DRYLogLevelError)), nil)];
 }
 
 - (void)testTrace_stopsCallingAppenderWhenItIsRemoved {
     _logger.level = DRYLogLevelTrace;
     [_logger removeAppender:_firstAppender];
     [_logger trace:@"Message %@", @"param"];
-    [MKTVerifyCount(_firstAppender, never()) append:anything()];
+    [MKTVerifyCount(_firstAppender, MKTNever()) append:HC_anything()];
 }
 
 - (void)testLog_blockLoggingWorksAsExpected {

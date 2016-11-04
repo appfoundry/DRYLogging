@@ -49,19 +49,19 @@
 - (void)testRollerRenamesFileToFile1 {
     [_manager createFileAtPath:_filePath contents:nil attributes:nil];
     [_roller rollFileAtPath:_filePath];
-    assertThatBool([_manager fileExistsAtPath:_filePath1], isTrue());
+    HC_assertThatBool([_manager fileExistsAtPath:_filePath1], HC_isTrue());
 }
 
 - (void)testRollerRenamesFile1ToFile2 {
     [_manager createFileAtPath:_filePath1 contents:nil attributes:nil];
     [_roller rollFileAtPath:_filePath];
-    assertThatBool([_manager fileExistsAtPath:_filePath2], isTrue());
+    HC_assertThatBool([_manager fileExistsAtPath:_filePath2], HC_isTrue());
 }
 
 - (void)testRollerRenamesFile2ToFile3 {
     [_manager createFileAtPath:_filePath2 contents:nil attributes:nil];
     [_roller rollFileAtPath:_filePath];
-    assertThatBool([_manager fileExistsAtPath:_filePath3], isTrue());
+    HC_assertThatBool([_manager fileExistsAtPath:_filePath3], HC_isTrue());
 }
 
 - (void)testDeletesMaximumAllowedFileAndMovesBeforeLast {
@@ -69,8 +69,8 @@
     [self _writeString:@"2" toFile:_filePath2];
     [_roller rollFileAtPath:_filePath];
     NSString *file3Content = [NSString stringWithContentsOfFile:_filePath3 encoding:NSUTF8StringEncoding error:nil];
-    assertThat(file3Content, is(equalTo(@"2")));
-    assertThatBool([_manager fileExistsAtPath:_filePath4], isFalse());
+    HC_assertThat(file3Content, HC_is(HC_equalTo(@"2")));
+    HC_assertThatBool([_manager fileExistsAtPath:_filePath4], HC_isFalse());
 }
 
 - (void)_writeString:(NSString *)string toFile:(NSString *)file {
@@ -80,7 +80,7 @@
 }
 
 - (void)testConvenienceInitializerSetMaxNumberOfFilesTo5 {
-    assertThatUnsignedInteger([[DRYLoggingBackupRoller alloc] init].maximumNumberOfFiles, is(equalToUnsignedInteger(5)));
+    HC_assertThatUnsignedInteger([[DRYLoggingBackupRoller alloc] init].maximumNumberOfFiles, HC_is(HC_equalToUnsignedInteger(5)));
 }
 
 

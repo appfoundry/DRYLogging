@@ -47,7 +47,7 @@
 
 - (void)setUp {
     [super setUp];
-    _formatter = mockProtocol(@protocol(DRYLoggingMessageFormatter));
+    _formatter = MKTMockProtocol(@protocol(DRYLoggingMessageFormatter));
     _rollerPredicate = [[BlockRollerPredicate alloc] init];
     _roller = [[BlockRoller alloc] init];
     _encoding = NSUTF8StringEncoding;
@@ -70,17 +70,17 @@
 
 - (void)testAppendShouldWriteMessageToFile {
     [_appender appendAcceptedAndFormattedMessage:@"message"];
-    assertThatAfter(1, ^id() {
+    HC_assertThatAfter(1, ^id() {
         return [self _readStringFromFile];
-    }, is(equalTo(@"message\n")));
+    }, HC_is(HC_equalTo(@"message\n")));
 }
 
 - (void)testAppendShouldAppendMessagesToFile {
     [self _writeStringToFile:@"existing content"];
     [_appender appendAcceptedAndFormattedMessage:@"message2"];
-    assertThatAfter(1, ^id() {
+    HC_assertThatAfter(1, ^id() {
         return [self _readStringFromFile];
-    }, is(equalTo(@"existing contentmessage2\n")));
+    }, HC_is(HC_equalTo(@"existing contentmessage2\n")));
 }
 
 - (void)testInitializingWithFormatterOnlyResultsInLoggingToDefaultDotLogFileInDocumentPath {
@@ -88,9 +88,9 @@
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSString *path = [documentsPath stringByAppendingPathComponent:@"default.log"];
 
-    assertThatAfter(1, ^id() {
+    HC_assertThatAfter(1, ^id() {
         return @([[NSFileManager defaultManager] fileExistsAtPath:path]);
-    }, is(equalTo(@(YES))));
+    }, HC_is(HC_equalTo(@(YES))));
     [self _removeFileAtPath:path];
     appender = nil;
 }
@@ -100,7 +100,7 @@
     WEAK_SELF
     _rollerPredicate.executeOnCall = ^(NSString *calledWithPath) {
         STRONG_SELF
-        assertThat(calledWithPath, is(equalTo(self->_filePath)));
+        HC_assertThat(calledWithPath, HC_is(HC_equalTo(self->_filePath)));
         [expectation fulfill];
     };
 
@@ -115,7 +115,7 @@
     __weak DRYLoggingFileAppenderTest *weakSelf = self;
     _roller.executeOnCall = ^(NSString *calledWithPath) {
         DRYLoggingFileAppenderTest *self = weakSelf;
-        assertThat(calledWithPath, is(equalTo(self->_filePath)));
+        HC_assertThat(calledWithPath, HC_is(HC_equalTo(self->_filePath)));
         [expectation fulfill];
     };
     [_appender appendAcceptedAndFormattedMessage:@"message"];
@@ -135,12 +135,12 @@
 }
 
 - (void)testWhenRollingOccurredANewFileIsCreated {
-    [given([_rollerPredicate shouldRollFileAtPath:_filePath]) willReturnBool:YES];
+    [MKTGiven([_rollerPredicate shouldRollFileAtPath:_filePath]) willReturnBool:YES];
     id <DRYLoggingRoller> roller = [[FileDeletingRoller alloc] init];
     _appender = [DRYLoggingFileAppender appenderWithFormatter:_formatter toFileAtPath:_filePath encoding:_encoding rollerPredicate:_rollerPredicate roller:roller];
     [_appender appendAcceptedAndFormattedMessage:@"message"];
     while(_appender.queuedMessage.count > 0) {}
-    assertThatBool([[NSFileManager defaultManager] fileExistsAtPath:_filePath], isTrue());
+    HC_assertThatBool([[NSFileManager defaultManager] fileExistsAtPath:_filePath], HC_isTrue());
 }
 
 - (NSString *)_readStringFromFile {

@@ -33,16 +33,16 @@
 
 - (void)testPredicateReturnsYESWhenFileSizeExeedsConfiguredSize {
     [self _writeStringToFile:@"toobig"];
-    assertThatBool([_predicate shouldRollFileAtPath:_filePath], isTrue());
+    HC_assertThatBool([_predicate shouldRollFileAtPath:_filePath], HC_isTrue());
 }
 
 - (void)testPredicateReturnsNOWhenFileSizeDoesNotExceedConfiguredSize {
     [self _writeStringToFile:@"small"];
-    assertThatBool([_predicate shouldRollFileAtPath:_filePath], isFalse());
+    HC_assertThatBool([_predicate shouldRollFileAtPath:_filePath], HC_isFalse());
 }
 
 - (void)testUsingConvenienceInitializerSetMaxSizeInBytesTo1MB {
-    assertThatUnsignedInteger([[DRYLoggingSizeRollerPredicate alloc] init].maxSizeInBytes, is(equalToUnsignedInteger(DRY_ONE_MEGABYTE)));
+    HC_assertThatUnsignedInteger([[DRYLoggingSizeRollerPredicate alloc] init].maxSizeInBytes, HC_is(HC_equalToUnsignedInteger(DRY_ONE_MEGABYTE)));
 }
 
 

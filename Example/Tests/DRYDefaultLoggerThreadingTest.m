@@ -9,6 +9,13 @@
 #import "DRYDefaultLogger.h"
 #import "DRYLoggingAppender.h"
 
+
+#define HC_SHORTHAND
+#import <OCHamcrest/OCHamcrest.h>
+#define MOCKITO_SHORTHAND
+#import <OCMockito/OCMockito.h>
+
+
 @interface DRYDefaultLoggerThreadingTest : XCTestCase {
     DRYDefaultLogger *_logger;
     id <DRYLoggingAppender> _appender;
@@ -22,14 +29,14 @@
     [super setUp];
     _logger = [[DRYDefaultLogger alloc] initWithName:@"test"];
     _logger.level = DRYLogLevelInfo;
-    _appender = mockProtocol(@protocol(DRYLoggingAppender));
+    _appender = MKTMockProtocol(@protocol(DRYLoggingAppender));
     [_logger addAppender:_appender];
     
 }
 
 - (void)testLogMessageShouldGetThreadNameMainIfOnMainThread {
     [_logger info:@"Info"];
-    [MKTVerify(_appender) append:hasProperty(@"threadName", @"main")];
+    [MKTVerify(_appender) append:HC_hasProperty(@"threadName", @"main")];
 }
 
 - (void)testLogMessageShouldGetThreadNameAsSpecifiedOnThread {
@@ -38,7 +45,7 @@
     thread.name = @"other";
     [thread start];
     [super waitForExpectationsWithTimeout:1.0 handler:^(NSError *error) {}];
-    [MKTVerify(_appender) append:hasProperty(@"threadName", @"other")];
+    [MKTVerify(_appender) append:HC_hasProperty(@"threadName", @"other")];
 }
 
 - (void)testLogMessageShouldGetThreadNameFallingbackToQuestionMarks {
@@ -46,7 +53,7 @@
     NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(inOtherThread:) object:expectation];
     [thread start];
     [super waitForExpectationsWithTimeout:1.0 handler:^(NSError *error) {}];
-    [MKTVerify(_appender) append:hasProperty(@"threadName", @"???")];
+    [MKTVerify(_appender) append:HC_hasProperty(@"threadName", @"???")];
 }
 
 

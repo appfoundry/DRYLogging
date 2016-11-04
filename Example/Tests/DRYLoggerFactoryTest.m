@@ -24,52 +24,52 @@
 }
 
 - (void)testLoggerFactoryIsASingleton {
-    assertThat(_factory, is(notNilValue()));
-    assertThat(_factory, is(sameInstance([DRYLoggerFactory sharedLoggerFactory])));
+    HC_assertThat(_factory, HC_is(HC_notNilValue()));
+    HC_assertThat(_factory, HC_is(HC_sameInstance([DRYLoggerFactory sharedLoggerFactory])));
 }
 
 - (void)testFactoryReturnsLoggerNamedAsRequested {
-    assertThat([_factory loggerWithName:@"test"].name, is(equalTo(@"test")));
+    HC_assertThat([_factory loggerWithName:@"test"].name, HC_is(HC_equalTo(@"test")));
 }
 
 - (void)testRootLoggerHasInfoLevel {
-    assertThatInteger(_factory.rootLogger.level, is(equalToInteger(DRYLogLevelInfo)));
+    HC_assertThatInteger(_factory.rootLogger.level, HC_is(HC_equalToInteger(DRYLogLevelInfo)));
 }
 
 - (void)testCanAccessRootLoggerStatically {
-    assertThat([DRYLoggerFactory rootLogger], is(sameInstance(_factory.rootLogger)));
+    HC_assertThat([DRYLoggerFactory rootLogger], HC_is(HC_sameInstance(_factory.rootLogger)));
 }
 
 - (void)testNonRootLoggerHasNoneLevel {
-    assertThatInteger([_factory loggerWithName:@"test"].level, is(equalToInteger(DRYLogLevelOff)));
+    HC_assertThatInteger([_factory loggerWithName:@"test"].level, HC_is(HC_equalToInteger(DRYLogLevelOff)));
 }
 
 - (void)testFactoryReturnsSameLoggerForSameName {
-    assertThat([_factory loggerWithName:@"test"], is(sameInstance([_factory loggerWithName:@"test"])));
+    HC_assertThat([_factory loggerWithName:@"test"], HC_is(HC_sameInstance([_factory loggerWithName:@"test"])));
 }
 
 - (void)testFactoryWorksThroughSingletonWhenUsedStatically {
     id <DRYLogger> logger = [DRYLoggerFactory loggerWithName:@"test"];
-    assertThat(logger, is(sameInstance([[DRYLoggerFactory sharedLoggerFactory] loggerWithName:@"test"])));
+    HC_assertThat(logger, HC_is(HC_sameInstance([[DRYLoggerFactory sharedLoggerFactory] loggerWithName:@"test"])));
 }
 
 - (void)testFactoryReturnsLoggerWithRootLoggerAsParent {
     id <DRYLogger> logger = [_factory loggerWithName:@"name"];
-    assertThat(logger.parent, is(sameInstance(_factory.rootLogger)));
+    HC_assertThat(logger.parent, HC_is(HC_sameInstance(_factory.rootLogger)));
 }
 
 - (void)testFactoryReturnsLoggerWithParentLoggerAsParent {
     id <DRYLogger> child = [_factory loggerWithName:@"name.child"];
-    assertThat(child.parent, is(sameInstance([_factory loggerWithName:@"name"])));
+    HC_assertThat(child.parent, HC_is(HC_sameInstance([_factory loggerWithName:@"name"])));
 }
 
 - (void)testFactoryReturnsLoggerWithParentAndItsParent {
     id <DRYLogger> child = [_factory loggerWithName:@"name.child.grandchild"];
 
-    assertThat(child.parent, is(sameInstance([_factory loggerWithName:@"name.child"])));
-    assertThat(child.parent.parent, is(sameInstance([_factory loggerWithName:@"name"])));
-    assertThat(child.parent.parent.parent, is(sameInstance(_factory.rootLogger)));
-    assertThat(child.parent.parent.parent.parent, is(nilValue()));
+    HC_assertThat(child.parent, HC_is(HC_sameInstance([_factory loggerWithName:@"name.child"])));
+    HC_assertThat(child.parent.parent, HC_is(HC_sameInstance([_factory loggerWithName:@"name"])));
+    HC_assertThat(child.parent.parent.parent, HC_is(HC_sameInstance(_factory.rootLogger)));
+    HC_assertThat(child.parent.parent.parent.parent, HC_is(HC_nilValue()));
 }
 
 @end
