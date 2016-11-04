@@ -1,15 +1,19 @@
 PODS:
   - DRYLogging (3.0.0)
   - DRYTestUtilities (0.1.1)
+  - Nimble (5.1.1)
   - OCHamcrest (4.1.1)
   - OCMockito (1.4.0):
     - OCHamcrest (~> 4.0)
+  - Quick (0.10.0)
 
 DEPENDENCIES:
   - DRYLogging (from `../`)
   - DRYTestUtilities
+  - Nimble
   - OCHamcrest
   - OCMockito
+  - Quick
 
 EXTERNAL SOURCES:
   DRYLogging:
@@ -18,9 +22,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   DRYLogging: 13e9adb17be876a72ef79ec0163a852b4350645e
   DRYTestUtilities: bd822808b8a648372f40d8b364bc9a3981c448a1
+  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
   OCHamcrest: 6f03ffa81d12feab872638490a44ab0a6d3aca10
   OCMockito: 4981140c9a9ec06c31af40f636e3c0f25f27e6b2
+  Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
 
-PODFILE CHECKSUM: 8b592ff127711010375ac5af4d026d83feaeacb1
+PODFILE CHECKSUM: 54df6ff6f44bbfd1d1b3139f9bea809fdde50aae
 
 COCOAPODS: 1.1.1

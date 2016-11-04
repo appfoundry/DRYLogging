@@ -13,17 +13,15 @@
 		2727D65C1AD7411D00482706 /* DRYDefaultLoggerLogTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2727D65B1AD7411D00482706 /* DRYDefaultLoggerLogTest.m */; };
 		2729C0FAB777086D1C7B8D2C /* Pods_DRYLoggingExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6294FAC4A6489C24AB29840 /* Pods_DRYLoggingExample.framework */; };
 		277FF7B41ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7B31ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m */; };
-		277FF7B91ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7B81ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m */; };
 		277FF7BB1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7BA1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m */; };
 		277FF7C31ADBE527003CDF82 /* DRYLoggerFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7C21ADBE527003CDF82 /* DRYLoggerFactoryTest.m */; };
 		277FF7C51ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7C41ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m */; };
 		27AAEE771DCBA75200E99ECF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAEE761DCBA75200E99ECF /* ViewController.swift */; };
 		27AAEE791DCBA98100E99ECF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AAEE781DCBA98100E99ECF /* Launch Screen.storyboard */; };
-		27DE12CA1AE24F210071EC68 /* DRYLoggingFileAppenderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12C91AE24F210071EC68 /* DRYLoggingFileAppenderTest.m */; };
+		27AAEE871DCCE43400E99ECF /* LogLevelsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAEE861DCCE43400E99ECF /* LogLevelsSpec.swift */; };
 		27DE12CF1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12CE1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m */; };
 		27DE12D61AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12D51AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m */; };
 		27DE12DB1AE2FFE10071EC68 /* DRYLoggingBackupRollerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12DA1AE2FFE10071EC68 /* DRYLoggingBackupRollerTest.m */; };
-		27DE12DD1AE392400071EC68 /* DRYLoggingConcurrencyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12DC1AE392400071EC68 /* DRYLoggingConcurrencyTest.m */; };
 		27F2995D1DC367FD008935E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F2995C1DC367FD008935E8 /* AppDelegate.swift */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -62,6 +60,7 @@
 		277FF7C41ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerThreadingTest.m; sourceTree = "<group>"; };
 		27AAEE761DCBA75200E99ECF /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		27AAEE781DCBA98100E99ECF /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		27AAEE861DCCE43400E99ECF /* LogLevelsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogLevelsSpec.swift; sourceTree = "<group>"; };
 		27DE12C91AE24F210071EC68 /* DRYLoggingFileAppenderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingFileAppenderTest.m; sourceTree = "<group>"; };
 		27DE12CE1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingBaseFormattingAppenderTest.m; sourceTree = "<group>"; };
 		27DE12D51AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingSizeRollerPredicateTest.m; sourceTree = "<group>"; };
@@ -221,6 +220,7 @@
 				27DE12D51AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m */,
 				27DE12DA1AE2FFE10071EC68 /* DRYLoggingBackupRollerTest.m */,
 				27DE12DC1AE392400071EC68 /* DRYLoggingConcurrencyTest.m */,
+				27AAEE861DCCE43400E99ECF /* LogLevelsSpec.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -304,6 +304,7 @@
 						LastSwiftMigration = 0800;
 					};
 					6003F5AD195388D20070C39A = {
+						LastSwiftMigration = 0810;
 						TestTargetID = 6003F589195388D20070C39A;
 					};
 				};
@@ -458,14 +459,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27DE12CA1AE24F210071EC68 /* DRYLoggingFileAppenderTest.m in Sources */,
 				277FF7BB1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m in Sources */,
+				27AAEE871DCCE43400E99ECF /* LogLevelsSpec.swift in Sources */,
 				27DE12DB1AE2FFE10071EC68 /* DRYLoggingBackupRollerTest.m in Sources */,
-				27DE12DD1AE392400071EC68 /* DRYLoggingConcurrencyTest.m in Sources */,
 				2727D65C1AD7411D00482706 /* DRYDefaultLoggerLogTest.m in Sources */,
 				2727D65A1AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m in Sources */,
 				2704AC6C1AE179A4000B6EA5 /* DRYLoggingAppenderLevelFilterDecissionTest.m in Sources */,
-				277FF7B91ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m in Sources */,
 				27DE12CF1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m in Sources */,
 				2704AC6E1AE18A28000B6EA5 /* DRYLoggingAppenderLevelFilterTest.m in Sources */,
 				27DE12D61AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m in Sources */,
@@ -641,6 +640,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -652,8 +652,12 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DRYLoggingExample.app/DRYLoggingExample";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -665,6 +669,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -672,8 +677,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DRYLoggingExample.app/DRYLoggingExample";
 				WRAPPER_EXTENSION = xctest;
 			};

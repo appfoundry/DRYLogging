@@ -10,5 +10,7 @@ target 'DRYLoggingExample' do
       pod "OCHamcrest"
       pod "OCMockito"
       pod "DRYTestUtilities"
+      pod "Quick"
+      pod "Nimble"
   end
 end
