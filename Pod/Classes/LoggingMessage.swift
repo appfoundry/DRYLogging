@@ -81,4 +81,36 @@ public struct LoggingMessage {
      *  The date of the creation of this message.
      */
     public let date: Date
+    
+    public init(message: String, level: LogLevel, loggerName: String, framework:String, className: String, fileName: String, methodName: String, memoryAddress: String, byteOffset: String, threadName: String, lineNumber: Int, date: Date) {
+        self.message = message
+        self.level = level
+        self.loggerName = loggerName
+        self.framework = framework
+        self.className = className
+        self.fileName = fileName
+        self.methodName = methodName
+        self.memoryAddress = memoryAddress
+        self.byteOffset = byteOffset
+        self.threadName = threadName
+        self.lineNumber = lineNumber
+        self.date = date
+    }
+}
+
+extension LoggingMessage : Equatable {
+    public static func ==(lhs:LoggingMessage, rhs:LoggingMessage) -> Bool {
+        return lhs.message == rhs.message &&
+            lhs.level == rhs.level &&
+            lhs.loggerName == rhs.loggerName &&
+            lhs.framework == rhs.framework &&
+            lhs.className == rhs.className &&
+            lhs.fileName == rhs.fileName &&
+            lhs.methodName == rhs.methodName &&
+            lhs.memoryAddress == rhs.memoryAddress &&
+            lhs.byteOffset == rhs.byteOffset &&
+            lhs.threadName == rhs.threadName &&
+            lhs.lineNumber == rhs.lineNumber &&
+            lhs.date == rhs.date
+    }
 }

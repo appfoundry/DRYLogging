@@ -59,17 +59,14 @@ public class LevelAppenderFilter : AppenderFilter {
     public let noMatchDecission: AppenderFilterDecission
     
     /**
-     *  Convenience initializer, setting all properties to their defaults.
-     */
-    public convenience init() {
-        self.init(level: .trace, exactMatchRequired: true, matchDecission: .accept, noMatchDecission: .deny)
-    }
-    
-    
-    /**
      *  Designated initializer, initializing a level filter with all of its properties.
+     *
+     * @param level defaults to trace
+     * @param exactMatchRequired defaults to true
+     * @param matchDecission defaults to accept
+     * @param noMatchDecission defaults to deny
      */
-    public init(level: LogLevel, exactMatchRequired: Bool, matchDecission: AppenderFilterDecission, noMatchDecission: AppenderFilterDecission) {
+    public init(level: LogLevel = .trace, exactMatchRequired: Bool = true, matchDecission: AppenderFilterDecission = .accept, noMatchDecission: AppenderFilterDecission = .deny) {
         self.level = level
         self.exactMatchRequired = exactMatchRequired
         self.matchDecission = matchDecission

@@ -23,11 +23,7 @@ public class DefaultLogger : Logger {
         self.init(name: "root")
     }
     
-    public convenience init(name: String) {
-        self.init(name: name, parent: nil)
-    }
-    
-    public init(name: String, parent: Logger?) {
+    public init(name: String, parent: Logger? = nil) {
         self.name = name
         self.parent = parent
         self.appenders = [LoggingAppender]()
@@ -68,7 +64,7 @@ public class DefaultLogger : Logger {
     
     public func log(level: LogLevel, message: String, lineNumber:Int, function: String, file: String) {
         if (self.isLevelEnabled(level)) {
-            let sourceString = Thread.callStackSymbols.count > 2 ? Thread.callStackSymbols[2] : ""
+            let sourceString = Thread.callStackSymbols.count > 3 ? Thread.callStackSymbols[3] : ""
             let separatorSet = CharacterSet(charactersIn: " -[]+?.,")
             let components = sourceString.components(separatedBy: separatorSet).filter {
                 $0 != ""

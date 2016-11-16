@@ -38,7 +38,7 @@
     [_logger info:@"Info"];
     [MKTVerify(_appender) append:HC_hasProperty(@"threadName", @"main")];
 }
-
+ 
 - (void)testLogMessageShouldGetThreadNameAsSpecifiedOnThread {
     XCTestExpectation *expectation = [super expectationWithDescription:@"ThreadExp"];
     NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(inOtherThread:) object:expectation];
