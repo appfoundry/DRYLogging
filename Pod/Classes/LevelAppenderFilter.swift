@@ -73,7 +73,7 @@ public class LevelAppenderFilter : AppenderFilter {
         self.noMatchDecission = noMatchDecission
     }
     
-    public func decide(_ message: LoggingMessage!) -> AppenderFilterDecission {
+    public func decide(_ message: LoggingMessage) -> AppenderFilterDecission {
         if self.exactMatchRequired {
             return message.level == self.level ? matchDecission : noMatchDecission
         } else {

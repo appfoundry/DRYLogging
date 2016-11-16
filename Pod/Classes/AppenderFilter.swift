@@ -15,5 +15,5 @@ public protocol AppenderFilter : class {
      *
      *  @param message The message to make a decission for.
      */
-    func decide(_ message: LoggingMessage!) -> AppenderFilterDecission
+    func decide(_ message: LoggingMessage) -> AppenderFilterDecission
 }

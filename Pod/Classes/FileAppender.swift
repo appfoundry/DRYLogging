@@ -34,7 +34,7 @@ fileprivate class MessageQueue {
  *  A file appender will write to the default.log file in the user's document directory or the file at the given filePath. Incomming messages are queued and the handled in that order in its own created thread.
  */
 public class FileAppender : BaseFormattingAppender {
-    public private(set) var filters = [AppenderFilter]()
+    public var filters = [AppenderFilter]()
     public let formatter: MessageFormatter
     private var messageQueue:MessageQueue
     private let queueOrCancelledSemaphore:DispatchSemaphore
@@ -67,19 +67,9 @@ public class FileAppender : BaseFormattingAppender {
         self.messageQueueThread.start()
     }
     
-    public func appendAcceptedAndFormattedMessage(_ formattedMessage: String!) {
+    public func appendAcceptedAndFormattedMessage(_ formattedMessage: String) {
         messageQueue.append(message: formattedMessage)
         self.queueOrCancelledSemaphore.signal()
-    }
-    
-    public func add(filter: AppenderFilter) {
-        self.filters.append(filter)
-    }
-    
-    public func remove(filter: AppenderFilter) {
-        if let index = self.filters.index(where: { $0 === filter }) {
-            self.filters.remove(at: index)
-        }
     }
     
     deinit {

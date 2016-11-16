@@ -14,9 +14,9 @@ import Foundation
  *
  * @since 3.0
  */
-public protocol BaseFormattingAppender : LoggingAppender {
+public protocol BaseFormattingAppender : class, LoggingAppender {
     
-    var filters:[AppenderFilter] { get }
+    var filters:[AppenderFilter] { get set }
     var formatter:MessageFormatter { get }
     
     /**
@@ -25,13 +25,23 @@ public protocol BaseFormattingAppender : LoggingAppender {
      *
      *  @param formattedMessage The message which was formatted using the DRYLoggingMessageFormatter
      */
-    func appendAcceptedAndFormattedMessage(_ formattedMessage: String!)
+    func appendAcceptedAndFormattedMessage(_ formattedMessage: String)
 }
 
 extension BaseFormattingAppender {
     public func append(message: LoggingMessage) {
         if self.filterDecision(message: message) != .deny {
             self.appendAcceptedAndFormattedMessage(self.formatter.format(message))
+        }
+    }
+    
+    public func add(filter: AppenderFilter) {
+        self.filters.append(filter)
+    }
+    
+    public func remove(filter: AppenderFilter) {
+        if let index = self.filters.index(where: { $0 === filter }) {
+            self.filters.remove(at: index)
         }
     }
     
