@@ -46,7 +46,7 @@ public class FileAppender : BaseFormattingAppender {
      *  roller predicate which will check that the file will not get bigger then 1 MB.
      */
     public convenience init(formatter:MessageFormatter) {
-        self.init(formatter: formatter, filePath: (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as [String])[0].stringByAppendingPathComponent(path: "default.log"), encoding: .utf8, rollerPredicate: SizeLoggingRollerPredicate(), roller: BackupRoller())
+        self.init(formatter: formatter, filePath: (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as [String])[0].stringByAppendingPathComponent(path: "default.log"))
     }
     
     /**
@@ -55,11 +55,11 @@ public class FileAppender : BaseFormattingAppender {
      *
      *  @param formatter       the appended messages will be formatter by using the formatter, required.
      *  @param path            the path of the file to which messages should be appended, required.
-     *  @param encoding        the string encoding, used to write to the file.
-     *  @param rollerPredicate the roller predicate which decides when file rolling should occur.
-     *  @param roller          the roller which is used to roll files
+     *  @param encoding        the string encoding, used to write to the file. Defaults to utf-8 encoding.
+     *  @param rollerPredicate the roller predicate which decides when file rolling should occur. Defaults to a SizeLoggingRollerPredicate.
+     *  @param roller          the roller which is used to roll files. Default to a BackupRoller.
      */
-    public init(formatter:MessageFormatter, filePath: String, encoding: String.Encoding, rollerPredicate:LoggingRollerPredicate, roller:LoggingRoller) {
+    public init(formatter:MessageFormatter, filePath: String, encoding: String.Encoding = .utf8, rollerPredicate:LoggingRollerPredicate = SizeLoggingRollerPredicate(), roller:LoggingRoller = BackupRoller()) {
         self.formatter = formatter
         self.messageQueue = MessageQueue()
         self.queueOrCancelledSemaphore = DispatchSemaphore(value: 0)
