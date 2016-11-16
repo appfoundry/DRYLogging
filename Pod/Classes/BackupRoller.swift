@@ -39,17 +39,9 @@ public struct BackupRoller : LoggingRoller {
     
     
     /**
-     *  Convenience initializer, setting the maximumNumberOfFiles to 5
+     *  Designated initializer, initializing a backup roller with the given maximumNumberOfFiles. The default is a maximum of 5 files.
      */
-    public init() {
-        self.init(maximumNumberOfFiles: 5)
-    }
-    
-    
-    /**
-     *  Designated initializer, initializing a backup roller with the given maximumNumberOfFiles
-     */
-    public init(maximumNumberOfFiles: UInt) {
+    public init(maximumNumberOfFiles: UInt = 5) {
         self.maximumNumberOfFiles = maximumNumberOfFiles
     }
     
@@ -79,13 +71,13 @@ private struct BackupRollerOperation {
     func performRolling() {
         self.deleteLastFileIfNeeded()
         
-        for index in stride(from: lastIndex, to: 0, by: -1) {
+        for index in stride(from: Int(lastIndex), to: -1, by: -1) {
             self.moveFileToNextIndex(fromIndex: index)
         }
     }
     
     private func deleteLastFileIfNeeded() {
-        let lastFile = self.file(atIndex:self.lastIndex)
+        let lastFile = self.file(atIndex:Int(self.lastIndex))
         if self.fileManager.fileExists(atPath: lastFile) {
             do {
                 try self.fileManager.removeItem(atPath: lastFile)
@@ -95,20 +87,24 @@ private struct BackupRollerOperation {
         }
     }
     
-    private func moveFileToNextIndex(fromIndex index:UInt) {
+    private func moveFileToNextIndex(fromIndex index:Int) {
         let potentialExistingRolledFile = self.file(atIndex: index)
         if self.fileManager.fileExists(atPath: potentialExistingRolledFile) {
             let newPath = self.file(atIndex: index + 1)
-            do {
-                try self.fileManager.moveItem(atPath: potentialExistingRolledFile, toPath: newPath)
-            } catch {
-                print("Couldn't move file from \(potentialExistingRolledFile) to \(newPath): \(error)")
-            }
+            self.moveFile(fromPath: potentialExistingRolledFile, toPath: newPath)
         }
     }
     
-    private func file(atIndex index:UInt) -> String {
-        return self.directory.stringByAppendingPathComponent(path: "\(self.fileName)\(index == 0 ? "" : String(index)).\(self.ext)")
+    private func moveFile(fromPath:String, toPath:String) {
+        do {
+            try self.fileManager.moveItem(atPath: fromPath, toPath: toPath)
+        } catch {
+            print("Couldn't move file from \(fromPath) to \(toPath): \(error)")
+        }
+    }
+    
+    private func file(atIndex index:Int) -> String {
+        return self.directory.stringByAppendingPathComponent(path: "\(self.fileName)\(index <= 0 ? "" : String(index)).\(self.ext)")
     }
     
     
