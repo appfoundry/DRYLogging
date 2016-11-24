@@ -63,7 +63,7 @@ we add an appender.
 
 Now we are ready to log a messages: 
 
-```Objective-C
+```Swift
 let world = "earth"
 logger.info("Hello, \(world)")
 ```
