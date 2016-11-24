@@ -9,6 +9,13 @@
 import UIKit
 import DRYLogging
 
+/**
+ Demo view controller to show case logging of different levels. Make sure to activate the appropriate log level 
+ to see the messages appear on the console!
+ 
+ You could configure the log level in the viewDidLoad, but better is to configure the log level of the logger named
+ "viewcontroller" in the app delegate, seperating config from code. Consult the DRYLogging documentation for more info!
+ */
 class ViewController: UIViewController {
     
     let logger:Logger = LoggerFactory.logger(named: "viewcontroller.DRYViewController")

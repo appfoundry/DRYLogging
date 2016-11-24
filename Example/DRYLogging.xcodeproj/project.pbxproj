@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2704AC6C1AE179A4000B6EA5 /* DRYLoggingAppenderLevelFilterDecissionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2704AC6B1AE179A4000B6EA5 /* DRYLoggingAppenderLevelFilterDecissionTest.m */; };
-		2704AC6E1AE18A28000B6EA5 /* DRYLoggingAppenderLevelFilterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2704AC6D1AE18A28000B6EA5 /* DRYLoggingAppenderLevelFilterTest.m */; };
-		2727D65A1AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2727D6591AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m */; };
-		2727D65C1AD7411D00482706 /* DRYDefaultLoggerLogTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2727D65B1AD7411D00482706 /* DRYDefaultLoggerLogTest.m */; };
 		2729C0FAB777086D1C7B8D2C /* Pods_DRYLoggingExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6294FAC4A6489C24AB29840 /* Pods_DRYLoggingExample.framework */; };
 		2758068B1DDA232A0080D1E8 /* ConsoleAppenderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2758068A1DDA232A0080D1E8 /* ConsoleAppenderSpec.swift */; };
 		2758068D1DDA27010080D1E8 /* MessageFormatterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2758068C1DDA27010080D1E8 /* MessageFormatterMock.swift */; };
@@ -26,25 +22,16 @@
 		276E9D421DDC5A8400B61165 /* SizeLoggingRollerPredicateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276E9D411DDC5A8400B61165 /* SizeLoggingRollerPredicateSpec.swift */; };
 		276E9D441DDC5DE900B61165 /* BackupRollerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276E9D431DDC5DE900B61165 /* BackupRollerSpec.swift */; };
 		276E9D461DDC694D00B61165 /* LoggingConcurrencySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276E9D451DDC694D00B61165 /* LoggingConcurrencySpec.swift */; };
-		277FF7B41ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7B31ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m */; };
-		277FF7BB1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7BA1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m */; };
-		277FF7C31ADBE527003CDF82 /* DRYLoggerFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7C21ADBE527003CDF82 /* DRYLoggerFactoryTest.m */; };
-		277FF7C51ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7C41ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m */; };
 		27AAEE771DCBA75200E99ECF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAEE761DCBA75200E99ECF /* ViewController.swift */; };
 		27AAEE791DCBA98100E99ECF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AAEE781DCBA98100E99ECF /* Launch Screen.storyboard */; };
 		27AAEE871DCCE43400E99ECF /* LogLevelsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAEE861DCCE43400E99ECF /* LogLevelsSpec.swift */; };
 		27AAEE891DD1D91700E99ECF /* DefaultLoggerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAEE881DD1D91700E99ECF /* DefaultLoggerSpec.swift */; };
-		27DE12CF1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12CE1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m */; };
-		27DE12D61AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12D51AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m */; };
-		27DE12DB1AE2FFE10071EC68 /* DRYLoggingBackupRollerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12DA1AE2FFE10071EC68 /* DRYLoggingBackupRollerTest.m */; };
 		27F2995D1DC367FD008935E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F2995C1DC367FD008935E8 /* AppDelegate.swift */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
-		6003F59E195388D20070C39A /* DRYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* DRYAppDelegate.m */; };
 		6003F5A1195388D20070C39A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6003F59F195388D20070C39A /* Main.storyboard */; };
-		6003F5A7195388D20070C39A /* DRYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* DRYViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -64,10 +51,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2704AC6B1AE179A4000B6EA5 /* DRYLoggingAppenderLevelFilterDecissionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingAppenderLevelFilterDecissionTest.m; sourceTree = "<group>"; };
-		2704AC6D1AE18A28000B6EA5 /* DRYLoggingAppenderLevelFilterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingAppenderLevelFilterTest.m; sourceTree = "<group>"; };
-		2727D6591AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerLevelsTest.m; sourceTree = "<group>"; };
-		2727D65B1AD7411D00482706 /* DRYDefaultLoggerLogTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerLogTest.m; sourceTree = "<group>"; };
 		2758068A1DDA232A0080D1E8 /* ConsoleAppenderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleAppenderSpec.swift; sourceTree = "<group>"; };
 		2758068C1DDA27010080D1E8 /* MessageFormatterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageFormatterMock.swift; sourceTree = "<group>"; };
 		2758068E1DDA2A910080D1E8 /* ClosureBasedMessageFormatterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureBasedMessageFormatterSpec.swift; sourceTree = "<group>"; };
@@ -82,20 +65,10 @@
 		276E9D411DDC5A8400B61165 /* SizeLoggingRollerPredicateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeLoggingRollerPredicateSpec.swift; sourceTree = "<group>"; };
 		276E9D431DDC5DE900B61165 /* BackupRollerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackupRollerSpec.swift; sourceTree = "<group>"; };
 		276E9D451DDC694D00B61165 /* LoggingConcurrencySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingConcurrencySpec.swift; sourceTree = "<group>"; };
-		277FF7B31ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingConsoleAppenderTest.m; sourceTree = "<group>"; };
-		277FF7B81ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYBlockBasedLoggingMessageFormatterTest.m; sourceTree = "<group>"; };
-		277FF7BA1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerInheritanceTest.m; sourceTree = "<group>"; };
-		277FF7C21ADBE527003CDF82 /* DRYLoggerFactoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggerFactoryTest.m; sourceTree = "<group>"; };
-		277FF7C41ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerThreadingTest.m; sourceTree = "<group>"; };
 		27AAEE761DCBA75200E99ECF /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		27AAEE781DCBA98100E99ECF /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		27AAEE861DCCE43400E99ECF /* LogLevelsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogLevelsSpec.swift; sourceTree = "<group>"; };
 		27AAEE881DD1D91700E99ECF /* DefaultLoggerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLoggerSpec.swift; sourceTree = "<group>"; };
-		27DE12C91AE24F210071EC68 /* DRYLoggingFileAppenderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingFileAppenderTest.m; sourceTree = "<group>"; };
-		27DE12CE1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingBaseFormattingAppenderTest.m; sourceTree = "<group>"; };
-		27DE12D51AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingSizeRollerPredicateTest.m; sourceTree = "<group>"; };
-		27DE12DA1AE2FFE10071EC68 /* DRYLoggingBackupRollerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingBackupRollerTest.m; sourceTree = "<group>"; };
-		27DE12DC1AE392400071EC68 /* DRYLoggingConcurrencyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingConcurrencyTest.m; sourceTree = "<group>"; };
 		27F2995C1DC367FD008935E8 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F66AD72FEADD6787B5DE2D1 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* DRYLoggingExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DRYLoggingExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,11 +79,7 @@
 		6003F597195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F599195388D20070C39A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6003F59B195388D20070C39A /* DRYLogging-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DRYLogging-Prefix.pch"; sourceTree = "<group>"; };
-		6003F59C195388D20070C39A /* DRYAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DRYAppDelegate.h; sourceTree = "<group>"; };
-		6003F59D195388D20070C39A /* DRYAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DRYAppDelegate.m; sourceTree = "<group>"; };
 		6003F5A0195388D20070C39A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* DRYViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DRYViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* DRYViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DRYViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -207,13 +176,9 @@
 		6003F593195388D20070C39A /* DRYLogging */ = {
 			isa = PBXGroup;
 			children = (
-				6003F59C195388D20070C39A /* DRYAppDelegate.h */,
-				6003F59D195388D20070C39A /* DRYAppDelegate.m */,
 				27F2995C1DC367FD008935E8 /* AppDelegate.swift */,
 				6003F59F195388D20070C39A /* Main.storyboard */,
 				27AAEE781DCBA98100E99ECF /* Launch Screen.storyboard */,
-				6003F5A5195388D20070C39A /* DRYViewController.h */,
-				6003F5A6195388D20070C39A /* DRYViewController.m */,
 				27AAEE761DCBA75200E99ECF /* ViewController.swift */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -236,32 +201,18 @@
 			isa = PBXGroup;
 			children = (
 				6003F5B6195388D20070C39A /* Supporting Files */,
-				2727D6591AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m */,
 				27AAEE861DCCE43400E99ECF /* LogLevelsSpec.swift */,
-				2727D65B1AD7411D00482706 /* DRYDefaultLoggerLogTest.m */,
 				27AAEE881DD1D91700E99ECF /* DefaultLoggerSpec.swift */,
-				277FF7B31ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m */,
 				2758068A1DDA232A0080D1E8 /* ConsoleAppenderSpec.swift */,
-				277FF7B81ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m */,
 				2758068E1DDA2A910080D1E8 /* ClosureBasedMessageFormatterSpec.swift */,
-				277FF7BA1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m */,
 				276E9D311DDB0F4C00B61165 /* DefaultLoggerInheritanceSpec.swift */,
-				277FF7C21ADBE527003CDF82 /* DRYLoggerFactoryTest.m */,
 				276E9D351DDB1E3D00B61165 /* LoggerFactorySpec.swift */,
-				277FF7C41ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m */,
 				276E9D371DDB615B00B61165 /* DefaultLoggerMessageSpec.swift */,
-				2704AC6B1AE179A4000B6EA5 /* DRYLoggingAppenderLevelFilterDecissionTest.m */,
-				2704AC6D1AE18A28000B6EA5 /* DRYLoggingAppenderLevelFilterTest.m */,
 				276E9D391DDB816000B61165 /* LevelAppenderFilterTest.swift */,
-				27DE12C91AE24F210071EC68 /* DRYLoggingFileAppenderTest.m */,
 				276E9D3B1DDC400500B61165 /* FileAppenderSpec.swift */,
-				27DE12CE1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m */,
 				276E9D3D1DDC502400B61165 /* BaseFormattingAppenderSpec.swift */,
-				27DE12D51AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m */,
 				276E9D411DDC5A8400B61165 /* SizeLoggingRollerPredicateSpec.swift */,
-				27DE12DA1AE2FFE10071EC68 /* DRYLoggingBackupRollerTest.m */,
 				276E9D431DDC5DE900B61165 /* BackupRollerSpec.swift */,
-				27DE12DC1AE392400071EC68 /* DRYLoggingConcurrencyTest.m */,
 				276E9D451DDC694D00B61165 /* LoggingConcurrencySpec.swift */,
 				2758068C1DDA27010080D1E8 /* MessageFormatterMock.swift */,
 				276E9D331DDB176300B61165 /* LoggingAppenderMock.swift */,
@@ -341,7 +292,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DRY;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Michael Seghers";
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
@@ -494,9 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27F2995D1DC367FD008935E8 /* AppDelegate.swift in Sources */,
-				6003F59E195388D20070C39A /* DRYAppDelegate.m in Sources */,
 				27AAEE771DCBA75200E99ECF /* ViewController.swift in Sources */,
-				6003F5A7195388D20070C39A /* DRYViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,24 +453,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				277FF7BB1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m in Sources */,
 				2758068F1DDA2A910080D1E8 /* ClosureBasedMessageFormatterSpec.swift in Sources */,
 				27AAEE871DCCE43400E99ECF /* LogLevelsSpec.swift in Sources */,
 				276E9D3A1DDB816000B61165 /* LevelAppenderFilterTest.swift in Sources */,
-				27DE12DB1AE2FFE10071EC68 /* DRYLoggingBackupRollerTest.m in Sources */,
 				2758068B1DDA232A0080D1E8 /* ConsoleAppenderSpec.swift in Sources */,
-				2727D65C1AD7411D00482706 /* DRYDefaultLoggerLogTest.m in Sources */,
-				2727D65A1AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m in Sources */,
-				2704AC6C1AE179A4000B6EA5 /* DRYLoggingAppenderLevelFilterDecissionTest.m in Sources */,
 				276E9D361DDB1E3D00B61165 /* LoggerFactorySpec.swift in Sources */,
 				2758068D1DDA27010080D1E8 /* MessageFormatterMock.swift in Sources */,
-				27DE12CF1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m in Sources */,
-				2704AC6E1AE18A28000B6EA5 /* DRYLoggingAppenderLevelFilterTest.m in Sources */,
-				27DE12D61AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m in Sources */,
-				277FF7C51ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m in Sources */,
-				277FF7C31ADBE527003CDF82 /* DRYLoggerFactoryTest.m in Sources */,
 				276E9D3E1DDC502400B61165 /* BaseFormattingAppenderSpec.swift in Sources */,
-				277FF7B41ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m in Sources */,
 				276E9D461DDC694D00B61165 /* LoggingConcurrencySpec.swift in Sources */,
 				276E9D421DDC5A8400B61165 /* SizeLoggingRollerPredicateSpec.swift in Sources */,
 				276E9D401DDC560E00B61165 /* AppenderFilterMock.swift in Sources */,
@@ -650,6 +588,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -659,6 +598,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E8804426F57E0250F6F9422C /* Pods-DRYLoggingExample.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -679,6 +619,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E339446594B992B70585F081 /* Pods-DRYLoggingExample.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -698,7 +639,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B6A2E8E8659D85CA772EAEED /* Pods-Tests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -727,7 +668,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2F66AD72FEADD6787B5DE2D1 /* Pods-Tests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (

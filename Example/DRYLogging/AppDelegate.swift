@@ -9,6 +9,13 @@
 import UIKit
 import DRYLogging
 
+/**
+ Demo AppDelegate to show case logging of different levels. Make sure to activate the appropriate log level
+ to see the messages appear on the console!
+ 
+ Consult the DRYLogging documentation for more info!
+ */
+
 @UIApplicationMain
 class AppDelegate : UIResponder, UIApplicationDelegate {
     var logger:Logger = LoggerFactory.logger(named: "ui.appdelegate")
