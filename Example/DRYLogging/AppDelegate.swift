@@ -51,9 +51,9 @@ class AppDelegate : UIResponder, UIApplicationDelegate {
     func setupErrorLoggingFileLogger() {
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
-        let formatter = ClosureBasedMessageFormatter(closure: {
+        let formatter = ClosureBasedMessageFormatter {
             return "[\(df.string(from: $0.date))] <T:\($0.threadName) - S:\($0.className) - M:\($0.methodName) - L:\($0.lineNumber)> - \($0.message)"
-        })
+        }
         let errorAppender = FileAppender(formatter: formatter)
         let filter = LevelAppenderFilter(level: .error, exactMatchRequired: true, matchDecission: .accept, noMatchDecission: .deny)
         errorAppender.add(filter: filter)

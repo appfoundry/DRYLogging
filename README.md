@@ -9,20 +9,19 @@ DRYLogging is a logging framework for Swift, based on logging frameworks seen in
 
 ## Short overview
 
-The idea behind these logging frameworks is that loggers are hierarchical of nature to facilitate configuration of common
+The idea behind these logging frameworks is that loggers are hierarchical of nature. This makes it easy to configure common
 log levels and the way log messages are written to underlying systems.
 
 If a logger doesn't hold any specific level information, it will ask it's parent on which level it should log. This means
-that you don't need to configure a level for each and every logger in your system. If, however you want to log on a 
+that you don't need to configure a level for each and every logger in your system. However, if you want to log on a 
 different level for a specific logger (and its children) you can override the parent's settings. You can even change log 
 levels at runtime, or have different log configurations in different steps of your developement. 
 
-Furthermore, if a parent has a so called "appender", its children will also append their log messages to this appender.
-This is an additive process. 
+Furthermore, if a parent has a so called 'appender', its children will also append their log messages to this appender.
 
 Messages are formatted to strings before they are appended to an appender through the use of log formatters. 
  
-Last but not least, these appenders themselves can decide to accept or deny a message by using a filter mechanism.
+Appenders themselves can decide to accept or deny a message by using a filter mechanism.
  
 For more detailed information, you should check out the API documentation, available on [CocoaDocs](http://cocoadocs.org/docsets/DRYLogging/)
 and the example project, found in the Example directory of the git repository.
