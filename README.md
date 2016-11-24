@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/DRYLogging.svg?style=flat)](http://cocoapods.org/pods/DRYLogging)
 [![Platform](https://img.shields.io/cocoapods/p/DRYLogging.svg?style=flat)](http://cocoapods.org/pods/DRYLogging)
 
-DRYLogging is a logging framework for Objective-C based on logging frameworks seen in other languages.
+DRYLogging is a logging framework for Swift, based on logging frameworks seen in other languages.
 
 ## Short overview
 
@@ -33,67 +33,44 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ### TL;DR version
 
-Import the DRYLogging header wherever you need logging
+Import DRYLogging wherever you need logging
 
-```Objective-C
-#import <DRYLogging/DRYLogging.h>
+```Swift
+import DRYLogging
 ```
 
 Create a logger, using the LoggerFactory
 
-```Objective-C
-//Create a logger named "FanceLogger". This logger will automatically have the root logger as its parent.
-id<DRYLogger> logger = [DRYLoggerFactory loggerWithName:@"FancyLogger"];
+```Swift
+//Create a logger named "FancyLogger". This logger will automatically have the root logger as its parent.
+let logger = LoggerFactory.logger(named: "FancyLogger")
 ```
 
-You can also use a macro to get the same result:
+If you want your messages to appear on the console, add the console appender to your logger (or one of its parents). 
+Adding the appender on the root logger, makes sure all loggers can append their messages too.
 
-```Objective-C
-id<DRYLogger> logger = DRYLogger(@"FancyLogger");
+```Swift
+let dateFormatter = DateFormatter()
+dateFormatter.dateFormat = "HH:mm:ss.SSS"
+let formatter = ClosureBasedMessageFormatter(closure: {
+return "[\($0.level) - \(dateFormatter.string(from: $0.date))] <T:\($0.threadName) - S:\($0.className) - M:\($0.methodName) - L:\($0.lineNumber)> - \($0.message)"
+})
+LoggerFactory.rootLogger.add(appender: ConsoleAppender(formatter: formatter))
 ```
 
-If you want your messages to appear on the console, add the console appender to the root logger. Adding the appender on 
-the root logger, makes sure all loggers can append their messages too.
-
-```Objective-C
-id <DRYLoggingMessageFormatter> formatter = [DRYBlockBasedLoggingMessageFormatter formatterWithFormatterBlock:^NSString *(DRYLoggingMessage *message) {
-    return [NSString stringWithFormat:@"%@ -[%@ %@] <%@> - %@", [NSString stringFromDRYLoggingLevel:message.level], message.className, message.methodName, message.lineNumber, message.message];
-}];
-id<DRYLoggingAppender> appender = [[DRYLoggingConsoleAppender alloc] initWithFormatter:formatter];
-[[DRYLoggerFactory rootLogger] addAppender:appender];
-```
-
-By default, the root logger will set it's level to INFO, so info, warning and error logs will show up once we add an appender.
+By default, the root logger will set it's level to LogLevel.info, so info, warning and error logs will show up once 
+we add an appender.
 
 Now we are ready to log a messages: 
 
 ```Objective-C
-NSString *world = @"globe";
-DRYInfo(logger, @"Hello, %@", world);
+let world = "earth"
+logger.info("Hello, \(world)")
 ```
 
 This message will be printed to the console.
 
-If you plan to use a logger class wide, you can use the DRYInitializeStaticLogger macro to create a static variable called "LOGGER". 
-We've also provided convenience macros that assume a LOGGER variable exists in scope. The example app uses this approach
-in both the DRYAppDelegate and the DRYViewController. Here's the gist of it.
-
-```Objective-C
-@implementation DRYAppDelegate
-
-DRYInitializeStaticLogger(@"application.DRYAppDelegate")
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    //...
-    DRYTrace(@"...");
-    //...
-    return YES;
-}
-
-//...
-
-@end
-```
+You can all see this in action in the example app too.
 
 For more information on log levels and appenders, refer to the API documentation. 
 

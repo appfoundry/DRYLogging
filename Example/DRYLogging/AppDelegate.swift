@@ -18,11 +18,8 @@ import DRYLogging
 
 @UIApplicationMain
 class AppDelegate : UIResponder, UIApplicationDelegate {
-    var logger:Logger = LoggerFactory.logger(named: "ui.appdelegate")
-    
+    let logger = LoggerFactory.logger(named: "ui.appdelegate")
     var window: UIWindow?
-
-    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         self.setupConsoleLogger()
