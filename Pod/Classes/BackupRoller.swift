@@ -72,12 +72,12 @@ private struct BackupRollerOperation {
         self.deleteLastFileIfNeeded()
         
         for index in stride(from: Int(lastIndex), to: -1, by: -1) {
-            self.moveFileToNextIndex(fromIndex: index)
+            self.moveFileToNextIndex(from: index)
         }
     }
     
     private func deleteLastFileIfNeeded() {
-        let lastFile = self.file(atIndex:Int(self.lastIndex))
+        let lastFile = self.file(at:Int(self.lastIndex))
         if self.fileManager.fileExists(atPath: lastFile) {
             do {
                 try self.fileManager.removeItem(atPath: lastFile)
@@ -87,10 +87,10 @@ private struct BackupRollerOperation {
         }
     }
     
-    private func moveFileToNextIndex(fromIndex index:Int) {
-        let potentialExistingRolledFile = self.file(atIndex: index)
+    private func moveFileToNextIndex(from index:Int) {
+        let potentialExistingRolledFile = self.file(at: index)
         if self.fileManager.fileExists(atPath: potentialExistingRolledFile) {
-            let newPath = self.file(atIndex: index + 1)
+            let newPath = self.file(at: index + 1)
             self.moveFile(fromPath: potentialExistingRolledFile, toPath: newPath)
         }
     }
@@ -103,7 +103,7 @@ private struct BackupRollerOperation {
         }
     }
     
-    private func file(atIndex index:Int) -> String {
+    private func file(at index:Int) -> String {
         return self.directory.stringByAppendingPathComponent(path: "\(self.fileName)\(index <= 0 ? "" : String(index)).\(self.ext)")
     }
     
