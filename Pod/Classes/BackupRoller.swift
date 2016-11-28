@@ -8,39 +8,35 @@
 
 import Foundation
 
-/**
- *  File roller which moves log files, augmenting their index and limiting them to the maximumNumberOfFiles.
- *  The naming of the file follows the format [fileName][index].[extension] bassed on the file being rolled.
- *
- *  The following list shows an example of how rolling happens for a file named "default.log" and a maximum of 4 files
- *
- *  * 1st roll
- *  ** default.log becomes default1.log
- *  * 2nd roll
- *  ** default1.log becomes default2.log
- *  ** default.log becomes default1.log
- *  * 3rd roll
- *  ** default2.log becomes default3.log
- *  ** default1.log becomes default2.log
- *  ** default.log becomes default1.log
- *  * 4th roll
- *  ** default3.log is deleted
- *  ** default2.log becomes default3.log
- *  ** default1.log becomes default2.log
- *  ** default.log becomes default1.log
- *
- *  @since 3.0
- */
+/// File roller which moves log files, augmenting their index and limiting them to the maximumNumberOfFiles.
+/// The naming of the file follows the format [fileName][index].[extension] bassed on the file being rolled.
+///
+/// The following list shows an example of how rolling happens for a file named "default.log" and a maximum of 4 files
+///
+/// * 1st roll
+///     - default.log becomes default1.log
+/// * 2nd roll
+///     - default1.log becomes default2.log
+///     - default.log becomes default1.log
+/// * 3rd roll
+///     - default2.log becomes default3.log
+///     - default1.log becomes default2.log
+///     - default.log becomes default1.log
+/// * 4th roll
+///     - default3.log is deleted
+///     - default2.log becomes default3.log
+///     - default1.log becomes default2.log
+///     - default.log becomes default1.log
+///
+/// - since: 3.0
 public struct BackupRoller : LoggingRoller {
-    /**
-     *  The number of files that should be kept before starting to delete te oldest ones.
-     */
+    /// The number of files that should be kept before starting to delete te oldest ones.
     public let maximumNumberOfFiles: UInt
     
     
-    /**
-     *  Designated initializer, initializing a backup roller with the given maximumNumberOfFiles. The default is a maximum of 5 files.
-     */
+    /// Designated initializer, initializing a backup roller with the given maximumNumberOfFiles. The default is a maximum of 5 files.
+    ///
+    /// - parameter maximumNumberOfFiles: the maximum number of files that will be used to roll over
     public init(maximumNumberOfFiles: UInt = 5) {
         self.maximumNumberOfFiles = maximumNumberOfFiles
     }
@@ -58,15 +54,13 @@ public struct BackupRoller : LoggingRoller {
     }
 }
 
-/**
- * Private helper class to perform the actual rolling
- */
+/// Private helper class to perform the actual rolling
 private struct BackupRollerOperation {
-    let fileName:String
-    let ext:String
-    let directory:String
-    let lastIndex:UInt
-    let fileManager:FileManager = FileManager.default
+    let fileName: String
+    let ext: String
+    let directory: String
+    let lastIndex: UInt
+    let fileManager: FileManager = FileManager.default
     
     func performRolling() {
         self.deleteLastFileIfNeeded()
@@ -77,7 +71,7 @@ private struct BackupRollerOperation {
     }
     
     private func deleteLastFileIfNeeded() {
-        let lastFile = self.file(at:Int(self.lastIndex))
+        let lastFile = self.file(at: Int(self.lastIndex))
         if self.fileManager.fileExists(atPath: lastFile) {
             do {
                 try self.fileManager.removeItem(atPath: lastFile)
@@ -87,7 +81,7 @@ private struct BackupRollerOperation {
         }
     }
     
-    private func moveFileToNextIndex(from index:Int) {
+    private func moveFileToNextIndex(from index: Int) {
         let potentialExistingRolledFile = self.file(at: index)
         if self.fileManager.fileExists(atPath: potentialExistingRolledFile) {
             let newPath = self.file(at: index + 1)
@@ -95,7 +89,7 @@ private struct BackupRollerOperation {
         }
     }
     
-    private func moveFile(fromPath:String, toPath:String) {
+    private func moveFile(fromPath: String, toPath: String) {
         do {
             try self.fileManager.moveItem(atPath: fromPath, toPath: toPath)
         } catch {
@@ -103,7 +97,7 @@ private struct BackupRollerOperation {
         }
     }
     
-    private func file(at index:Int) -> String {
+    private func file(at index: Int) -> String {
         return self.directory.stringByAppendingPathComponent(path: "\(self.fileName)\(index <= 0 ? "" : String(index)).\(self.ext)")
     }
     

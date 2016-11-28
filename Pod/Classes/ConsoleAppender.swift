@@ -8,15 +8,20 @@
 
 import Foundation
 
+/// A formatting appender, appending messages to the system console
 public class ConsoleAppender : BaseFormattingAppender {
+    /// - seealso: BaseFormattingAppender
     public var filters = [AppenderFilter]()
+    
+    /// - seealso: BaseFormattingAppender
     public let formatter: MessageFormatter
     
-    public init(formatter:MessageFormatter) {
+    /// Designated initializer, setting the message formatter
+    public init(formatter: MessageFormatter) {
         self.formatter = formatter
     }
     
-    public func appendAcceptedAndFormattedMessage(_ formattedMessage: String) {
+    public func append(acceptedAndFormattedMessage formattedMessage: String) {
         print(formattedMessage)
     }
 }

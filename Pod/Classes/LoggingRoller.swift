@@ -8,12 +8,14 @@
 
 import Foundation
 
-/**
- *  A logging roller is responsible for rolling over files. The goal is to not make the logging
- *  system clutter the system with large files or too many log files.
- *
- *  @since 3.0
- */
+/// A logging roller is responsible for rolling over files. The goal is to not make the logging
+/// system clutter the system with large files or too many log files.
+///
+/// - since: 3.0
 public protocol LoggingRoller {
-    func rollFile(atPath:String)
+    
+    /// Rolls the file at the given path
+    ///
+    /// - parameter atPath: the file path
+    func rollFile(atPath: String)
 }
