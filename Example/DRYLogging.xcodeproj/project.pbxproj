@@ -7,36 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03B76B8C4B44D8A58C62E539 /* libPods-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F172C9BFD40A37EB4E9F2D22 /* libPods-Tests.a */; };
-		2704AC6C1AE179A4000B6EA5 /* DRYLoggingAppenderLevelFilterDecissionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2704AC6B1AE179A4000B6EA5 /* DRYLoggingAppenderLevelFilterDecissionTest.m */; };
-		2704AC6E1AE18A28000B6EA5 /* DRYLoggingAppenderLevelFilterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2704AC6D1AE18A28000B6EA5 /* DRYLoggingAppenderLevelFilterTest.m */; };
-		2727D65A1AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2727D6591AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m */; };
-		2727D65C1AD7411D00482706 /* DRYDefaultLoggerLogTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2727D65B1AD7411D00482706 /* DRYDefaultLoggerLogTest.m */; };
-		277FF7B41ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7B31ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m */; };
-		277FF7B91ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7B81ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m */; };
-		277FF7BB1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7BA1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m */; };
-		277FF7C31ADBE527003CDF82 /* DRYLoggerFactoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7C21ADBE527003CDF82 /* DRYLoggerFactoryTest.m */; };
-		277FF7C51ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 277FF7C41ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m */; };
-		27DE12CA1AE24F210071EC68 /* DRYLoggingFileAppenderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12C91AE24F210071EC68 /* DRYLoggingFileAppenderTest.m */; };
-		27DE12CF1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12CE1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m */; };
-		27DE12D61AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12D51AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m */; };
-		27DE12DB1AE2FFE10071EC68 /* DRYLoggingBackupRollerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12DA1AE2FFE10071EC68 /* DRYLoggingBackupRollerTest.m */; };
-		27DE12DD1AE392400071EC68 /* DRYLoggingConcurrencyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DE12DC1AE392400071EC68 /* DRYLoggingConcurrencyTest.m */; };
+		2729C0FAB777086D1C7B8D2C /* Pods_DRYLoggingExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6294FAC4A6489C24AB29840 /* Pods_DRYLoggingExample.framework */; };
+		2758068B1DDA232A0080D1E8 /* ConsoleAppenderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2758068A1DDA232A0080D1E8 /* ConsoleAppenderSpec.swift */; };
+		2758068D1DDA27010080D1E8 /* MessageFormatterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2758068C1DDA27010080D1E8 /* MessageFormatterMock.swift */; };
+		2758068F1DDA2A910080D1E8 /* ClosureBasedMessageFormatterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2758068E1DDA2A910080D1E8 /* ClosureBasedMessageFormatterSpec.swift */; };
+		276E9D321DDB0F4C00B61165 /* DefaultLoggerInheritanceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276E9D311DDB0F4C00B61165 /* DefaultLoggerInheritanceSpec.swift */; };
+		276E9D341DDB176300B61165 /* LoggingAppenderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276E9D331DDB176300B61165 /* LoggingAppenderMock.swift */; };
+		276E9D361DDB1E3D00B61165 /* LoggerFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276E9D351DDB1E3D00B61165 /* LoggerFactorySpec.swift */; };
+		276E9D381DDB615B00B61165 /* DefaultLoggerMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276E9D371DDB615B00B61165 /* DefaultLoggerMessageSpec.swift */; };
+		276E9D3A1DDB816000B61165 /* LevelAppenderFilterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276E9D391DDB816000B61165 /* LevelAppenderFilterTest.swift */; };
+		276E9D3C1DDC400500B61165 /* FileAppenderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276E9D3B1DDC400500B61165 /* FileAppenderSpec.swift */; };
+		276E9D3E1DDC502400B61165 /* BaseFormattingAppenderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276E9D3D1DDC502400B61165 /* BaseFormattingAppenderSpec.swift */; };
+		276E9D401DDC560E00B61165 /* AppenderFilterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276E9D3F1DDC560E00B61165 /* AppenderFilterMock.swift */; };
+		276E9D421DDC5A8400B61165 /* SizeLoggingRollerPredicateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276E9D411DDC5A8400B61165 /* SizeLoggingRollerPredicateSpec.swift */; };
+		276E9D441DDC5DE900B61165 /* BackupRollerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276E9D431DDC5DE900B61165 /* BackupRollerSpec.swift */; };
+		276E9D461DDC694D00B61165 /* LoggingConcurrencySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276E9D451DDC694D00B61165 /* LoggingConcurrencySpec.swift */; };
+		27AAEE771DCBA75200E99ECF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAEE761DCBA75200E99ECF /* ViewController.swift */; };
+		27AAEE791DCBA98100E99ECF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AAEE781DCBA98100E99ECF /* Launch Screen.storyboard */; };
+		27AAEE871DCCE43400E99ECF /* LogLevelsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAEE861DCCE43400E99ECF /* LogLevelsSpec.swift */; };
+		27AAEE891DD1D91700E99ECF /* DefaultLoggerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AAEE881DD1D91700E99ECF /* DefaultLoggerSpec.swift */; };
+		27F2995D1DC367FD008935E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27F2995C1DC367FD008935E8 /* AppDelegate.swift */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
-		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
-		6003F59E195388D20070C39A /* DRYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* DRYAppDelegate.m */; };
-		6003F5A1195388D20070C39A /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6003F59F195388D20070C39A /* Main_iPhone.storyboard */; };
-		6003F5A4195388D20070C39A /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A2195388D20070C39A /* Main_iPad.storyboard */; };
-		6003F5A7195388D20070C39A /* DRYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* DRYViewController.m */; };
+		6003F5A1195388D20070C39A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6003F59F195388D20070C39A /* Main.storyboard */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		BDE8E922571AAB14570C53E4 /* libPods-DRYLogging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8E30C60D4EDB5B49D29EFAE /* libPods-DRYLogging.a */; };
+		D5A69D555813E4BC9F623634 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D963E5B57248F5A49D7649B /* Pods_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,22 +51,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2704AC6B1AE179A4000B6EA5 /* DRYLoggingAppenderLevelFilterDecissionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingAppenderLevelFilterDecissionTest.m; sourceTree = "<group>"; };
-		2704AC6D1AE18A28000B6EA5 /* DRYLoggingAppenderLevelFilterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingAppenderLevelFilterTest.m; sourceTree = "<group>"; };
-		2727D6591AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerLevelsTest.m; sourceTree = "<group>"; };
-		2727D65B1AD7411D00482706 /* DRYDefaultLoggerLogTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerLogTest.m; sourceTree = "<group>"; };
-		277FF7B31ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingConsoleAppenderTest.m; sourceTree = "<group>"; };
-		277FF7B81ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYBlockBasedLoggingMessageFormatterTest.m; sourceTree = "<group>"; };
-		277FF7BA1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerInheritanceTest.m; sourceTree = "<group>"; };
-		277FF7C21ADBE527003CDF82 /* DRYLoggerFactoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggerFactoryTest.m; sourceTree = "<group>"; };
-		277FF7C41ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYDefaultLoggerThreadingTest.m; sourceTree = "<group>"; };
-		27DE12C91AE24F210071EC68 /* DRYLoggingFileAppenderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingFileAppenderTest.m; sourceTree = "<group>"; };
-		27DE12CE1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingBaseFormattingAppenderTest.m; sourceTree = "<group>"; };
-		27DE12D51AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingSizeRollerPredicateTest.m; sourceTree = "<group>"; };
-		27DE12DA1AE2FFE10071EC68 /* DRYLoggingBackupRollerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingBackupRollerTest.m; sourceTree = "<group>"; };
-		27DE12DC1AE392400071EC68 /* DRYLoggingConcurrencyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRYLoggingConcurrencyTest.m; sourceTree = "<group>"; };
+		2758068A1DDA232A0080D1E8 /* ConsoleAppenderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleAppenderSpec.swift; sourceTree = "<group>"; };
+		2758068C1DDA27010080D1E8 /* MessageFormatterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageFormatterMock.swift; sourceTree = "<group>"; };
+		2758068E1DDA2A910080D1E8 /* ClosureBasedMessageFormatterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClosureBasedMessageFormatterSpec.swift; sourceTree = "<group>"; };
+		276E9D311DDB0F4C00B61165 /* DefaultLoggerInheritanceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLoggerInheritanceSpec.swift; sourceTree = "<group>"; };
+		276E9D331DDB176300B61165 /* LoggingAppenderMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingAppenderMock.swift; sourceTree = "<group>"; };
+		276E9D351DDB1E3D00B61165 /* LoggerFactorySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerFactorySpec.swift; sourceTree = "<group>"; };
+		276E9D371DDB615B00B61165 /* DefaultLoggerMessageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLoggerMessageSpec.swift; sourceTree = "<group>"; };
+		276E9D391DDB816000B61165 /* LevelAppenderFilterTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelAppenderFilterTest.swift; sourceTree = "<group>"; };
+		276E9D3B1DDC400500B61165 /* FileAppenderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileAppenderSpec.swift; sourceTree = "<group>"; };
+		276E9D3D1DDC502400B61165 /* BaseFormattingAppenderSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFormattingAppenderSpec.swift; sourceTree = "<group>"; };
+		276E9D3F1DDC560E00B61165 /* AppenderFilterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppenderFilterMock.swift; sourceTree = "<group>"; };
+		276E9D411DDC5A8400B61165 /* SizeLoggingRollerPredicateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeLoggingRollerPredicateSpec.swift; sourceTree = "<group>"; };
+		276E9D431DDC5DE900B61165 /* BackupRollerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackupRollerSpec.swift; sourceTree = "<group>"; };
+		276E9D451DDC694D00B61165 /* LoggingConcurrencySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggingConcurrencySpec.swift; sourceTree = "<group>"; };
+		27AAEE761DCBA75200E99ECF /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		27AAEE781DCBA98100E99ECF /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		27AAEE861DCCE43400E99ECF /* LogLevelsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogLevelsSpec.swift; sourceTree = "<group>"; };
+		27AAEE881DD1D91700E99ECF /* DefaultLoggerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultLoggerSpec.swift; sourceTree = "<group>"; };
+		27F2995C1DC367FD008935E8 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F66AD72FEADD6787B5DE2D1 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
-		6003F58A195388D20070C39A /* DRYLogging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DRYLogging.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F58A195388D20070C39A /* DRYLoggingExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DRYLoggingExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6003F591195388D20070C39A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -73,12 +79,7 @@
 		6003F597195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F599195388D20070C39A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6003F59B195388D20070C39A /* DRYLogging-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DRYLogging-Prefix.pch"; sourceTree = "<group>"; };
-		6003F59C195388D20070C39A /* DRYAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DRYAppDelegate.h; sourceTree = "<group>"; };
-		6003F59D195388D20070C39A /* DRYAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DRYAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A0195388D20070C39A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		6003F5A3195388D20070C39A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* DRYViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DRYViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* DRYViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DRYViewController.m; sourceTree = "<group>"; };
+		6003F5A0195388D20070C39A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -86,11 +87,14 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		6B04BF45C0BEFF04B0673764 /* DRYLogging.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DRYLogging.podspec; path = ../DRYLogging.podspec; sourceTree = "<group>"; };
+		7F76FC6B1A48D22C53223305 /* Pods_DRYLogging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DRYLogging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C0B19C35775F3E1C65D0271 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		9D963E5B57248F5A49D7649B /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6A2E8E8659D85CA772EAEED /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		D8E30C60D4EDB5B49D29EFAE /* libPods-DRYLogging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DRYLogging.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6294FAC4A6489C24AB29840 /* Pods_DRYLoggingExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DRYLoggingExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E339446594B992B70585F081 /* Pods-DRYLoggingExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRYLoggingExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-DRYLoggingExample/Pods-DRYLoggingExample.release.xcconfig"; sourceTree = "<group>"; };
 		E6E486836C26AC5505BA6BCF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		F172C9BFD40A37EB4E9F2D22 /* libPods-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8804426F57E0250F6F9422C /* Pods-DRYLoggingExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRYLoggingExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DRYLoggingExample/Pods-DRYLoggingExample.debug.xcconfig"; sourceTree = "<group>"; };
 		F36C2A1C729CB93155B354F0 /* Pods-DRYLogging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRYLogging.release.xcconfig"; path = "Pods/Target Support Files/Pods-DRYLogging/Pods-DRYLogging.release.xcconfig"; sourceTree = "<group>"; };
 		FA7881E37B1407B5BA757A67 /* Pods-DRYLogging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DRYLogging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DRYLogging/Pods-DRYLogging.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,7 +107,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				BDE8E922571AAB14570C53E4 /* libPods-DRYLogging.a in Frameworks */,
+				2729C0FAB777086D1C7B8D2C /* Pods_DRYLoggingExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +118,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				03B76B8C4B44D8A58C62E539 /* libPods-Tests.a in Frameworks */,
+				D5A69D555813E4BC9F623634 /* Pods_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +132,8 @@
 				F36C2A1C729CB93155B354F0 /* Pods-DRYLogging.release.xcconfig */,
 				B6A2E8E8659D85CA772EAEED /* Pods-Tests.debug.xcconfig */,
 				2F66AD72FEADD6787B5DE2D1 /* Pods-Tests.release.xcconfig */,
+				E8804426F57E0250F6F9422C /* Pods-DRYLoggingExample.debug.xcconfig */,
+				E339446594B992B70585F081 /* Pods-DRYLoggingExample.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -147,7 +153,7 @@
 		6003F58B195388D20070C39A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6003F58A195388D20070C39A /* DRYLogging.app */,
+				6003F58A195388D20070C39A /* DRYLoggingExample.app */,
 				6003F5AE195388D20070C39A /* Tests.xctest */,
 			);
 			name = Products;
@@ -160,8 +166,9 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				D8E30C60D4EDB5B49D29EFAE /* libPods-DRYLogging.a */,
-				F172C9BFD40A37EB4E9F2D22 /* libPods-Tests.a */,
+				7F76FC6B1A48D22C53223305 /* Pods_DRYLogging.framework */,
+				9D963E5B57248F5A49D7649B /* Pods_Tests.framework */,
+				C6294FAC4A6489C24AB29840 /* Pods_DRYLoggingExample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -169,12 +176,10 @@
 		6003F593195388D20070C39A /* DRYLogging */ = {
 			isa = PBXGroup;
 			children = (
-				6003F59C195388D20070C39A /* DRYAppDelegate.h */,
-				6003F59D195388D20070C39A /* DRYAppDelegate.m */,
-				6003F59F195388D20070C39A /* Main_iPhone.storyboard */,
-				6003F5A2195388D20070C39A /* Main_iPad.storyboard */,
-				6003F5A5195388D20070C39A /* DRYViewController.h */,
-				6003F5A6195388D20070C39A /* DRYViewController.m */,
+				27F2995C1DC367FD008935E8 /* AppDelegate.swift */,
+				6003F59F195388D20070C39A /* Main.storyboard */,
+				27AAEE781DCBA98100E99ECF /* Launch Screen.storyboard */,
+				27AAEE761DCBA75200E99ECF /* ViewController.swift */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -196,20 +201,22 @@
 			isa = PBXGroup;
 			children = (
 				6003F5B6195388D20070C39A /* Supporting Files */,
-				2727D6591AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m */,
-				2727D65B1AD7411D00482706 /* DRYDefaultLoggerLogTest.m */,
-				277FF7B31ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m */,
-				277FF7B81ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m */,
-				277FF7BA1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m */,
-				277FF7C21ADBE527003CDF82 /* DRYLoggerFactoryTest.m */,
-				277FF7C41ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m */,
-				2704AC6B1AE179A4000B6EA5 /* DRYLoggingAppenderLevelFilterDecissionTest.m */,
-				2704AC6D1AE18A28000B6EA5 /* DRYLoggingAppenderLevelFilterTest.m */,
-				27DE12C91AE24F210071EC68 /* DRYLoggingFileAppenderTest.m */,
-				27DE12CE1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m */,
-				27DE12D51AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m */,
-				27DE12DA1AE2FFE10071EC68 /* DRYLoggingBackupRollerTest.m */,
-				27DE12DC1AE392400071EC68 /* DRYLoggingConcurrencyTest.m */,
+				27AAEE861DCCE43400E99ECF /* LogLevelsSpec.swift */,
+				27AAEE881DD1D91700E99ECF /* DefaultLoggerSpec.swift */,
+				2758068A1DDA232A0080D1E8 /* ConsoleAppenderSpec.swift */,
+				2758068E1DDA2A910080D1E8 /* ClosureBasedMessageFormatterSpec.swift */,
+				276E9D311DDB0F4C00B61165 /* DefaultLoggerInheritanceSpec.swift */,
+				276E9D351DDB1E3D00B61165 /* LoggerFactorySpec.swift */,
+				276E9D371DDB615B00B61165 /* DefaultLoggerMessageSpec.swift */,
+				276E9D391DDB816000B61165 /* LevelAppenderFilterTest.swift */,
+				276E9D3B1DDC400500B61165 /* FileAppenderSpec.swift */,
+				276E9D3D1DDC502400B61165 /* BaseFormattingAppenderSpec.swift */,
+				276E9D411DDC5A8400B61165 /* SizeLoggingRollerPredicateSpec.swift */,
+				276E9D431DDC5DE900B61165 /* BackupRollerSpec.swift */,
+				276E9D451DDC694D00B61165 /* LoggingConcurrencySpec.swift */,
+				2758068C1DDA27010080D1E8 /* MessageFormatterMock.swift */,
+				276E9D331DDB176300B61165 /* LoggingAppenderMock.swift */,
+				276E9D3F1DDC560E00B61165 /* AppenderFilterMock.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -237,9 +244,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6003F589195388D20070C39A /* DRYLogging */ = {
+		6003F589195388D20070C39A /* DRYLoggingExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "DRYLogging" */;
+			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "DRYLoggingExample" */;
 			buildPhases = (
 				3CEF6F32D89131D9DFD16DA2 /* [CP] Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
@@ -252,9 +259,9 @@
 			);
 			dependencies = (
 			);
-			name = DRYLogging;
+			name = DRYLoggingExample;
 			productName = DRYLogging;
-			productReference = 6003F58A195388D20070C39A /* DRYLogging.app */;
+			productReference = 6003F58A195388D20070C39A /* DRYLoggingExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6003F5AD195388D20070C39A /* Tests */ = {
@@ -285,13 +292,15 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DRY;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Michael Seghers";
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
 						DevelopmentTeam = 25D2G7D8KE;
+						LastSwiftMigration = 0800;
 					};
 					6003F5AD195388D20070C39A = {
+						LastSwiftMigration = 0810;
 						TestTargetID = 6003F589195388D20070C39A;
 					};
 				};
@@ -309,7 +318,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6003F589195388D20070C39A /* DRYLogging */,
+				6003F589195388D20070C39A /* DRYLoggingExample */,
 				6003F5AD195388D20070C39A /* Tests */,
 			);
 		};
@@ -320,9 +329,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F5A4195388D20070C39A /* Main_iPad.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
-				6003F5A1195388D20070C39A /* Main_iPhone.storyboard in Resources */,
+				6003F5A1195388D20070C39A /* Main.storyboard in Resources */,
+				27AAEE791DCBA98100E99ECF /* Launch Screen.storyboard in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -380,7 +389,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DRYLogging/Pods-DRYLogging-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DRYLoggingExample/Pods-DRYLoggingExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6BEBFACB68EDE00C8B0E78FB /* [CP] Embed Pods Frameworks */ = {
@@ -395,7 +404,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DRYLogging/Pods-DRYLogging-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DRYLoggingExample/Pods-DRYLoggingExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F660981C2C1F93E9481A3076 /* [CP] Embed Pods Frameworks */ = {
@@ -435,9 +444,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F59E195388D20070C39A /* DRYAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* DRYViewController.m in Sources */,
-				6003F59A195388D20070C39A /* main.m in Sources */,
+				27F2995D1DC367FD008935E8 /* AppDelegate.swift in Sources */,
+				27AAEE771DCBA75200E99ECF /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,20 +453,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27DE12CA1AE24F210071EC68 /* DRYLoggingFileAppenderTest.m in Sources */,
-				277FF7BB1ADBD725003CDF82 /* DRYDefaultLoggerInheritanceTest.m in Sources */,
-				27DE12DB1AE2FFE10071EC68 /* DRYLoggingBackupRollerTest.m in Sources */,
-				27DE12DD1AE392400071EC68 /* DRYLoggingConcurrencyTest.m in Sources */,
-				2727D65C1AD7411D00482706 /* DRYDefaultLoggerLogTest.m in Sources */,
-				2727D65A1AD72F1B00482706 /* DRYDefaultLoggerLevelsTest.m in Sources */,
-				2704AC6C1AE179A4000B6EA5 /* DRYLoggingAppenderLevelFilterDecissionTest.m in Sources */,
-				277FF7B91ADB1F65003CDF82 /* DRYBlockBasedLoggingMessageFormatterTest.m in Sources */,
-				27DE12CF1AE253260071EC68 /* DRYLoggingBaseFormattingAppenderTest.m in Sources */,
-				2704AC6E1AE18A28000B6EA5 /* DRYLoggingAppenderLevelFilterTest.m in Sources */,
-				27DE12D61AE2F5430071EC68 /* DRYLoggingSizeRollerPredicateTest.m in Sources */,
-				277FF7C51ADC0215003CDF82 /* DRYDefaultLoggerThreadingTest.m in Sources */,
-				277FF7C31ADBE527003CDF82 /* DRYLoggerFactoryTest.m in Sources */,
-				277FF7B41ADB195E003CDF82 /* DRYLoggingConsoleAppenderTest.m in Sources */,
+				2758068F1DDA2A910080D1E8 /* ClosureBasedMessageFormatterSpec.swift in Sources */,
+				27AAEE871DCCE43400E99ECF /* LogLevelsSpec.swift in Sources */,
+				276E9D3A1DDB816000B61165 /* LevelAppenderFilterTest.swift in Sources */,
+				2758068B1DDA232A0080D1E8 /* ConsoleAppenderSpec.swift in Sources */,
+				276E9D361DDB1E3D00B61165 /* LoggerFactorySpec.swift in Sources */,
+				2758068D1DDA27010080D1E8 /* MessageFormatterMock.swift in Sources */,
+				276E9D3E1DDC502400B61165 /* BaseFormattingAppenderSpec.swift in Sources */,
+				276E9D461DDC694D00B61165 /* LoggingConcurrencySpec.swift in Sources */,
+				276E9D421DDC5A8400B61165 /* SizeLoggingRollerPredicateSpec.swift in Sources */,
+				276E9D401DDC560E00B61165 /* AppenderFilterMock.swift in Sources */,
+				276E9D321DDB0F4C00B61165 /* DefaultLoggerInheritanceSpec.swift in Sources */,
+				276E9D341DDB176300B61165 /* LoggingAppenderMock.swift in Sources */,
+				276E9D3C1DDC400500B61165 /* FileAppenderSpec.swift in Sources */,
+				276E9D381DDB615B00B61165 /* DefaultLoggerMessageSpec.swift in Sources */,
+				276E9D441DDC5DE900B61165 /* BackupRollerSpec.swift in Sources */,
+				27AAEE891DD1D91700E99ECF /* DefaultLoggerSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,7 +477,7 @@
 /* Begin PBXTargetDependency section */
 		6003F5B4195388D20070C39A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6003F589195388D20070C39A /* DRYLogging */;
+			target = 6003F589195388D20070C39A /* DRYLoggingExample */;
 			targetProxy = 6003F5B3195388D20070C39A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -481,20 +491,12 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		6003F59F195388D20070C39A /* Main_iPhone.storyboard */ = {
+		6003F59F195388D20070C39A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6003F5A0195388D20070C39A /* Base */,
 			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		6003F5A2195388D20070C39A /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6003F5A3195388D20070C39A /* Base */,
-			);
-			name = Main_iPad.storyboard;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		6003F5B8195388D20070C39A /* InfoPlist.strings */ = {
@@ -586,6 +588,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -593,32 +596,41 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FA7881E37B1407B5BA757A67 /* Pods-DRYLogging.debug.xcconfig */;
+			baseConfigurationReference = E8804426F57E0250F6F9422C /* Pods-DRYLoggingExample.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DRYLogging/DRYLogging-Prefix.pch";
 				INFOPLIST_FILE = "DRYLogging/DRYLogging-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "be.appfoundry.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F36C2A1C729CB93155B354F0 /* Pods-DRYLogging.release.xcconfig */;
+			baseConfigurationReference = E339446594B992B70585F081 /* Pods-DRYLoggingExample.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DRYLogging/DRYLogging-Prefix.pch";
 				INFOPLIST_FILE = "DRYLogging/DRYLogging-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "be.appfoundry.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -627,7 +639,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B6A2E8E8659D85CA772EAEED /* Pods-Tests.debug.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DRYLogging.app/DRYLogging";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -639,9 +653,13 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0.1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DRYLoggingExample.app/DRYLoggingExample";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -650,7 +668,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2F66AD72FEADD6787B5DE2D1 /* Pods-Tests.release.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DRYLogging.app/DRYLogging";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -658,9 +678,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				SWIFT_VERSION = 3.0.1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DRYLoggingExample.app/DRYLoggingExample";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -677,7 +700,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "DRYLogging" */ = {
+		6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "DRYLoggingExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6003F5C0195388D20070C39A /* Debug */,
