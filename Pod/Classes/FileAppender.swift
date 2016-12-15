@@ -134,7 +134,7 @@ private class FileAppenderMessageQueueThread : Thread {
     
     private func write(message: String) {
         if let data = (message + "\n").data(using: self.encoding) {
-            data.withUnsafeBytes {
+            let _ = data.withUnsafeBytes {
                 self.stream?.write($0, maxLength: data.count)
             }
         }
