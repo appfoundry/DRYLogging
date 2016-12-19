@@ -125,6 +125,7 @@ private class FileAppenderMessageQueueThread : Thread {
             throw FileAppenderError.openingStreamFailed
         }
         self.stream = stream
+        self.stream?.open()
     }
     
     private func closeStream() {
