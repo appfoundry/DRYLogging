@@ -292,6 +292,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DRY;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Michael Seghers";
 				TargetAttributes = {
