@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "DRYLogging"
-  s.version          = "3.0.0"
+  s.version          = "3.0.1"
   s.summary          = "A swift logging framework, inspired on logging frameworks in other languages"
   s.homepage         = "https://github.com/appfoundry/DRYLogging"
   s.license          = 'MIT'
