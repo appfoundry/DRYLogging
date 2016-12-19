@@ -33,26 +33,26 @@ class FileAppenderSpec : QuickSpec {
                 }
                 
                 it("should append the formatterd message") {
-                    appender.appendAcceptedAndFormattedMessage("message")
+                    appender.append(acceptedAndFormattedMessage: "message")
                     expect(self.contentsOfFile(atPath: path)).toEventually(equal("message\n"))
                 }
                 
                 it("should append messages, not erase them") {
                     self.write(string: "existing content\n", toFile: path)
-                    appender.appendAcceptedAndFormattedMessage("message")
+                    appender.append(acceptedAndFormattedMessage: "message")
                     expect(self.contentsOfFile(atPath: path)).toEventually(equal("existing content\nmessage\n"))
                 }
                 
                 it("should call file roller when predicate says we should role") {
                     rollerPredicate.shouldRollFile = true
-                    appender.appendAcceptedAndFormattedMessage("message")
+                    appender.append(acceptedAndFormattedMessage: "message")
                     expect(roller.rolledFile).toEventually(equal(path))
                 }
                 
                 it("should have created a new empty file after rolling occured") {
                     self.write(string: "existing content\n", toFile: path)
                     rollerPredicate.shouldRollFile = true
-                    appender.appendAcceptedAndFormattedMessage("message")
+                    appender.append(acceptedAndFormattedMessage: "message")
                     expect(self.contentsOfFile(atPath: path)).toEventually(equal(""))
                 }
             }
@@ -64,7 +64,7 @@ class FileAppenderSpec : QuickSpec {
                 }
                 
                 it("should append the formatterd message") {
-                    appender.appendAcceptedAndFormattedMessage("message")
+                    appender.append(acceptedAndFormattedMessage: "message")
                     expect(self.contentsOfFile(atPath: path)).toEventually(equal("message\n"))
                 }
             }

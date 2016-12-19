@@ -1,0 +1,6 @@
+framework module DRYTestUtilities {
+  umbrella header "DRYTestUtilities-umbrella.h"
+
+  export *
+  module * { export * }
+}

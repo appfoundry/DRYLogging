@@ -9,7 +9,7 @@
 import Foundation
 import Quick
 import Nimble
-import DRYLogging
+@testable import DRYLogging
 
 class BaseFormattingAppenderSpec : QuickSpec {
     override func spec() {
@@ -101,7 +101,7 @@ class TestBaseFormattingAppender : BaseFormattingAppender {
         self.formatter = formatter
     }
 
-    func appendAcceptedAndFormattedMessage(_ formattedMessage: String) {
-        appendAcceptedAndFormattedMessage = formattedMessage
+    func append(acceptedAndFormattedMessage: String) {
+        appendAcceptedAndFormattedMessage = acceptedAndFormattedMessage
     }
 }

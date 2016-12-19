@@ -27,7 +27,7 @@ public protocol BaseFormattingAppender: class, LoggingAppender {
     func append(acceptedAndFormattedMessage: String)
 }
 
-extension BaseFormattingAppender {
+public extension BaseFormattingAppender {
     public func append(message: LoggingMessage) {
         if self.filterDecision(message: message) != .deny {
             self.append(acceptedAndFormattedMessage: self.formatter.format(message))
